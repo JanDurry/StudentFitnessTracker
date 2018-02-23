@@ -24,7 +24,7 @@ Standortbestimmung: GPS-Abfrage
 Kalorienrechner: Berechnung anhand von zurückgelegter Distanz (Laufen/Radfahren)
 Speicherung von Werten: Öffnen einer Datenbankverbindung, Ausführen von Anfragen, Schließen der
 Verbindung
-Erinnerungsbenachrichtigung: Push-Nachricht bei Inaktivität oder zur für Proximity Alerts, wenn eine bestimmte Umgebung erreicht wurde
+Notification: Push-Nachricht, wenn Kalorienverbrauch erreicht wurde oder nicht
 
 ### Zusatzfeature
 
