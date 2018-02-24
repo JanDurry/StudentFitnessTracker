@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+
+    <!-- Colors Light Blue - black text -->
+
+    <color name="primaryBlue_500">#03A9F4</color>
+    <color name="blue_50">#E1F5FE</color>
+    <color name="blue_100">#B3E5FC</color>
+    <color name="blue_200">#81D4FA</color>
+    <color name="blue_300">#4FC3F7</color>
+    <color name="blue_400">#29B6F6</color>
+    <color name="blue_600">#039BE5</color>
+
+    <!-- Colors Light Blue - white text -->
+
+    <color name="blue_700">#0288D1</color>
+    <color name="blue_800">#0277BD</color>
+    <color name="blue_900">#01579B</color>
+
+    <!-- Warning colors - text black -->
+
+    <color name="warning_color">#FF9800</color>
+
+    <!-- Success colors - text black -->
+
+    <color name="success_color">#4CAF50</color>
+
+
 </resources>

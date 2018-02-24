@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">StudentFitnessTracker</string>
+
+    <!-- Settings -->
     <string name="settings">Settings</string>
     <string name="personal_data">Personal Data</string>
+
+    <!-- Main Menu -->
+
+    <!-- Notifications -->
 </resources>
