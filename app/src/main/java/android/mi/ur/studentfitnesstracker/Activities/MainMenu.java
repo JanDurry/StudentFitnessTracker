@@ -1,5 +1,6 @@
-package android.mi.ur.studentfitnesstracker;
+package android.mi.ur.studentfitnesstracker.Activities;
 
+import android.mi.ur.studentfitnesstracker.R;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
