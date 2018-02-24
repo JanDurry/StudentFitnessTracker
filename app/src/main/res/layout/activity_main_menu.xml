@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="android.mi.ur.studentfitnesstracker.Activities.MainMenu">
+    tools:context="android.mi.ur.studentfitnesstracker.Activities.MainMenu"
+    android:orientation="vertical">
 
     <!-- Toolbar -->
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     <!-- Main Menu -->
 
-</android.support.design.widget.CoordinatorLayout>
+    <fragment
+        android:name="android.mi.ur.studentfitnesstracker.Fragments.SessionFragment"
+        android:id="@+id/session_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    <fragment
+        android:name="android.mi.ur.studentfitnesstracker.Fragments.MapFragment"
+        android:id="@+id/map_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!-- Options -->
+
+</LinearLayout>

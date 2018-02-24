@@ -24,6 +24,9 @@
 
         <!-- Other Activity -->
 
+        <activity android:name=".Activities.PersonalData" />
+        <activity android:name=".Activities.PeriodicStatistics" />
+        <activity android:name=".Activities.SessionOverview"></activity>
     </application>
 
 </manifest>
