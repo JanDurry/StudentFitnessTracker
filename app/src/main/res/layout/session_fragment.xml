@@ -1,13 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/session_fragment_layout">
 
-    <TextView
+
+    <RelativeLayout
+        android:id="@+id/switch_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/session_fragment_title"/>
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
 
-</LinearLayout>
+
+        <TextView
+                android:id="@+id/text_run"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/switch_run_cycle"
+                android:text="@string/session_type_run"/>
+
+        <TextView
+            android:id="@+id/text_cycle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/switch_run_cycle"
+            android:text="@string/session_type_cycle"/>
+
+         <Switch
+            android:id="@+id/switch_run_cycle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/button_start_session"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/switch_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="@string/session_start"/>
+
+
+</RelativeLayout>
