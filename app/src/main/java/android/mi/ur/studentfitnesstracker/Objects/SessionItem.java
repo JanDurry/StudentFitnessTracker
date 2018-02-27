@@ -5,8 +5,8 @@ package android.mi.ur.studentfitnesstracker.Objects;
  */
 
 public class SessionItem {
+    private int time;
+    Calculator calc;
 
-    public SessionItem() {
 
-    }
 }

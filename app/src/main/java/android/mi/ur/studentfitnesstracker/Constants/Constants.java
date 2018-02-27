@@ -6,8 +6,13 @@ package android.mi.ur.studentfitnesstracker.Constants;
 
 public class Constants {
 
-    public static final String LATITUDE_KEY = "latitude";
-    public static final String LONGITUDE_KEY = "longitude";
-    public static final String ALTITUDE_KEY = "altitude";
+    //** -------Database------- **//
+
+    public static final String KEY_ID = "_id";
+    public static final String KEY_DISTANCE = "distance";
+
+
+    public static final int COLUMN_X_INDEX = 1;
+    public static final int COLUMN_Y_INDEX = 2;
 
 }

@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="android.mi.ur.studentfitnesstracker">
 
+    <!-- Permissions -->
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <!-- App Setup -->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,11 +30,37 @@
             </intent-filter>
         </activity>
 
-        <!-- Other Activity -->
+        <!-- PersonalData Activity -->
 
-        <activity android:name=".Activities.PersonalData" />
-        <activity android:name=".Activities.PeriodicStatistics" />
-        <activity android:name=".Activities.SessionOverview"></activity>
+        <activity
+            android:name=".Activities.PersonalData"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
+
+        <!-- PeriodicStatistics Activity -->
+
+        <activity
+            android:name=".Activities.PeriodicStatistics"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
+
+        <!-- SessionOverview Activity -->
+
+        <activity
+            android:name=".Activities.SessionOverview"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
+
+
     </application>
 
 </manifest>
