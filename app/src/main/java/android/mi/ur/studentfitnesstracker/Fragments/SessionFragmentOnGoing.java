@@ -14,14 +14,15 @@ import android.widget.Button;
  * Created by JanDurry on 24.02.2018.
  */
 
-public class SessionFragment extends Fragment {
-    private Button startSessionButton;
-    private SessionFragmentOnGoing sessionFragmentOnGoing;
+public class SessionFragmentOnGoing extends Fragment {
+
+    private Button stopSession;
+    private SessionFragment sessionFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.session_fragment, parent, false);
+        return inflater.inflate(R.layout.session_fragment_ongoing, parent, false);
     }
 
     // This event is triggered soon after onCreateView().
@@ -39,14 +40,14 @@ public class SessionFragment extends Fragment {
     }
 
     private void initButton() {
-        sessionFragmentOnGoing = new SessionFragmentOnGoing();
-        startSessionButton = (Button) getView().findViewById(R.id.button_start_session);
-        startSessionButton.setOnClickListener(new View.OnClickListener() {
+        sessionFragment = new SessionFragment();
+        stopSession = (Button) getView().findViewById(R.id.button_stop_session);
+        stopSession.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.session_fragment, sessionFragmentOnGoing);
+                fragmentTransaction.replace(R.id.session_fragment, sessionFragment);
                 fragmentTransaction.commit();
             }
         });
