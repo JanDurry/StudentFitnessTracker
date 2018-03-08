@@ -74,6 +74,7 @@ public class SessionFragmentOnGoing extends Fragment implements TrackingControll
         stopSession.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                trackingController.stop();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.session_fragment, sessionFragment);
