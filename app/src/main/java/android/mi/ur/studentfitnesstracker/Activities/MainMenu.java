@@ -5,7 +5,6 @@ import android.app.FragmentTransaction;
 import android.mi.ur.studentfitnesstracker.Adapter.SessionItemAdapter;
 import android.mi.ur.studentfitnesstracker.Database.SessionDatabaseAdapter;
 import android.mi.ur.studentfitnesstracker.Fragments.SessionFragment;
-import android.mi.ur.studentfitnesstracker.Fragments.SessionFragmentOnGoing;
 import android.mi.ur.studentfitnesstracker.Objects.SessionItem;
 import android.mi.ur.studentfitnesstracker.R;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 public class MainMenu extends AppCompatActivity {
 
     private SessionFragment sessionFragment;
-    private SessionFragmentOnGoing sessionFragmentOnGoing;
 
     private ArrayList<SessionItem> sessions;
     private SessionItemAdapter sessionsAdapter;
@@ -38,9 +36,9 @@ public class MainMenu extends AppCompatActivity {
         initDatabase();
     }
 
+
     private void initFragmentLayouts() {
         sessionFragment = new SessionFragment();
-        sessionFragmentOnGoing = new SessionFragmentOnGoing();
     }
 
     @Override
@@ -85,5 +83,4 @@ public class MainMenu extends AppCompatActivity {
         fragmentTransaction.replace(R.id.session_fragment, sessionFragment);
         fragmentTransaction.commit();
     }
-
 }

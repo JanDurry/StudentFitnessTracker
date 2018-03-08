@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.mi.ur.studentfitnesstracker.R;
+import android.mi.ur.studentfitnesstracker.TrackingTools.TrackingController;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +16,14 @@ import android.widget.Button;
  */
 
 public class SessionFragment extends Fragment {
-    private Button startSessionButton;
+
     private SessionFragmentOnGoing sessionFragmentOnGoing;
+    private TrackingController trackingController;
+
+    /* Fragment Objects
+     */
+
+    private Button startSessionButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -33,10 +40,16 @@ public class SessionFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initButton();
     }
+
 
     private void initButton() {
         sessionFragmentOnGoing = new SessionFragmentOnGoing();
@@ -51,4 +64,6 @@ public class SessionFragment extends Fragment {
             }
         });
     }
+
+
 }
