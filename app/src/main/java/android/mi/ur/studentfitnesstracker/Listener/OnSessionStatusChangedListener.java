@@ -5,4 +5,5 @@ package android.mi.ur.studentfitnesstracker.Listener;
  */
 
 public interface OnSessionStatusChangedListener {
+
 }

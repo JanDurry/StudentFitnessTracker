@@ -6,4 +6,19 @@
     android:layout_height="match_parent"
     tools:context="android.mi.ur.studentfitnesstracker.Activities.SessionOverview">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/list_session_overview">
+
+        </ListView>
+
+    </RelativeLayout>
+
+
+
+
 </android.support.constraint.ConstraintLayout>
