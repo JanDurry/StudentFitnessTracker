@@ -1,9 +1,14 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
 
+   <!-- Text Sizes -->
+
     <dimen name="button">20sp</dimen>
     <dimen name="session_type_text_size">20sp</dimen>
-    <dimen name="param_padding">14dp</dimen>
     <dimen name="session_ongoing_param">20sp</dimen>
+
+    <!-- Padding -->
     <dimen name="space">2sp</dimen>
+    <dimen name="param_padding">14dp</dimen>
+
 </resources>
