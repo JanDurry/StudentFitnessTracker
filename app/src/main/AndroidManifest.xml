@@ -2,11 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="android.mi.ur.studentfitnesstracker">
 
+
+    <!-- Permissions -->
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
+    <!-- App Setup -->
 
     <application
         android:allowBackup="true"
@@ -23,23 +27,45 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- Other Activity -->
+        <!-- PersonalData Activity -->
 
-        <activity android:name=".Activities.PersonalData" />
-        <activity android:name=".Activities.PeriodicStatistics" />
-        <activity android:name=".Activities.SessionOverview"></activity>
+        <activity
+            android:name=".Activities.PersonalData"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
 
-        <!-- Maps Android Key -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDJJYkm0Le6yi1E7IHUCJwL6J4UJ1jxnwQ"/>
 
-        <!-- Maps -->
+        </activity>
+
+        <!-- PeriodicStatistics Activity -->
+
+        <activity
+            android:name=".Activities.PeriodicStatistics"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
+
+        <!-- SessionOverview Activity -->
+
+        <activity
+            android:name=".Activities.SessionOverview"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
+
+
+        <!-- Broadcast-Receiver -->
+
+        <receiver android:name=".TrackingTools.TrackingReceiver">
+        </receiver>
 
     </application>
 

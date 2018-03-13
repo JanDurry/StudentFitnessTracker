@@ -1,5 +1,11 @@
 package android.mi.ur.studentfitnesstracker.Activities;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.mi.ur.studentfitnesstracker.Adapter.SessionItemAdapter;
+import android.mi.ur.studentfitnesstracker.Database.SessionDatabaseAdapter;
+import android.mi.ur.studentfitnesstracker.Fragments.SessionFragment;
+import android.mi.ur.studentfitnesstracker.Objects.SessionItem;
 import android.mi.ur.studentfitnesstracker.R;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +13,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
 public class MainMenu extends AppCompatActivity {
+
+    private SessionFragment sessionFragment;
+
+    private ArrayList<SessionItem> sessions;
+    private SessionItemAdapter sessionsAdapter;
+    private SessionDatabaseAdapter sessionDB;
+
+    /** Überschriebene Methoden **/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +31,20 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        initFragmentLayouts();
+        initInitialFragment();
+        initDatabase();
+    }
+
+
+    private void initFragmentLayouts() {
+        sessionFragment = new SessionFragment();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sessionDB.close();
     }
 
     @Override
@@ -37,5 +67,20 @@ public class MainMenu extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /** Eigene Methoden **/
+
+    private void initDatabase() {
+        sessionDB = new SessionDatabaseAdapter(this);
+        sessionDB.open();
+        sessions = sessionDB.getAllSessionItems();
+    }
+
+    private void initInitialFragment() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.session_fragment, sessionFragment);
+        fragmentTransaction.commit();
     }
 }
