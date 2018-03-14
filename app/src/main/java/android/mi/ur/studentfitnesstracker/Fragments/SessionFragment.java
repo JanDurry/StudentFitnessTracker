@@ -4,7 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.mi.ur.studentfitnesstracker.R;
-import android.mi.ur.studentfitnesstracker.TrackingTools.TrackingController;
+import android.mi.ur.studentfitnesstracker.TrackingTools.SessionService;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +18,7 @@ import android.widget.Button;
 public class SessionFragment extends Fragment {
 
     private SessionFragmentOnGoing sessionFragmentOnGoing;
-    private TrackingController trackingController;
+    private SessionService sessionService;
 
     /* Fragment Objects
      */
