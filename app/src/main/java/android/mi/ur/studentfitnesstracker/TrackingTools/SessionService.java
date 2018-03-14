@@ -147,7 +147,9 @@ public class SessionService extends Service {
 
     private class LocationListener implements android.location.LocationListener {
 
-        private Location current;
+        private Location startLocation = null;
+        private Location current = null;
+        private Location last = null;
 
         public LocationListener(String provider)
         {
@@ -159,7 +161,14 @@ public class SessionService extends Service {
         public void onLocationChanged(Location location) {
             Log.e(TAG, "onLocationChanged: " + location);
             if (onSessionDataChangedListener != null) {
-                onSessionDataChangedListener.onNewLocation(location);
+                if (startLocation == null) {
+                    startLocation = location;
+                    current = location;
+                    onSessionDataChangedListener.onFirstLocation(startLocation);
+                }
+                last = current;
+                current = location;
+                onSessionDataChangedListener.onNewLocation(current, last);
             }
         }
 
