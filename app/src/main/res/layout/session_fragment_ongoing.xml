@@ -31,6 +31,7 @@
             android:text="@string/session_stop"/>
 
         <RelativeLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/layout_session_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,6 +59,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/layout_session_kCal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,6 +87,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/layout_session_pace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,6 +113,38 @@
                 android:textSize="@dimen/session_ongoing_param"
                 android:paddingEnd="@dimen/param_padding"
                 android:text="@string/session_current_pace" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/test1_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_session_time">
+
+            <TextView
+                android:id="@+id/test"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/test2_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/test1_layout">
+
+            <TextView
+                android:id="@+id/test2"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location" />
+
 
         </RelativeLayout>
 
