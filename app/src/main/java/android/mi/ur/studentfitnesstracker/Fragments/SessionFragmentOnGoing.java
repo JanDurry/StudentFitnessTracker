@@ -40,6 +40,8 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     private long pausesInSecs;
     private int currentDistanceInMeters;
 
+    private OnSessionFragmentOnGoingDataChanged onSessionFragmentOnGoingDataChanged;
+
     private boolean bound;
 
     private TextView time;
@@ -110,6 +112,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
         Intent intent = new Intent(getActivity(), SessionService.class);
         getActivity().stopService(intent);
         Log.e("Bound", String.valueOf(bound));
+        onSessionFragmentOnGoingDataChanged.onFinishSession();
     }
 
     private void bindSessionService() {
@@ -162,7 +165,16 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     }
 
 
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            onSessionFragmentOnGoingDataChanged = (OnSessionFragmentOnGoingDataChanged) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement TextClicked");
+        }
+    }
 
     /** SessionFragmentOnGoing Callbacks */
 
@@ -173,6 +185,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
             pausesInSecs += ((current.getElapsedRealtimeNanos() - last.getElapsedRealtimeNanos())/ (1000*1000*1000)) % 60;
         }
         currentDistanceInMeters += current.distanceTo(last);
+        onSessionFragmentOnGoingDataChanged.onDataChanged(current);
         calculate();
     }
 
@@ -189,5 +202,12 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     @Override
     public void onCurrentTimeStamp(long timeInMs) {
         this.timeInSecs = (timeInMs/(1000));
+    }
+
+    /* Interface to Communicate with other Fragments through Activity */
+
+    public interface OnSessionFragmentOnGoingDataChanged {
+        public void onDataChanged(Location currentLocation);
+        public void onFinishSession();
     }
 }
