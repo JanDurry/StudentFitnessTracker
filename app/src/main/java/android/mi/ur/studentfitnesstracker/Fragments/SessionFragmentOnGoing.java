@@ -45,6 +45,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     private TextView time;
     private TextView kCal;
     private TextView pace;
+    private TextView distance;
     private Button stopSession;
 
     private ServiceConnection sessionServiceConnection = new ServiceConnection() {
@@ -128,6 +129,8 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
         time = (TextView) getView().findViewById(R.id.current_time);
         kCal = (TextView) getView().findViewById(R.id.current_kCal);
         pace = (TextView) getView().findViewById(R.id.current_pace);
+        distance = (TextView) getView().findViewById(R.id.current_distance);
+
     }
 
     private void initButton() {
@@ -149,6 +152,16 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
         fragmentTransaction.commit();
     }
 
+    private void calculate() {
+        Calculator calc = new Calculator();
+        calc.setValues(currentDistanceInMeters, timeInSecs, pausesInSecs);
+
+        kCal.setText(calc.calculateKcal());
+        pace.setText(calc.calculatePace());
+        distance.setText(String.valueOf(currentDistanceInMeters) + " " + "m");
+    }
+
+
 
 
     /** SessionFragmentOnGoing Callbacks */
@@ -157,9 +170,10 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     public void onNewLocation(Location current, Location last) {
         this.endLocation = current;
         if ((int) current.distanceTo(last) == 0) {
-            pausesInSecs += ((last.getElapsedRealtimeNanos() - current.getElapsedRealtimeNanos())/ (1000*1000*1000)) % 60;
+            pausesInSecs += ((current.getElapsedRealtimeNanos() - last.getElapsedRealtimeNanos())/ (1000*1000*1000)) % 60;
         }
         currentDistanceInMeters += current.distanceTo(last);
+        calculate();
     }
 
     @Override
@@ -174,6 +188,6 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
 
     @Override
     public void onCurrentTimeStamp(long timeInMs) {
-        this.timeInSecs = (timeInMs/(1000)) % 60;
+        this.timeInSecs = (timeInMs/(1000));
     }
 }
