@@ -27,24 +27,25 @@ import android.widget.TextView;
 
 public class SessionFragmentOnGoing extends Fragment implements OnSessionDataChangedListener {
 
-    private Button stopSession;
     private SessionFragment sessionFragment;
     private SessionService sessionService;
-
     private Calculator calc;
 
     private Location startLocation;
     private Location endLocation;
+    private Location currentLocation;
+    private Location lastLocation;
 
-    private int distance;
-    private int timeRunning;
-    private int pause;
+    private long timeInSecs;
+    private long pausesInSecs;
+    private int currentDistanceInMeters;
 
     private boolean bound;
 
     private TextView time;
     private TextView kCal;
     private TextView pace;
+    private Button stopSession;
 
     private ServiceConnection sessionServiceConnection = new ServiceConnection() {
         @Override
@@ -153,8 +154,17 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     /** SessionFragmentOnGoing Callbacks */
 
     @Override
-    public void onNewLocation(Location current) {
+    public void onNewLocation(Location current, Location last) {
+        this.endLocation = current;
+        if ((int) current.distanceTo(last) == 0) {
+            pausesInSecs += ((last.getElapsedRealtimeNanos() - current.getElapsedRealtimeNanos())/ (1000*1000*1000)) % 60;
+        }
+        currentDistanceInMeters += current.distanceTo(last);
+    }
 
+    @Override
+    public void onFirstLocation(Location first) {
+        this.startLocation = first;
     }
 
     @Override
@@ -164,6 +174,6 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
 
     @Override
     public void onCurrentTimeStamp(long timeInMs) {
-        kCal.setText(String.valueOf(timeInMs));
+        this.timeInSecs = (timeInMs/(1000)) % 60;
     }
 }

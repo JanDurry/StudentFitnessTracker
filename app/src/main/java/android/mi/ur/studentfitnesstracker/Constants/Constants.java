@@ -9,7 +9,7 @@ public class Constants {
     //** -------SessionService------- **/
 
     public static final int LOCATION_UPDATE_TIME = 1000;
-    public static final float LOCATION_UPDATE_DISTANCE = 5;
+    public static final float LOCATION_UPDATE_DISTANCE = 0;
 
 
     //** -------Database------- **//

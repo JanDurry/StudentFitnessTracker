@@ -8,7 +8,8 @@ import android.location.Location;
 
 public interface OnSessionDataChangedListener {
 
-    public void onNewLocation(Location current);
+    public void onNewLocation(Location current, Location last);
+    public void onFirstLocation(Location first);
     public void onTimeUpdate(String currentTimeString);
     public void onCurrentTimeStamp(long timeInMs);
 
