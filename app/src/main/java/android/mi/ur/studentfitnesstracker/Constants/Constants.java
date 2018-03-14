@@ -6,6 +6,12 @@ package android.mi.ur.studentfitnesstracker.Constants;
 
 public class Constants {
 
+    //** -------SessionService------- **/
+
+    public static final int LOCATION_UPDATE_TIME = 1000;
+    public static final float LOCATION_UPDATE_DISTANCE = 0;
+
+
     //** -------Database------- **//
 
     public static final String KEY_ID = "_id";
