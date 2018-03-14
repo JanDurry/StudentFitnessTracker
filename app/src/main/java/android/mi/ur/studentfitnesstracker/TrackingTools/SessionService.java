@@ -37,7 +37,7 @@ public class SessionService extends Service {
     };
 
     /** Test **/
-    private static final String TAG = "BOOMBOOMTESTGPS";
+    private static final String TAG = "TESTGPS";
 
     /* Binding Service */
 
