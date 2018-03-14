@@ -8,13 +8,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <TextView
             android:id="@+id/title_personal_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="@dimen/param_padding"
             android:text="@string/personal_data"
+            android:textSize="@dimen/session_type_text_size"
+
             android:paddingTop="20dp"
             android:paddingBottom="20dp"/>
 
@@ -31,6 +35,8 @@
                 android:id="@+id/text_weight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingStart="@dimen/param_padding"
+                android:textSize="@dimen/session_type_text_size"
                 android:text="@string/header_weight"/>
 
             <TextView
@@ -38,6 +44,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/text_weight"
+                android:textSize="@dimen/session_type_text_size"
                 android:text="@string/edit_weight" />
 
             <TextView
@@ -45,6 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/edit_weight"
+                android:textSize="@dimen/session_type_text_size"
                 android:text="@string/text_kg"/>
 
         </RelativeLayout>
@@ -62,6 +70,8 @@
                 android:id="@+id/text_height"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingStart="@dimen/param_padding"
+                android:textSize="@dimen/session_type_text_size"
                 android:text="@string/header_height"/>
 
             <TextView
@@ -69,6 +79,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/text_height"
+                android:textSize="@dimen/session_type_text_size"
                 android:text="@string/edit_height" />
 
             <TextView
@@ -76,6 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/edit_height"
+                android:textSize="@dimen/session_type_text_size"
                 android:text="@string/text_cm"/>
 
         </RelativeLayout>
@@ -85,6 +97,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/height_layout"
+            android:textSize="@dimen/button"
+            android:layout_centerHorizontal="true"
             android:text="@string/button_change_personal_data"/>
 
     </RelativeLayout>

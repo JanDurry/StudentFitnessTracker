@@ -12,12 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.google.android.gms.maps.MapFragment;
 
 import java.util.ArrayList;
 
 public class MainMenu extends AppCompatActivity {
 
     private SessionFragment sessionFragment;
+    private MapFragment map;
 
     private ArrayList<SessionItem> sessions;
     private SessionItemAdapter sessionsAdapter;
@@ -39,6 +41,7 @@ public class MainMenu extends AppCompatActivity {
 
     private void initFragmentLayouts() {
         sessionFragment = new SessionFragment();
+        map = new MapFragment();
     }
 
     @Override

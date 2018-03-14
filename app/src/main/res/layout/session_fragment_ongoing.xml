@@ -8,13 +8,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="30dp">
 
         <TextView
             android:id="@+id/current_session_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
+            android:paddingStart="@dimen/param_padding"
+            android:paddingEnd="@dimen/param_padding"
+            android:paddingTop="10dp"
+            android:paddingBottom="40dp"
+            android:textSize="@dimen/session_type_text_size"
             android:text="@string/current_session_type"/>
 
         <Button
@@ -23,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="20dp"
+            android:textSize="@dimen/button"
             android:text="@string/session_stop"/>
 
         <RelativeLayout
@@ -37,6 +42,9 @@
             android:id="@+id/header_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/session_ongoing_param"
+            android:paddingStart="@dimen/param_padding"
+            android:paddingEnd="@dimen/space"
             android:text="@string/session_header_time"/>
 
             <TextView
@@ -44,7 +52,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/header_time"
-            android:text="@string/session_current_time"/>
+            android:paddingEnd="@dimen/param_padding"
+            android:textSize="@dimen/session_ongoing_param"
+            android:text="@string/session_current_time" />
 
         </RelativeLayout>
 
@@ -53,14 +63,15 @@
             android:id="@+id/layout_session_kCal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/current_session_type"
-            android:layout_centerHorizontal="true"
-            >
+            android:layout_below="@id/layout_session_time">
 
             <TextView
                 android:id="@+id/header_kCal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/session_ongoing_param"
+                android:paddingStart="@dimen/param_padding"
+                android:paddingEnd="@dimen/space"
                 android:text="@string/session_header_kCal"/>
 
             <TextView
@@ -68,25 +79,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/header_kCal"
+                android:paddingEnd="@dimen/param_padding"
+                android:textSize="@dimen/session_ongoing_param"
                 android:text="@string/session_current_kCal"/>
 
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
             android:id="@+id/layout_session_pace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/layout_session_kCal"
-            android:layout_alignBottom="@+id/layout_session_kCal"
-            android:layout_alignParentEnd="true">
+            android:layout_below="@+id/current_session_type"
+            android:layout_toEndOf="@+id/layout_session_time">
 
             <TextView
                 android:id="@+id/header_pace"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-
+                android:textSize="@dimen/session_ongoing_param"
+                android:paddingStart="@dimen/param_padding"
+                android:paddingEnd="@dimen/space"
                 android:text="@string/session_header_pace" />
 
             <TextView
@@ -94,42 +108,39 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/header_pace"
+                android:textSize="@dimen/session_ongoing_param"
+                android:paddingEnd="@dimen/param_padding"
                 android:text="@string/session_current_pace" />
 
         </RelativeLayout>
-
         <RelativeLayout
-            android:id="@+id/test1_layout"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/layout_running_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/layout_session_time">
+            android:layout_below="@+id/layout_session_time"
+            android:layout_toEndOf="@+id/layout_session_time">
 
             <TextView
-                android:id="@+id/test"
-                android:layout_margin="5dp"
+                android:id="@+id/header_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Location" />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/test2_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/test1_layout">
+                android:textSize="@dimen/session_ongoing_param"
+                android:paddingStart="@dimen/param_padding"
+                android:paddingEnd="@dimen/space"
+                android:text="@string/session_header_distance" />
 
             <TextView
-                android:id="@+id/test2"
-                android:layout_margin="5dp"
+                android:id="@+id/current_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Location" />
-
+                android:layout_toEndOf="@id/header_distance"
+                android:textSize="@dimen/session_ongoing_param"
+                android:paddingEnd="@dimen/param_padding"
+                android:text="@string/session_current_distance" />
 
         </RelativeLayout>
-
 
     </RelativeLayout>
 
