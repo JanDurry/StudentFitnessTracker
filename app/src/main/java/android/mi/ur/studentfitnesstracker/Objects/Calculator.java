@@ -14,33 +14,47 @@ public class Calculator {
     private final static double MAX_SLOW_KM_H = 7;
 
     private float distance;
-    private float time;
-    private int pause;
+    private long time;
+    private long pause;
 
-    public void setValues(int distance, int time, int pause) {
+    public void setValues(int distance, long time, long pause) {
         this.distance = distance;
         this.time = time;
         this.pause = pause;
     }
 
     private double calculateSpeed() {
-        return ((double) distance) / (((double) time - (double) pause) / 60);
+
+        return ((double) distance/1000) / (((double) time/60 - (double) pause/60));
     }
 
-    public double calculatePace() {
-        return time/(double) distance;
+    public String calculatePace() {
+        float pace = time/(distance/1000);
+        long secs = (long)pace%60;
+        long mins = (long)(pace/60)%60;
+        return "" + getFormattedTime(mins) + ":" + getFormattedTime(secs) + " min/km";
+
+    }
+
+    //Darstellung in 01:23 statt 83.0000
+    private String getFormattedTime(long num) {
+        if(num < 10) {
+            String formattedNum = "0" + num;
+            return formattedNum;
+        }
+        return String.valueOf(num);
     }
 
 
-    public double calculateKcal() {
+    public String calculateKcal() {
         double speed = calculateSpeed();
         double kcal = 0;
         if (speed > MAX_SLOW_KM_H) {
-            kcal = FAST_JOGGING_KCAL_PER_HOUR * ((double) time / 60);
+            kcal = FAST_JOGGING_KCAL_PER_HOUR * (((double) time / 60)/60);
         } else {
-            kcal = SLOW_JOGGING_KCAL_PER_HOUR * ((double) time / 60);
+            kcal = SLOW_JOGGING_KCAL_PER_HOUR * (((double) time / 60)/60);
         }
-        return kcal;
+        return "" + (int) kcal + " kCal";
     }
 
 }
