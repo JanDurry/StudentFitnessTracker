@@ -47,19 +47,33 @@ public class SessionItemAdapter extends ArrayAdapter<SessionItem> {
             TextView sessionPace = (TextView) v.findViewById(R.id.session_item_pace);
             TextView sessionKCal = (TextView) v.findViewById(R.id.session_item_kCal);
 
+            int distance = sessionItem.getDistance();
+
+
             String kCal = String.valueOf((int) sessionItem.getkCal() + " kCal");
-            String distance = String.valueOf(sessionItem.getDistance() + " m");
+            String distanceString = String.valueOf(sessionItem.getDistance() + " m");
 
             sessionType.setText(sessionItem.getSessionType());
             sessionDate.setText(sessionItem.getDate());
-            sessionTime.setText(sessionItem.getTime() + " minutes");
-            sessionDistance.setText(distance);
+            sessionTime.setText(sessionItem.getTime() + " min");
+            sessionDistance.setText(formatDistance(distance));
             sessionPace.setText(sessionItem.getPace());
             sessionKCal.setText(kCal);
 
         }
 
         return v;
+    }
+
+    private String formatDistance(int distance) {
+        if(distance > 1000) {
+            int distanceKMBeforeComma = (distance - (distance%1000)) / 1000;
+            int distanceKMAfterComma = (distance%1000) / 10;
+             String distanceKMString = "" + distanceKMBeforeComma + "," + distanceKMAfterComma;
+             return  distanceKMString + " km";
+        } else {
+            return String.valueOf(distance) + " m";
+        }
     }
 
 
