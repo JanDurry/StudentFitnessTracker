@@ -24,6 +24,7 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
 
     private SessionFragment sessionFragment;
     private MapFragment map;
+    private SessionFragmentOnGoing sessionFragmentOnGoing;
 
     private ArrayList<SessionItem> sessions;
     private SessionItemAdapter sessionsAdapter;

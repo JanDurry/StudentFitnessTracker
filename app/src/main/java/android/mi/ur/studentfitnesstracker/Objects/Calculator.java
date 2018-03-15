@@ -16,10 +16,13 @@ public class Calculator {
     private float distance;
     private float distanceLastSec;
     private long time;
+    private String type;
+
  // bei sekündlicher kCal-Berechnung nicht benötigt:   private long pause;
     private double kCalTotal;
 
-    public void setValues(int distance, long time, int distanceLastSec) {
+    public void setValues(int distance, long time, int distanceLastSec, String type) {
+        this.type = type;
         this.distance = distance;
         this.time = time;
         this.distanceLastSec = distanceLastSec;
