@@ -35,6 +35,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     Polyline line;
 
     private Location currentLocation = null;
+    private Location startLocation = null;
 
     private ArrayList<LatLng> points;
 
@@ -68,23 +69,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         return view;
     }
 
+
+    /* on App start show basic Location Regensburg */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         MapsInitializer.initialize(getContext());
         this.googleMap = googleMap;
         resetLocation();
     }
 
-    public void locationChange(Location current) {
-        currentLocation = current;
-        CameraPosition currentPosition = CameraPosition.builder().target(new LatLng(current.getLatitude(), current.getLongitude())).zoom(16).bearing(0).tilt(45).build();
-        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(currentPosition));
-        LatLng latLng = new LatLng(current.getLatitude(), current.getLongitude());
-        points.add(latLng);
-        redrawLine();
-
-    }
+    /* function to draw a line */
 
     private void redrawLine() {
         googleMap.clear();  //clears all Markers and Polylines
@@ -98,9 +93,45 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         line = googleMap.addPolyline(options); //add Polyline
     }
 
+    /* LocationChange is called whenever OnNewLocation is called
+    * -> see SessionFragmentOnGoing and Callback in MainMenu
+    * */
+
+    public void locationChange(Location current) {
+        currentLocation = current;
+        CameraPosition currentPosition = CameraPosition.builder().target(new LatLng(current.getLatitude(), current.getLongitude())).zoom(16).bearing(0).tilt(45).build();
+        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(currentPosition));
+        LatLng latLng = new LatLng(current.getLatitude(), current.getLongitude());
+        points.add(latLng);
+        redrawLine();
+
+    }
+
+    /* onFinishSession is called when Service is unbounded in SessionFragmentOnGoing
+    * -> see SessionFragmentOnGoing and Callback in MainMenu
+    * */
+
     public void onFinishSession() {
-        resetLocation();
+        if (currentLocation != null) {
+            CameraPosition currentPosition = CameraPosition.builder().target(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())).zoom(14).bearing(0).tilt(45).build();
+            googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(currentPosition));
+            redrawLine();
+        }
+    }
+
+    /* onStartLocation is called as soon the firstLocation after Session start is called
+    *  -> see SessionFragmentOnGoing and Callback in MainMenu
+    * */
+
+    public void onStartLocation(Location first) {
+        googleMap.clear();
         points.clear();
+        startLocation = first;
+        CameraPosition currentPosition = CameraPosition.builder().target(new LatLng(startLocation.getLatitude(), startLocation.getLongitude())).zoom(16).bearing(0).tilt(45).build();
+        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(currentPosition));
+        LatLng latLng = new LatLng(startLocation.getLatitude(), startLocation.getLongitude());
+        points.add(latLng);
+        redrawLine();
     }
 
     private void resetLocation() {

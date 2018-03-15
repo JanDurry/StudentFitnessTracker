@@ -191,6 +191,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
 
     @Override
     public void onFirstLocation(Location first) {
+        onSessionFragmentOnGoingDataChanged.onSessionStart(first);
         this.startLocation = first;
     }
 
@@ -209,5 +210,6 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     public interface OnSessionFragmentOnGoingDataChanged {
         public void onDataChanged(Location currentLocation);
         public void onFinishSession();
+        public void onSessionStart(Location startLocation);
     }
 }
