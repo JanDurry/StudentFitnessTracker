@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="@dimen/layout_margin">
 
         <TextView
             android:id="@+id/current_session_type"
@@ -87,7 +87,7 @@
 
         <RelativeLayout
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="80dp"
             android:id="@+id/layout_session_pace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -115,7 +115,7 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="80dp"
             android:id="@+id/layout_running_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

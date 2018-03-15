@@ -6,6 +6,12 @@ package android.mi.ur.studentfitnesstracker.Constants;
 
 public class Constants {
 
+
+    //** -------SessionFragment------***//
+
+    public static final boolean BYCICLE_SELECT = true;
+    public static final boolean RUNNING_SELECT = false;
+
     //** -------SessionService------- **/
 
     public static final int LOCATION_UPDATE_TIME = 1000;

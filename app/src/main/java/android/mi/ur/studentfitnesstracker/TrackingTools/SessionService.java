@@ -37,7 +37,7 @@ public class SessionService extends Service {
     };
 
     /** Test **/
-    private static final String TAG = "BOOMBOOMTESTGPS";
+    private static final String TAG = "TESTGPS";
 
     /* Binding Service */
 
@@ -165,10 +165,11 @@ public class SessionService extends Service {
                     startLocation = location;
                     current = location;
                     onSessionDataChangedListener.onFirstLocation(startLocation);
+                } else {
+                    last = current;
+                    current = location;
+                    onSessionDataChangedListener.onNewLocation(current, last);
                 }
-                last = current;
-                current = location;
-                onSessionDataChangedListener.onNewLocation(current, last);
             }
         }
 
