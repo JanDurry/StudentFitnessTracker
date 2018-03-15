@@ -89,6 +89,10 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
         fragmentTransaction.commit();
     }
 
+    /* Callbacks aus dem SessionFragmentOnGoing
+    *  ruft öffentliche Methoden des MapFragment auf.
+    * */
+
     @Override
     public void onDataChanged(Location currentLocation) {
         Log.e("MAP", "onDataChanged");
@@ -98,6 +102,15 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
 
     @Override
     public void onFinishSession() {
+        Log.e("MAP", "onFinishSession");
+        map = (MapFragment) getFragmentManager().findFragmentById(R.id.map_fragment);
         map.onFinishSession();
+    }
+
+    @Override
+    public void onSessionStart(Location startLocation) {
+        Log.e("MAP", "onSessionStart");
+        map = (MapFragment) getFragmentManager().findFragmentById(R.id.map_fragment);
+        map.onStartLocation(startLocation);
     }
 }

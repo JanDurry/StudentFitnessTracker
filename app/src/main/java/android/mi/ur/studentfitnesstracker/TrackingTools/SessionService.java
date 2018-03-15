@@ -165,10 +165,11 @@ public class SessionService extends Service {
                     startLocation = location;
                     current = location;
                     onSessionDataChangedListener.onFirstLocation(startLocation);
+                } else {
+                    last = current;
+                    current = location;
+                    onSessionDataChangedListener.onNewLocation(current, last);
                 }
-                last = current;
-                current = location;
-                onSessionDataChangedListener.onNewLocation(current, last);
             }
         }
 
