@@ -17,15 +17,17 @@ public class Calculator {
     private float distanceLastSec;
     private long time;
     private String type;
+    private int weight;
 
  // bei sekündlicher kCal-Berechnung nicht benötigt:   private long pause;
     private double kCalTotal;
 
-    public void setValues(int distance, long time, int distanceLastSec, String type) {
+    public void setValues(int distance, long time, int distanceLastSec, String type, int weight) {
         this.type = type;
         this.distance = distance;
         this.time = time;
         this.distanceLastSec = distanceLastSec;
+        this.weight = weight;
     }
 
 
@@ -55,10 +57,7 @@ public class Calculator {
 
     //berechnet verbrauchte kCal in der letzten Sekunde
     public double calculateKcal() {
-
-        int weight = 75;
-
-        /**MET value multiplied by weight in kilograms tells you calories burned per hour (MET*weight in kg=calories/hour)
+                /**MET value multiplied by weight in kilograms tells you calories burned per hour (MET*weight in kg=calories/hour)
          * source: http://www.businessinsider.de/how-to-calculate-calories-burned-exercise-met-value-2017-8?r=US&IR=T, 15.03.17
          default weight = 75kg
          z.B: 3.5 * 75kg * 1h / 3600 = 0,072916 kCal/sec
