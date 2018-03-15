@@ -74,12 +74,12 @@
     <string name="google_maps_api_key">AIzaSyD7dK8SRmEDIolB6SKoVECqmphWTsMNNEs</string>
 
     <!-- Session Items -->
-    <string name="session_item_distance">999 m</string>
-    <string name="session_item_time">00:00 min</string>
-    <string name="session_item_pace">06:17 min/km</string>
-    <string name="session_item_date">2018-03-04 15:15:15 GMT+00:00</string>
-    <string name="session_item_type">Radfahren</string>
-    <string name="session_item_kCal">50 kCal</string>
+    <string name="session_item_distance"></string>
+    <string name="session_item_time"></string>
+    <string name="session_item_pace"></string>
+    <string name="session_item_date"></string>
+    <string name="session_item_type"></string>
+    <string name="session_item_kCal"></string>
 
 
 </resources>
