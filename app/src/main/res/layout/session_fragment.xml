@@ -10,8 +10,8 @@
         android:id="@+id/switch_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp">
+        android:paddingTop="40dp"
+        android:paddingBottom="40dp">
 
 
         <TextView
@@ -19,6 +19,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@id/switch_run_cycle"
+                android:paddingStart="@dimen/param_padding"
+                android:paddingEnd="@dimen/param_padding"
+                android:textSize="@dimen/session_type_text_size"
                 android:text="@string/session_type_run"/>
 
         <TextView
@@ -26,7 +29,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/switch_run_cycle"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:textSize="@dimen/session_type_text_size"
             android:text="@string/session_type_cycle"/>
+
 
          <Switch
             android:id="@+id/switch_run_cycle"
@@ -42,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/switch_layout"
+        android:textSize="@dimen/button"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:text="@string/session_start"/>

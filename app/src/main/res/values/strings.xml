@@ -31,10 +31,12 @@
     <string name="session_header_time">Zeit: </string>
     <string name="session_current_time">00:00</string>
     <string name="session_header_kCal">kCal: </string>
-    <string name="session_current_kCal">0</string>
+    <string name="session_current_kCal">000</string>
     <string name="session_header_pace">Pace: </string>
-    <string name="session_current_pace">0</string>
+    <string name="session_current_pace">00.0 km/h</string>
     <string name="session_stop">Session beenden</string>
+    <string name="session_header_distance">Distanz: </string>
+    <string name="session_current_distance">0 km</string>
 
     <!-- Maps -->
 
@@ -47,4 +49,10 @@
     <string name="menu_session_overview">Verlauf</string>
 
     <!-- Notifications -->
+
+
+    <!--- Resources -->
+
+    <string name="google_maps_api_key">AIzaSyD7dK8SRmEDIolB6SKoVECqmphWTsMNNEs</string>
+
 </resources>
