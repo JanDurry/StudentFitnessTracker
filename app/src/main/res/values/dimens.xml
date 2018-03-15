@@ -11,4 +11,8 @@
     <dimen name="space">2sp</dimen>
     <dimen name="param_padding">14dp</dimen>
 
+    <!-- Margin -->
+
+    <dimen name="layout_margin">30dp</dimen>
+
 </resources>
