@@ -9,10 +9,26 @@
     tools:context="android.mi.ur.studentfitnesstracker.Activities.SessionOverview">
 
     <ListView
+        android:id="@+id/list_session_overview"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:drawSelectorOnTop="false"/>
+
+    <!-- Options -->
+
+    <android.support.design.widget.BottomNavigationView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/list_session_overview">
-    </ListView>
+        android:layout_height="56dp"
+        android:padding="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="start"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/menu_bottom_menu" />
 
 
 

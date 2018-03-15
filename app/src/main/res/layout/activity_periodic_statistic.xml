@@ -5,14 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/layout_margin"
     android:orientation="vertical"
+    android:id="@+id/periodic_statistic_layout"
     tools:context="android.mi.ur.studentfitnesstracker.Activities.PeriodicStatistics">
-
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
         android:id="@+id/total_mileage"
         android:textSize="@dimen/session_ongoing_param"
         android:paddingStart="@dimen/param_padding"
@@ -109,10 +109,22 @@
         android:textSize="@dimen/session_ongoing_param"
         android:paddingStart="@dimen/param_padding"
         android:paddingEnd="@dimen/space"
-
         android:paddingBottom="@dimen/param_padding"
         android:text="@string/goal_percentage"
         />
+
+    <!-- Options -->
+
+    <android.support.design.widget.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:padding="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/menu_bottom_menu" />
 
 
 
