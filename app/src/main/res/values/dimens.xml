@@ -10,6 +10,7 @@
     <!-- Padding -->
     <dimen name="space">2sp</dimen>
     <dimen name="list_item_padding_top">3dp</dimen>
+    <dimen name="list_item_padding_big">100dp</dimen>
     <dimen name="list_item_padding">20dp</dimen>
     <dimen name="list_item_padding_small">6dp</dimen>
     <dimen name="param_padding">14dp</dimen>
