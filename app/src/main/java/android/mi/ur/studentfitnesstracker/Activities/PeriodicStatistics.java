@@ -72,10 +72,10 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
 
     private void setStrings() {
         getTotalPercentage();
-        totalMileageCycleString = String.valueOf(totalMileageCycleValue) + " km";
-        totalMileageRunString = String.valueOf(totalMileageRunValue) + " km";
+        totalMileageCycleString = String.valueOf(totalMileageCycleValue) + " m";
+        totalMileageRunString = String.valueOf(totalMileageRunValue) + " m";
         totalKCalString = "Du hast ingesamt " + String.valueOf(totalKCalValue) + " kCal verbraucht!";
-        totalMileageString = "Du hast insgesamt " + String.valueOf(totalMileageValue) + " km zurückgelegt!";
+        totalMileageString = "Du hast insgesamt " + String.valueOf(totalMileageValue) + " m zurückgelegt!";
     }
 
     private void setTotalValues() {
@@ -83,7 +83,7 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
             session = sessions.get(i);
             totalMileageValue += session.getDistance();
             totalKCalValue += session.getkCal();
-            if (session.getSessionType() == "Radfahren") {
+            if (session.getSessionType().equals("Radfahren")) {
                 totalMileageCycleValue += session.getDistance();
             } else {
                 totalMileageRunValue += session.getDistance();

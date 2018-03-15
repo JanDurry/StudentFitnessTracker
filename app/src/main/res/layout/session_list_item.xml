@@ -58,17 +58,29 @@
             android:textSize="12sp"
             android:text="@string/session_item_distance"/>
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/layout_time_distance_kcal"
+
+        android:id="@+id/layout_kcal">
+
         <TextView
             android:id="@+id/session_item_kCal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/session_item_time"
-            android:layout_toEndOf="@id/session_item_distance"
+            android:layout_height="fill_parent"
+
             android:paddingTop="@dimen/list_item_padding_top"
             android:paddingStart="@dimen/list_item_padding"
             android:paddingEnd="@dimen/list_item_padding"
             android:maxLines="1"
-            android:textSize="12sp"
+            android:textSize="15sp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:padding="5dp"
             android:text="@string/session_header_kCal"/>
 
     </RelativeLayout>
@@ -76,7 +88,9 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/layout_time_distance_kcal">
+        android:id="@+id/layout_date_pace"
+        android:layout_toEndOf="@id/layout_time_distance_kcal"
+        android:paddingStart="@dimen/list_item_padding_big">
 
         <TextView
             android:id="@+id/session_item_date"
