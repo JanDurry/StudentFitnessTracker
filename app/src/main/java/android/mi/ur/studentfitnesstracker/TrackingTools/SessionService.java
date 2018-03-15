@@ -31,7 +31,7 @@ public class SessionService extends Service {
     private int seconds;
     private String currentTime;
 
-    private LocationListener[] mLocationListeners = new LocationListener[] {
+    private LocationListener[] locationListeners = new LocationListener[] {
             new LocationListener(LocationManager.GPS_PROVIDER),
             new LocationListener(LocationManager.NETWORK_PROVIDER)
     };
@@ -55,6 +55,7 @@ public class SessionService extends Service {
         if (locationManager == null) {
             locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         }
+
     }
 
     private void initializeStopWatch() {
@@ -75,9 +76,15 @@ public class SessionService extends Service {
         });
     }
 
+    /** After register listener, check if GPS_Provider is enabled **/
+
     public void registerListeners(OnSessionDataChangedListener listener) {
-            Log.e(TAG, "registerListeners");
-            this.onSessionDataChangedListener = listener;
+        Log.e(TAG, "registerListeners");
+        this.onSessionDataChangedListener = listener;
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ) {
+            onSessionDataChangedListener.OnGpsProviderDisabled();
+            Log.e(TAG, "PROVIDER DISABLED");
+        }
     }
 
 
@@ -107,7 +114,7 @@ public class SessionService extends Service {
         try {
             locationManager.requestLocationUpdates(
                     LocationManager.NETWORK_PROVIDER, Constants.LOCATION_UPDATE_TIME, Constants.LOCATION_UPDATE_DISTANCE,
-                    mLocationListeners[1]);
+                    locationListeners[1]);
         } catch (java.lang.SecurityException ex) {
             Log.i(TAG, "fail to request location update, ignore", ex);
         } catch (IllegalArgumentException ex) {
@@ -116,7 +123,7 @@ public class SessionService extends Service {
         try {
             locationManager.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER, Constants.LOCATION_UPDATE_TIME, Constants.LOCATION_UPDATE_DISTANCE,
-                    mLocationListeners[0]);
+                    locationListeners[0]);
         } catch (java.lang.SecurityException ex) {
             Log.i(TAG, "fail to request location update, ignore", ex);
         } catch (IllegalArgumentException ex) {
@@ -130,9 +137,9 @@ public class SessionService extends Service {
         Log.e(TAG, "onDestroy");
         super.onDestroy();
         if (locationManager != null) {
-            for (int i = 0; i < mLocationListeners.length; i++) {
+            for (int i = 0; i < locationListeners.length; i++) {
                 try {
-                    locationManager.removeUpdates(mLocationListeners[i]);
+                    locationManager.removeUpdates(locationListeners[i]);
                 } catch (Exception ex) {
                     Log.i(TAG, "fail to remove location listners, ignore", ex);
                 }

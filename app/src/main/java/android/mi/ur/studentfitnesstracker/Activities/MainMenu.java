@@ -1,10 +1,15 @@
 package android.mi.ur.studentfitnesstracker.Activities;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.mi.ur.studentfitnesstracker.Adapter.SessionItemAdapter;
+import android.mi.ur.studentfitnesstracker.Constants.Constants;
 import android.mi.ur.studentfitnesstracker.Database.SessionDatabaseAdapter;
 import android.mi.ur.studentfitnesstracker.Fragments.MapFragment;
 import android.mi.ur.studentfitnesstracker.Fragments.SessionFragment;
@@ -14,6 +19,8 @@ import android.mi.ur.studentfitnesstracker.R;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -46,17 +53,70 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        checkLocationPermission();
         setSupportActionBar(toolbar);
         initFragmentLayouts();
         initInitialFragment();
         initDatabase();
     }
 
-    private void initFragmentLayouts() {
-        sessionFragment = new SessionFragment();
-        bottomNavigationItemView = (BottomNavigationView) findViewById(R.id.navigation);
-        bottomNavigationItemView.setOnNavigationItemSelectedListener(this);
-        bottomNavigationItemView.getMenu().getItem(1).setChecked(true);
+    /* Check AppPermissions -> siehe https://developer.android.com/training/permissions/requesting.html
+    * https://stackoverflow.com/questions/40142331/how-to-request-location-permission-at-runtime-on-android-6 */
+
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.app_permission_title)
+                        .setMessage(R.string.app_permission_message)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ActivityCompat.requestPermissions(MainMenu.this,
+                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                        Constants.PERMISSION_REQUEST_LOCATION);
+                            }
+                        })
+                        .create()
+                        .show();
+
+
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        Constants.PERMISSION_REQUEST_LOCATION);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case Constants.PERMISSION_REQUEST_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    Toast.makeText(this, R.string.app_permission_enabled, Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    Toast.makeText(this, R.string.app_permission_disabled, Toast.LENGTH_LONG).show();
+
+                }
+                return;
+            }
+
+        }
     }
 
     @Override
@@ -80,7 +140,7 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.settings) {
+        if (id == R.id.personal_data) {
             return true;
         }
 
@@ -100,6 +160,13 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.session_fragment, sessionFragment);
         fragmentTransaction.commit();
+    }
+
+    private void initFragmentLayouts() {
+        sessionFragment = new SessionFragment();
+        bottomNavigationItemView = (BottomNavigationView) findViewById(R.id.navigation);
+        bottomNavigationItemView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationItemView.getMenu().getItem(1).setChecked(true);
     }
 
     /* Callbacks aus dem SessionFragmentOnGoing
