@@ -45,7 +45,7 @@ public class SessionDatabaseAdapter {
         ContentValues sessionValues = new ContentValues();
         sessionValues.put(Constants.KEY_TYPE, session.getSessionType());
         sessionValues.put(Constants.KEY_DISTANCE, session.getDistance());
-        sessionValues.put(Constants.KEY_DATE, session.getDate().toString());
+        sessionValues.put(Constants.KEY_DATE, session.getDate());
         sessionValues.put(Constants.KEY_PACE, session.getPace());
         sessionValues.put(Constants.KEY_KCAL, session.getkCal());
         sessionValues.put(Constants.KEY_TIME, session.getTime());
@@ -54,7 +54,7 @@ public class SessionDatabaseAdapter {
 
     public void removeSessionItem(SessionItem session) {
         String toDelete = Constants.KEY_DATE + "=?";
-        String[] deleteArguments = new String[]{session.getDate().toString()};
+        String[] deleteArguments = new String[]{session.getDate()};
         db.delete(Constants.DATABASE_TABLE, toDelete, deleteArguments);
     }
 
@@ -70,7 +70,7 @@ public class SessionDatabaseAdapter {
                 String date = cursor.getString(Constants.COLUMN_DATE_INDEX);
                 String pace = cursor.getString(Constants.COLUMN_PACE_INDEX);
                 double kcal = cursor.getDouble(Constants.COLUMN_KCAL_INDEX);
-                int time = cursor.getInt(Constants.COLUMN_TIME_INDEX);
+                String time = cursor.getString(Constants.COLUMN_TIME_INDEX);
 
                 sessions.add(new SessionItem(type, distance, time, kcal, pace, date));
 
@@ -88,7 +88,7 @@ public class SessionDatabaseAdapter {
                 + " integer primary key autoincrement, " + Constants.KEY_TYPE
                 + " text not null, " + Constants.KEY_DISTANCE + " integer not null, "
                 + Constants.KEY_DATE + " text, " + Constants.KEY_PACE + " text not null, "
-                + Constants.KEY_KCAL + " double not null, " + Constants.KEY_TIME + " integer not null);";
+                + Constants.KEY_KCAL + " double not null, " + Constants.KEY_TIME + " text not null);";
 
         public SessionDBOpenHelper(Context c, String dbname,
                                           SQLiteDatabase.CursorFactory factory, int version) {
