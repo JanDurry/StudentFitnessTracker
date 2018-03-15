@@ -62,12 +62,18 @@ public class Calculator {
          * source: http://www.businessinsider.de/how-to-calculate-calories-burned-exercise-met-value-2017-8?r=US&IR=T, 15.03.17
          default weight = 75kg
          z.B: 3.5 * 75kg * 1h / 3600 = 0,072916 kCal/sec
-         1 MET = 1 km/h;
+         für Laufen: 1 MET = 1 km/h;
+         für Radfahren: 1 MET = 2,6 km/h;
          --> jede Sekunde currentkCal zu double kCalTotal addieren und kCalTotal als (int) returnen
          **/
 
-         double currentkCal = calculateSpeed() / 3600 *  weight;
+        double currentkCal = 0;
 
+        if(type.equals("Laufen")) {
+            currentkCal = calculateSpeed() / 3600 * weight;
+        } else {
+            currentkCal = calculateSpeed() / 3600 / 2.6 * weight;
+        }
         return currentkCal;
     }
 
