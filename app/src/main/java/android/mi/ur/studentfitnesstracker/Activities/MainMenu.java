@@ -158,6 +158,8 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.personal_data) {
+            Intent intent = new Intent(this, PersonalData.class);
+            startActivity(intent);
             return true;
         }
 
@@ -169,6 +171,9 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
     private void initDatabase() {
         sessionDB = new SessionDatabaseAdapter(this);
         sessionDB.open();
+        if (!sessionDB.checkIfUserDataExists()) {
+            sessionDB.insertUserData(Constants.DEFAULT_WEIGHT);
+        }
         sessions = sessionDB.getAllSessionItems();
     }
 

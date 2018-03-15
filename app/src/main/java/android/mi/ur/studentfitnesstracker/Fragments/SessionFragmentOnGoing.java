@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.location.Location;
 import android.mi.ur.studentfitnesstracker.Activities.MainMenu;
+import android.mi.ur.studentfitnesstracker.Database.SessionDatabaseAdapter;
 import android.mi.ur.studentfitnesstracker.Listener.OnSessionDataChangedListener;
 import android.mi.ur.studentfitnesstracker.Objects.Calculator;
 import android.mi.ur.studentfitnesstracker.R;
@@ -33,6 +34,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     private SessionFragment sessionFragment;
     private SessionService sessionService;
     private Calculator calc;
+    private SessionDatabaseAdapter sessionDB;
 
     private Location startLocation;
     private Location endLocation;
@@ -89,8 +91,14 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     public void onViewCreated(View view, Bundle savedInstanceState) {
         initElements();
         initButton();
+        initDatabase();
         // Setup any handles to view objects here
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+    }
+
+    private void initDatabase() {
+        sessionDB = new SessionDatabaseAdapter(getActivity());
+        sessionDB.open();
     }
 
     @Override
@@ -188,7 +196,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
 
     private void calculate() {
         Calculator calc = new Calculator();
-        calc.setValues(currentDistanceInMeters, timeInSecs, distanceInLastSec, currentSessionType.getText().toString());
+        calc.setValues(currentDistanceInMeters, timeInSecs, distanceInLastSec, currentSessionType.getText().toString(), sessionDB.getUserWeight());
         kCalTotal +=  calc.calculateKcal();
         currentPace = calc.calculatePace();
         kCal.setText(String.valueOf((int)kCalTotal));
