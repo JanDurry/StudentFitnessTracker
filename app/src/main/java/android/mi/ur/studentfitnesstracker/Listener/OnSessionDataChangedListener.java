@@ -12,5 +12,6 @@ public interface OnSessionDataChangedListener {
     public void onFirstLocation(Location first);
     public void onTimeUpdate(String currentTimeString);
     public void onCurrentTimeStamp(long timeInMs);
+    public void OnGpsProviderDisabled();
 
 }

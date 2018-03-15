@@ -1,10 +1,12 @@
 package android.mi.ur.studentfitnesstracker.Fragments;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.location.Location;
@@ -216,6 +218,25 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     public void onTimeUpdate(String currentTime) {
         this.currentTime = currentTime;
         time.setText(currentTime);
+    }
+
+    @Override
+    public void OnGpsProviderDisabled() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Dein GPS ist leider nicht für diese App aktiviert und wird benötigt. GPS aktivieren?")
+                .setCancelable(false)
+                .setPositiveButton("Einstellungen", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override

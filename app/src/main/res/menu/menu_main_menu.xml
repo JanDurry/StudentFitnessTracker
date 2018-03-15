@@ -4,11 +4,6 @@
     tools:context="android.mi.ur.studentfitnesstracker.Activities.MainMenu">
 
     <item
-        android:id="@+id/settings"
-        android:orderInCategory="100"
-        android:title="@string/settings"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/personal_data"
         android:orderInCategory="100"
         android:title="@string/personal_data"
