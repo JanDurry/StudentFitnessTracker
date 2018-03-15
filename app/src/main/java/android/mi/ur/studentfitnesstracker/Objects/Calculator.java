@@ -14,20 +14,25 @@ public class Calculator {
     private final static double MAX_SLOW_KM_H = 7;
 
     private float distance;
+    private float distanceLastSec;
     private long time;
-    private long pause;
+ // bei sekündlicher kCal-Berechnung nicht benötigt:   private long pause;
+    private double kCalTotal;
 
-    public void setValues(int distance, long time, long pause) {
+    public void setValues(int distance, long time, int distanceLastSec) {
         this.distance = distance;
         this.time = time;
-        this.pause = pause;
+        this.distanceLastSec = distanceLastSec;
     }
 
+
+    //berechnet Speed für 1 Std. in km/h
     private double calculateSpeed() {
-
-        return ((double) distance/1000) / (((double) time/60 - (double) pause/60));
+        double distanceInKm = (double) distanceLastSec / 1000;
+        return (distanceInKm * 3600);
     }
 
+    //berechnet Pace in min/km
     public String calculatePace() {
         float pace = time/(distance/1000);
         long secs = (long)pace%60;
@@ -45,16 +50,22 @@ public class Calculator {
         return String.valueOf(num);
     }
 
+    //berechnet verbrauchte kCal in der letzten Sekunde
+    public double calculateKcal() {
 
-    public String calculateKcal() {
-        double speed = calculateSpeed();
-        double kcal = 0;
-        if (speed > MAX_SLOW_KM_H) {
-            kcal = FAST_JOGGING_KCAL_PER_HOUR * (((double) time / 60)/60);
-        } else {
-            kcal = SLOW_JOGGING_KCAL_PER_HOUR * (((double) time / 60)/60);
-        }
-        return "" + (int) kcal + " kCal";
+        int weight = 75;
+
+        /**MET value multiplied by weight in kilograms tells you calories burned per hour (MET*weight in kg=calories/hour)
+         * source: http://www.businessinsider.de/how-to-calculate-calories-burned-exercise-met-value-2017-8?r=US&IR=T, 15.03.17
+         default weight = 75kg
+         z.B: 3.5 * 75kg * 1h / 3600 = 0,072916 kCal/sec
+         1 MET = 1 km/h;
+         --> jede Sekunde currentkCal zu double kCalTotal addieren und kCalTotal als (int) returnen
+         **/
+
+         double currentkCal = calculateSpeed() / 3600 *  weight;
+
+        return currentkCal;
     }
 
 }

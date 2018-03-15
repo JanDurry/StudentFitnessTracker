@@ -39,6 +39,8 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     private long timeInSecs;
     private long pausesInSecs;
     private int currentDistanceInMeters;
+    private int distanceInLastSec;
+    private double kCalTotal;
 
     private OnSessionFragmentOnGoingDataChanged onSessionFragmentOnGoingDataChanged;
 
@@ -157,9 +159,9 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
 
     private void calculate() {
         Calculator calc = new Calculator();
-        calc.setValues(currentDistanceInMeters, timeInSecs, pausesInSecs);
-
-        kCal.setText(calc.calculateKcal());
+        calc.setValues(currentDistanceInMeters, timeInSecs, distanceInLastSec);
+        kCalTotal +=  calc.calculateKcal();
+        kCal.setText(String.valueOf((int)kCalTotal));
         pace.setText(calc.calculatePace());
         distance.setText(String.valueOf(currentDistanceInMeters) + " " + "m");
     }
@@ -184,6 +186,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
         if ((int) current.distanceTo(last) == 0) {
             pausesInSecs += ((current.getElapsedRealtimeNanos() - last.getElapsedRealtimeNanos())/ (1000*1000*1000)) % 60;
         }
+        distanceInLastSec = (int) current.distanceTo(last);
         currentDistanceInMeters += current.distanceTo(last);
         onSessionFragmentOnGoingDataChanged.onDataChanged(current);
         calculate();
