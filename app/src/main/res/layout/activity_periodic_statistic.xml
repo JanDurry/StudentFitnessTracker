@@ -10,6 +10,84 @@
     tools:context="android.mi.ur.studentfitnesstracker.Activities.PeriodicStatistics">
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/total_mileage"
+        android:textSize="@dimen/session_ongoing_param"
+        android:paddingStart="@dimen/param_padding"
+        android:paddingEnd="@dimen/space"
+        android:paddingTop="@dimen/param_padding"
+        android:paddingBottom="@dimen/param_padding"
+        android:text="@string/total_mileage"/>
+
+    <!-- Distanz Rad -->
+
+    <RelativeLayout
+        android:id="@+id/layout_cycle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/total_mileage">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/session_ongoing_param"
+            android:paddingStart="@dimen/param_padding"
+            android:paddingEnd="@dimen/space"
+            android:paddingTop="@dimen/param_padding"
+            android:paddingBottom="@dimen/param_padding"
+            android:id="@+id/mileage_cycle"
+            android:text="@string/mileage_cycle"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/mileage_cycle"
+            android:textSize="@dimen/session_ongoing_param"
+            android:paddingStart="@dimen/param_padding"
+            android:paddingEnd="@dimen/space"
+            android:paddingTop="@dimen/param_padding"
+            android:paddingBottom="@dimen/param_padding"
+            android:id="@+id/mileage_cycle_value"
+            android:text="@string/mileage_cycle_value"/>
+
+    </RelativeLayout>
+
+    <!-- Distanz zu Fuß -->
+
+    <RelativeLayout
+        android:id="@+id/layout_run"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_cycle">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mileage_run"
+            android:textSize="@dimen/session_ongoing_param"
+            android:paddingStart="@dimen/param_padding"
+            android:paddingEnd="@dimen/space"
+            android:paddingTop="@dimen/param_padding"
+            android:paddingBottom="@dimen/param_padding"
+            android:id="@+id/mileage_run"
+            android:text="@string/mileage_run"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/mileage_run"
+            android:textSize="@dimen/session_ongoing_param"
+            android:paddingStart="@dimen/param_padding"
+            android:paddingEnd="@dimen/space"
+            android:paddingTop="@dimen/param_padding"
+            android:paddingBottom="@dimen/param_padding"
+            android:id="@+id/mileage_run_value"/>
+
+    </RelativeLayout>
 
 
 
