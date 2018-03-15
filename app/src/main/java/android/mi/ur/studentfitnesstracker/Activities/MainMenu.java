@@ -56,6 +56,7 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
         sessionFragment = new SessionFragment();
         bottomNavigationItemView = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigationItemView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationItemView.getMenu().getItem(1).setChecked(true);
     }
 
     @Override
@@ -119,7 +120,7 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
         map.onFinishSession();
         if (kCal > 20) { // If the user burned less than 20 kCal no session item will be created
             Date date = Calendar.getInstance(TimeZone.getTimeZone("CET")).getTime();
-            SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
+            SimpleDateFormat formatDate = new SimpleDateFormat("dd.MM.yy HH:mm:ss");
             String formattedDate = formatDate.format(date);
             sessionItem = new SessionItem(sessionType, distance, time, kCal, pace, formattedDate);
             sessionDB.insertSessionItem(sessionItem);
