@@ -42,6 +42,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     private int distanceInLastSec;
     private double kCalTotal;
     private String currentPace;
+    private String currentTime;
 
     private OnSessionFragmentOnGoingDataChanged onSessionFragmentOnGoingDataChanged;
 
@@ -176,7 +177,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.session_fragment, sessionFragment);
         fragmentTransaction.commit();
-        onSessionFragmentOnGoingDataChanged.onFinishSession(currentSessionType.getText().toString(), currentDistanceInMeters, timeInSecs, kCalTotal, currentPace);
+        onSessionFragmentOnGoingDataChanged.onFinishSession(currentSessionType.getText().toString(), currentDistanceInMeters, currentTime, kCalTotal, currentPace);
     }
 
     /* ---- calculate ---- */
@@ -213,6 +214,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
 
     @Override
     public void onTimeUpdate(String currentTime) {
+        this.currentTime = currentTime;
         time.setText(currentTime);
     }
 
@@ -225,7 +227,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
 
     public interface OnSessionFragmentOnGoingDataChanged {
         public void onDataChanged(Location currentLocation);
-        public void onFinishSession(String sessionType, int distance, long time, double kCal, String pace);
+        public void onFinishSession(String sessionType, int distance, String time, double kCal, String pace);
         public void onSessionStart(Location startLocation);
     }
 }

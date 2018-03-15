@@ -21,8 +21,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoing.OnSessionFragmentOnGoingDataChanged, BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -110,13 +113,15 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
     }
 
     @Override
-    public void onFinishSession(String sessionType, int distance, long time, double kCal, String pace) {
+    public void onFinishSession(String sessionType, int distance, String time, double kCal, String pace) {
         Log.e("MAP", "onFinishSession");
         map = (MapFragment) getFragmentManager().findFragmentById(R.id.map_fragment);
         map.onFinishSession();
         if (kCal > 20) { // If the user burned less than 20 kCal no session item will be created
-            String date = Calendar.getInstance().getTime().toString();
-            sessionItem = new SessionItem(sessionType, distance, time, kCal, pace, date);
+            Date date = Calendar.getInstance(TimeZone.getTimeZone("CET")).getTime();
+            SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
+            String formattedDate = formatDate.format(date);
+            sessionItem = new SessionItem(sessionType, distance, time, kCal, pace, formattedDate);
             sessionDB.insertSessionItem(sessionItem);
             Toast.makeText(this, "Glückwunsch! Du hast " + (int)kCal + " kCal verbraucht!", Toast.LENGTH_LONG).show();
             // save in Database
@@ -138,10 +143,15 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            int itemId = item.getItemId();
-            if (itemId == R.id.progress) {
-                startActivity(new Intent(this, PeriodicStatistics.class));
-            }
+        int itemId = item.getItemId();
+        if (itemId == R.id.progress) {
+            Intent intent = new Intent(this, PeriodicStatistics.class);
+            startActivity(intent);
+        }
+        if (itemId == R.id.sessions) {
+            Intent intent = new Intent(this, SessionOverview.class);
+            startActivity(intent);
+        }
         return true;
     }
 }

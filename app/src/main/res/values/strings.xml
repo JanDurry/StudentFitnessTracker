@@ -67,4 +67,13 @@
 
     <string name="google_maps_api_key">AIzaSyD7dK8SRmEDIolB6SKoVECqmphWTsMNNEs</string>
 
+    <!-- Session Items -->
+    <string name="session_item_distance">Distanz: 10000 Meter</string>
+    <string name="session_item_time">Zeit: 20 Minuten</string>
+    <string name="session_item_pace">Pace: 6:17 min/km</string>
+    <string name="session_item_date">2018.03.04 15:15:15 CET</string>
+    <string name="session_item_type">Radfahren</string>
+    <string name="session_item_kCal">50 kCal</string>
+
+
 </resources>
