@@ -26,6 +26,7 @@ public class Constants {
     public static final int DATABASE_VERSION = 2;
 
     public static final String DATABASE_TABLE = "sessionitems";
+    public static final String DATABASE_TABLE_USER = "sessionUserData";
 
     public static final String KEY_ID = "_id";
     public static final String KEY_TYPE = "type";
@@ -34,6 +35,12 @@ public class Constants {
     public static final String KEY_PACE = "pace";
     public static final String KEY_KCAL = "kCal";
     public static final String KEY_TIME = "time";
+
+    public static final String KEY_WEIGHT = "weight";
+
+    public static final int COLUMN_WEIGHT_INDEX = 1;
+
+    public static final int DEFAULT_WEIGHT = 75;
 
 
     public static final int COLUMN_ID_INDEX = 0;
