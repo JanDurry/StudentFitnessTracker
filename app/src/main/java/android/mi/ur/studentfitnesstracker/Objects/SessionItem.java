@@ -1,37 +1,47 @@
 package android.mi.ur.studentfitnesstracker.Objects;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-
 /**
  * Created by JanDurry on 24.02.2018.
  */
 
 public class SessionItem {
-    private GregorianCalendar cal;
-    private int id;
-    private int time;
-    Calculator calc;
+    String sessionType;
+    String pace; // pace in min/km
+    int distance; // distance in meters
+    String time; //Time in seconds
+    double kCal;
+    String date;
 
-    public SessionItem(int id, int day, int month, int year) {
-        this.id = id;
-        cal = new GregorianCalendar(day, month, year);
+    public SessionItem(String sessionType, int distance, String time, double kCal, String pace, String date) {
+        this.sessionType = sessionType;
+        this.distance = distance;
+        this.time = time;
+        this.kCal = kCal;
+        this.pace = pace;
+        this.date = date;
     }
 
-    public int getId() {
-        return id;
+    public String getDate() {
+        return date;
     }
 
-    public String getFormattedDate() {
-        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.GERMANY);
-        return df.format(cal.getTime());
+    public String getSessionType() {
+        return sessionType;
     }
 
-    public Date getTime() {
-        return cal.getTime();
+    public String getPace() {
+        return pace;
     }
 
+    public int getDistance() {
+        return distance;
+    }
 
+    public String getTime() {
+        return time;
+    }
+
+    public double getkCal() {
+        return kCal;
+    }
 }
