@@ -6,6 +6,15 @@
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:padding="12dp">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/session_item_img"
+        android:paddingTop="@dimen/list_item_padding_top"
+        android:paddingStart="@dimen/list_item_padding_small"
+        android:paddingEnd="@dimen/list_item_padding"
+        android:src="@drawable/img_cycle"/>
+
     <TextView
         android:id="@+id/session_item_type"
         android:layout_width="wrap_content"
@@ -22,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/layout_time_distance_kcal"
-        android:layout_toEndOf="@id/session_item_type">
+        android:layout_toEndOf="@id/session_item_img">
 
         <TextView
             android:id="@+id/session_item_time"
