@@ -41,6 +41,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     private int currentDistanceInMeters;
     private int distanceInLastSec;
     private double kCalTotal;
+    private String currentPace;
 
     private OnSessionFragmentOnGoingDataChanged onSessionFragmentOnGoingDataChanged;
 
@@ -52,7 +53,6 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     private TextView distance;
     private Button stopSession;
     private TextView currentSessionType;
-
     private String sessionType;
 
     private ServiceConnection sessionServiceConnection = new ServiceConnection() {
@@ -130,7 +130,6 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
         Intent intent = new Intent(getActivity(), SessionService.class);
         getActivity().stopService(intent);
         Log.e("Bound", String.valueOf(bound));
-        onSessionFragmentOnGoingDataChanged.onFinishSession();
     }
 
     private void bindSessionService() {
@@ -177,6 +176,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.session_fragment, sessionFragment);
         fragmentTransaction.commit();
+        onSessionFragmentOnGoingDataChanged.onFinishSession(currentSessionType.getText().toString(), currentDistanceInMeters, timeInSecs, kCalTotal, currentPace);
     }
 
     /* ---- calculate ---- */
@@ -185,8 +185,9 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
         Calculator calc = new Calculator();
         calc.setValues(currentDistanceInMeters, timeInSecs, distanceInLastSec, currentSessionType.getText().toString());
         kCalTotal +=  calc.calculateKcal();
+        currentPace = calc.calculatePace();
         kCal.setText(String.valueOf((int)kCalTotal));
-        pace.setText(calc.calculatePace());
+        pace.setText(currentPace);
         distance.setText(String.valueOf(currentDistanceInMeters) + " " + "m");
     }
 
@@ -224,7 +225,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
 
     public interface OnSessionFragmentOnGoingDataChanged {
         public void onDataChanged(Location currentLocation);
-        public void onFinishSession();
+        public void onFinishSession(String sessionType, int distance, long time, double kCal, String pace);
         public void onSessionStart(Location startLocation);
     }
 }
