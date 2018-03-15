@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.location.Location;
+import android.mi.ur.studentfitnesstracker.Activities.MainMenu;
 import android.mi.ur.studentfitnesstracker.Listener.OnSessionDataChangedListener;
 import android.mi.ur.studentfitnesstracker.Objects.Calculator;
 import android.mi.ur.studentfitnesstracker.R;
@@ -165,6 +166,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
         stopSession.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((MainMenu)getActivity()).enableNavigationBar();
                 unbindSessionService();
                 stopService();
                 closeFragment();
