@@ -6,7 +6,9 @@ package android.mi.ur.studentfitnesstracker.Constants;
 
 public class Constants {
 
+    //** Permission Check **/
 
+    public static final int PERMISSION_REQUEST_LOCATION = 99;
     //** -------SessionFragment------***//
 
     public static final boolean BYCICLE_SELECT = true;

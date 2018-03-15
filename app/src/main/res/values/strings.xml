@@ -62,6 +62,12 @@
 
     <!-- Notifications -->
 
+    <string name="app_permission_title">App GPS Permission</string>
+    <string name="app_permission_message">Zum verwenden dieser App musst du GPS für diese App aktivieren.</string>
+    <string name="app_permission_enabled">GPS App Permission wurden gegeben. Viel Erfolg beim abnehmen!</string>
+    <string name="app_permission_disabled">GPS App Permission wurden abgelehnt. So kannst du diese App nicht nutzen.</string>
+
+    <string name="gps_permission_message">Dein GPS ist nicht auf deinem Smartphone aktiviert und wird benötigt. GPS aktivieren?</string>
 
     <!--- Resources -->
 
