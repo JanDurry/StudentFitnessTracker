@@ -3,6 +3,7 @@ package android.mi.ur.studentfitnesstracker.Fragments;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.mi.ur.studentfitnesstracker.Activities.MainMenu;
 import android.mi.ur.studentfitnesstracker.R;
 import android.mi.ur.studentfitnesstracker.TrackingTools.SessionService;
 import android.os.Bundle;
@@ -70,6 +71,7 @@ public class SessionFragment extends Fragment {
         startSessionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((MainMenu)getActivity()).disableNavigationBar();
                 FragmentManager fragmentManager = getFragmentManager();
                 Bundle type = new Bundle();
                 type.putString( "SESSION_TYPE" , getSessionType());
@@ -87,6 +89,5 @@ public class SessionFragment extends Fragment {
         }
         return "Laufen";
     }
-
 
 }

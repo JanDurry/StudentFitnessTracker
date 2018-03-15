@@ -34,7 +34,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoing.OnSessionFragmentOnGoingDataChanged, BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoing.OnSessionFragmentOnGoingDataChanged,
+        BottomNavigationView.OnNavigationItemSelectedListener {
 
     private SessionFragment sessionFragment;
     private MapFragment map;
@@ -58,6 +59,22 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
         initFragmentLayouts();
         initInitialFragment();
         initDatabase();
+    }
+
+    /** public Method to disable BottomNavigationItems during session */
+
+    public void disableNavigationBar() {
+        Menu menu = bottomNavigationItemView.getMenu();
+        for (int i = 0; i < menu.size(); i++) {
+            menu.getItem(i).setEnabled(false);
+        }
+    }
+
+    public void enableNavigationBar() {
+        Menu menu = bottomNavigationItemView.getMenu();
+        for (int i = 0; i < menu.size(); i++) {
+            menu.getItem(i).setEnabled(true);
+        }
     }
 
     /* Check AppPermissions -> siehe https://developer.android.com/training/permissions/requesting.html
@@ -147,7 +164,7 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
         return super.onOptionsItemSelected(item);
     }
 
-    /** Eigene Methoden **/
+    /** andere OnCreate Methoden **/
 
     private void initDatabase() {
         sessionDB = new SessionDatabaseAdapter(this);
@@ -211,6 +228,7 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        SessionFragmentOnGoing sessionFragmentOnGoing = (SessionFragmentOnGoing) getFragmentManager().findFragmentById(R.id.session_fragment_onGoing);
         int itemId = item.getItemId();
         if (itemId == R.id.progress) {
             Intent intent = new Intent(this, PeriodicStatistics.class);
