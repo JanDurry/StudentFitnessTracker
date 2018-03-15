@@ -30,3 +30,8 @@ Notification: Push-Nachricht, wenn Kalorienverbrauch erreicht wurde oder nicht
 
 Punkteverteilung: Speicherung in einer Liste, bei Erreichen eines Etappenziels Belohnung (z.B.
 Bild/motivierende Nachricht)
+
+
+### Benötigte Libaries
+
+Google Service SDK
