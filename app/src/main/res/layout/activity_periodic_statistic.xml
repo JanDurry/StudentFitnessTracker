@@ -89,6 +89,31 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/total_kCal_burnt"
+        android:layout_below="@id/layout_run"
+        android:textSize="@dimen/session_ongoing_param"
+        android:paddingStart="@dimen/param_padding"
+        android:paddingEnd="@dimen/space"
+        android:paddingTop="@dimen/new_paragraph_padding"
+        android:paddingBottom="@dimen/param_padding"
+        android:text="@string/total_kCal"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/goal_percentage"
+        android:layout_below="@id/total_kCal_burnt"
+        android:textSize="@dimen/session_ongoing_param"
+        android:paddingStart="@dimen/param_padding"
+        android:paddingEnd="@dimen/space"
+
+        android:paddingBottom="@dimen/param_padding"
+        android:text="@string/goal_percentage"
+        />
+
 
 
 </RelativeLayout>

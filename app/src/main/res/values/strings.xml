@@ -28,7 +28,7 @@
     <string name="mileage_cycle_value"></string>
     <string name="mileage_run_value"></string>
 
-    <string name="percentage_of_goal">Du hast bisher 0% deines Wochenziels erreicht.</string>
+    <string name="goal_percentage">Du hast bisher 0% deines Wochenziels erreicht.</string>
 
     <string name="total_kCal">Du hast insgesamt 0 Kalorien verbraucht!</string>
 
