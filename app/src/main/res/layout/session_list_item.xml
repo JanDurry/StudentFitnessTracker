@@ -11,61 +11,94 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:padding="3dp"
+        android:paddingTop="@dimen/list_item_padding_top"
+        android:paddingStart="@dimen/list_item_padding_small"
+        android:paddingEnd="@dimen/list_item_padding"
         android:maxLines="1"
-        android:textSize="11sp"
+        android:textSize="12sp"
         android:text="@string/session_item_type"/>
-    <TextView
-        android:id="@+id/session_item_date"
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/session_item_type"
-        android:gravity="center_vertical"
-        android:padding="3dp"
-        android:maxLines="1"
-        android:textSize="11sp"
-        android:text="@string/session_item_date"/>
-    <TextView
-        android:id="@+id/session_item_distance"
+        android:id="@+id/layout_time_distance_kcal"
+        android:layout_toEndOf="@id/session_item_type">
+
+        <TextView
+            android:id="@+id/session_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingTop="@dimen/list_item_padding_top"
+            android:paddingStart="@dimen/list_item_padding_small"
+            android:paddingEnd="@dimen/list_item_padding"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:text="@string/session_item_time"/>
+
+        <TextView
+            android:id="@+id/session_item_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_below="@id/session_item_time"
+            android:paddingTop="@dimen/list_item_padding_top"
+            android:paddingStart="@dimen/list_item_padding_small"
+            android:paddingEnd="@dimen/list_item_padding"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:text="@string/session_item_distance"/>
+
+        <TextView
+            android:id="@+id/session_item_kCal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/session_item_time"
+            android:layout_toEndOf="@id/session_item_distance"
+            android:paddingTop="@dimen/list_item_padding_top"
+            android:paddingStart="@dimen/list_item_padding"
+            android:paddingEnd="@dimen/list_item_padding"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:text="@string/session_header_kCal"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_toEndOf="@id/session_item_type"
-        android:padding="3dp"
-        android:maxLines="1"
-        android:textSize="11sp"
-        android:text="@string/session_item_distance"/>
-    <TextView
-        android:id="@+id/session_item_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/session_item_distance"
-        android:layout_toEndOf="@id/session_item_date"
-        android:gravity="center_vertical"
-        android:padding="3dp"
-        android:maxLines="1"
-        android:textSize="11sp"
-        android:text="@string/session_item_time"/>
-    <TextView
-        android:id="@+id/session_item_pace"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/session_item_distance"
-        android:padding="3dp"
-        android:gravity="center_vertical"
-        android:maxLines="1"
-        android:textSize="11sp"
-        android:text="@string/session_item_pace"/>
-    <TextView
-        android:id="@+id/session_item_kCal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/session_item_distance"
-        android:layout_toEndOf="@id/session_item_time"
-        android:gravity="center_vertical"
-        android:padding="11sp"
-        android:maxLines="1"
-        android:textSize="11sp"
-        android:text="@string/session_header_kCal"/>
+        android:layout_toEndOf="@id/layout_time_distance_kcal">
+
+        <TextView
+            android:id="@+id/session_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingTop="@dimen/list_item_padding_top"
+            android:paddingStart="@dimen/list_item_padding"
+            android:paddingEnd="@dimen/list_item_padding"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:text="@string/session_item_date"/>
+
+
+
+        <TextView
+            android:id="@+id/session_item_pace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/session_item_date"
+
+            android:paddingTop="@dimen/list_item_padding_top"
+            android:paddingStart="@dimen/list_item_padding"
+            android:paddingEnd="@dimen/list_item_padding"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:text="@string/session_item_pace"/>
+
+    </RelativeLayout>
+
+
 
 </RelativeLayout>
