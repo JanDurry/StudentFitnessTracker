@@ -51,6 +51,9 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     private TextView pace;
     private TextView distance;
     private Button stopSession;
+    private TextView currentSessionType;
+
+    private String sessionType;
 
     private ServiceConnection sessionServiceConnection = new ServiceConnection() {
         @Override
@@ -100,9 +103,22 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            onSessionFragmentOnGoingDataChanged = (OnSessionFragmentOnGoingDataChanged) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement interface methods");
+        }
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
     }
+
+    /* ------ Service Methods ---- */
 
     private void initSessionService() {
         Intent intent = new Intent(getActivity(), SessionService.class);
@@ -129,13 +145,17 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
         }
     }
 
+    /* ------ Init Elements and public Method to set sessiontype ------ */
+
     private void initElements() {
+        Bundle arguments = getArguments();
         stopSession = (Button) getView().findViewById(R.id.button_stop_session);
         time = (TextView) getView().findViewById(R.id.current_time);
         kCal = (TextView) getView().findViewById(R.id.current_kCal);
         pace = (TextView) getView().findViewById(R.id.current_pace);
         distance = (TextView) getView().findViewById(R.id.current_distance);
-
+        currentSessionType = (TextView) getView().findViewById(R.id.current_session_type);
+        currentSessionType.setText(arguments.getString("SESSION_TYPE"));
     }
 
     private void initButton() {
@@ -150,6 +170,8 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
         });
     }
 
+    /* close Fragment */
+
     private void closeFragment() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -157,25 +179,15 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
         fragmentTransaction.commit();
     }
 
+    /* ---- calculate ---- */
+
     private void calculate() {
         Calculator calc = new Calculator();
-        calc.setValues(currentDistanceInMeters, timeInSecs, distanceInLastSec);
+        calc.setValues(currentDistanceInMeters, timeInSecs, distanceInLastSec, currentSessionType.getText().toString());
         kCalTotal +=  calc.calculateKcal();
         kCal.setText(String.valueOf((int)kCalTotal));
         pace.setText(calc.calculatePace());
         distance.setText(String.valueOf(currentDistanceInMeters) + " " + "m");
-    }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            onSessionFragmentOnGoingDataChanged = (OnSessionFragmentOnGoingDataChanged) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
-                    + " must implement TextClicked");
-        }
     }
 
     /** SessionFragmentOnGoing Callbacks */
