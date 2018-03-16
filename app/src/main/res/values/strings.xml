@@ -22,13 +22,18 @@
 
     <!-- Fortschritt -->
 
-    <string name="total_mileage">Du hast insgesamt 0 km zurückgelegt!</string>
+    <string name="current_week">12.03.2018 – 18.03.2018</string>
+
+    <string name="goal_title">1000/2500 kCal</string>
+
+    <string name="total_mileage">Du hast insgesamt 0 m zurückgelegt!</string>
     <string name="mileage_cycle">Auf dem Rad: </string>
     <string name="mileage_run">Zu Fuß: </string>
     <string name="mileage_cycle_value"></string>
     <string name="mileage_run_value"></string>
 
-    <string name="goal_percentage">Du hast bisher 0% deines Wochenziels erreicht.</string>
+    <string name="goal_value">Dein Wochenziel ist es, 0 Kalorien zu verbrennen.</string>
+    <string name="goal_percentage">Du hast bisher 0% deines Wochenziels erreicht!</string>
 
     <string name="total_kCal">Du hast insgesamt 0 Kalorien verbraucht!</string>
 

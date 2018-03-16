@@ -6,6 +6,8 @@
     <dimen name="button">20sp</dimen>
     <dimen name="session_type_text_size">20sp</dimen>
     <dimen name="session_ongoing_param">20sp</dimen>
+    <dimen name="periodic_title_text_size">18sp</dimen>
+    <dimen name="periodic_text_size">14sp</dimen>
 
     <!-- Padding -->
     <dimen name="space">2sp</dimen>
