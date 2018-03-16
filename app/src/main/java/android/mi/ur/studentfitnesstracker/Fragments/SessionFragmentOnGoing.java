@@ -171,6 +171,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
             @Override
             public void onClick(View view) {
                 ((MainMenu)getActivity()).enableNavigationBar();
+                ((MainMenu)getActivity()).enableToolBar();
                 unbindSessionService();
                 stopService();
                 closeFragment();

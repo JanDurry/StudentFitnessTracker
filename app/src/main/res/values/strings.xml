@@ -24,7 +24,7 @@
 
     <!-- Fortschritt -->
 
-    <string name="goal_title">1000/2500 kCal</string>
+    <string name="goal_title">Deine Persönliche Statistik</string>
 
     <string name="total_mileage_start">Du hast insgesamt</string>
     <string name="total_mileage">0 m zurückgelegt!</string>

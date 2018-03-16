@@ -9,45 +9,17 @@
     android:id="@+id/periodic_statistic_layout"
     tools:context="android.mi.ur.studentfitnesstracker.Activities.PeriodicStatistics">
 
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/goal_title"
-            android:textSize="@dimen/periodic_title_text_size"
-            android:paddingStart="@dimen/param_padding"
-            android:paddingEnd="@dimen/space"
-            android:paddingTop="@dimen/new_paragraph_padding"
-            android:paddingBottom="@dimen/param_padding"
-            android:text="@string/goal_title"/>
-
-
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/goal_title"
-        android:id="@+id/total_mileage_start"
-        android:textSize="@dimen/periodic_text_size"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/goal_title"
+        android:textSize="@dimen/periodic_title_text_size"
         android:paddingStart="@dimen/param_padding"
         android:paddingEnd="@dimen/space"
         android:paddingTop="@dimen/new_paragraph_padding"
-        android:paddingBottom="@dimen/above_img_padding"
-        android:text="@string/total_mileage_start"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/goal_title"
-        android:layout_toEndOf="@+id/total_mileage_start"
-        android:id="@+id/total_mileage"
-        android:textSize="@dimen/periodic_text_size"
-        android:paddingStart="@dimen/space"
-        android:paddingTop="@dimen/new_paragraph_padding"
         android:paddingBottom="@dimen/param_padding"
-        android:text="@string/total_mileage"/>
+        android:text="@string/goal_title"/>
 
     <!-- Distanz Rad -->
 
@@ -56,7 +28,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/total_mileage_start"
+        android:layout_below="@id/goal_title"
         android:layout_toStartOf="@id/mileage_cycle_value"
         android:id="@+id/mileage_cycle_img"
         android:paddingTop="@dimen/list_item_padding_top"
@@ -67,7 +39,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/total_mileage"
+            android:layout_below="@id/goal_title"
             android:layout_toEndOf="@id/total_mileage_start"
             android:textSize="@dimen/periodic_text_size"
             android:paddingStart="@dimen/param_padding"
@@ -76,6 +48,29 @@
             android:id="@+id/mileage_cycle_value"
             android:text="@string/mileage_cycle_value"/>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mileage_cycle_value"
+        android:layout_toStartOf="@id/mileage_cycle_value"
+        android:id="@+id/mileage_cycle_avg_img"
+        android:paddingTop="@dimen/list_item_padding_top"
+        android:paddingStart="@dimen/list_item_padding_small"
+        android:paddingEnd="@dimen/list_item_padding"
+        android:src="@drawable/img_cycle"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mileage_cycle_value"
+        android:layout_toEndOf="@id/mileage_cycle_avg_img"
+        android:textSize="@dimen/periodic_text_size"
+        android:paddingStart="@dimen/param_padding"
+        android:paddingEnd="@dimen/space"
+        android:paddingBottom="@dimen/param_padding"
+        android:id="@+id/mileage_cycle_avg_value"
+        android:text="@string/mileage_cycle_value"/>
+
 
 
     <!-- Distanz zu Fuß -->
@@ -83,19 +78,19 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/mileage_cycle_img"
-        android:layout_toStartOf="@id/mileage_run_value"
+        android:layout_below="@id/goal_title"
+        android:layout_toEndOf="@id/mileage_cycle_value"
         android:id="@+id/mileage_run_img"
         android:paddingTop="@dimen/list_item_padding_top"
-        android:paddingStart="@dimen/list_item_padding_small"
+        android:paddingLeft="70dp"
         android:paddingEnd="@dimen/list_item_padding"
         android:src="@drawable/img_run"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/mileage_cycle_value"
-            android:layout_toEndOf="@id/total_mileage_start"
+            android:layout_below="@id/goal_title"
+            android:layout_toEndOf="@id/mileage_run_img"
             android:textSize="@dimen/periodic_text_size"
             android:paddingStart="@dimen/param_padding"
             android:paddingEnd="@dimen/space"
@@ -103,10 +98,33 @@
             android:id="@+id/mileage_run_value"/>
 
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mileage_run_img"
+        android:layout_toStartOf="@id/mileage_run_value"
+        android:id="@+id/mileage_run_avg_img"
+        android:paddingTop="@dimen/list_item_padding_top"
+        android:paddingStart="@dimen/list_item_padding_small"
+        android:paddingEnd="@dimen/list_item_padding"
+        android:src="@drawable/img_run"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/mileage_run_value"
+        android:layout_toEndOf="@id/mileage_run_avg_img"
+        android:textSize="@dimen/periodic_text_size"
+        android:paddingStart="@dimen/param_padding"
+        android:paddingEnd="@dimen/space"
+        android:paddingBottom="@dimen/param_padding"
+        android:id="@+id/mileage_run_avg_value"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mileage_run_avg_img"
         android:id="@+id/total_kCal_burnt"
         android:textSize="@dimen/periodic_text_size"
         android:paddingStart="@dimen/param_padding"
@@ -139,6 +157,29 @@
         android:text="@string/goal_percentage"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/goal_percentage"
+        android:id="@+id/total_mileage_start"
+        android:textSize="@dimen/periodic_text_size"
+        android:paddingStart="@dimen/param_padding"
+        android:paddingEnd="@dimen/space"
+        android:paddingBottom="@dimen/param_padding"
+        android:text="@string/total_mileage_start"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/goal_percentage"
+        android:layout_toEndOf="@+id/total_mileage_start"
+        android:id="@+id/total_mileage"
+        android:textSize="@dimen/periodic_text_size"
+        android:paddingStart="@dimen/param_padding"
+        android:paddingEnd="@dimen/space"
+        android:paddingBottom="@dimen/param_padding"
+        android:text="@string/total_mileage"/>
+
     <!-- Options -->
 
     <android.support.design.widget.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -151,6 +192,8 @@
         android:layout_marginTop="10dp"
         android:layout_alignParentBottom="true"
         app:menu="@menu/menu_bottom_menu" />
+
+
 
 
 
