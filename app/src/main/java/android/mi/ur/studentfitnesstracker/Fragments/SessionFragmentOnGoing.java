@@ -42,9 +42,8 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     private Location lastLocation;
 
     private long timeInSecs;
-    private long pausesInSecs;
     private int currentDistanceInMeters;
-    private int distanceInLastSec;
+    private int distanceInLastTenSec;
     private double kCalTotal;
     private String currentPace;
     private String currentTime;
@@ -196,7 +195,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
 
     private void calculate() {
         Calculator calc = new Calculator();
-        calc.setValues(currentDistanceInMeters, timeInSecs, distanceInLastSec, currentSessionType.getText().toString(), sessionDB.getUserWeight());
+        calc.setValues(currentDistanceInMeters, timeInSecs, distanceInLastTenSec, currentSessionType.getText().toString(), sessionDB.getUserWeight());
         kCalTotal +=  calc.calculateKcal();
         currentPace = calc.calculatePace();
         kCal.setText(String.valueOf((int)kCalTotal));
@@ -209,11 +208,9 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     @Override
     public void onNewLocation(Location current, Location last) {
         this.endLocation = current;
-        if ((int) current.distanceTo(last) == 0) {
-            pausesInSecs += ((current.getElapsedRealtimeNanos() - last.getElapsedRealtimeNanos())/ (1000*1000*1000)) % 60;
-        }
-        distanceInLastSec = (int) current.distanceTo(last);
-        currentDistanceInMeters += current.distanceTo(last);
+        //Wert wurde durch 2 geteilt, da die Schätzung der Methode distanceTo doppelt so hoch lag. Durch Testen wurde sich auf /2 geeinigt.
+        currentDistanceInMeters += current.distanceTo(last)/2;
+        distanceInLastTenSec = (int) current.distanceTo(last)/2;
         onSessionFragmentOnGoingDataChanged.onDataChanged(current);
         calculate();
     }

@@ -11,14 +11,20 @@ public class Constants {
     public static final int PERMISSION_REQUEST_LOCATION = 99;
     //** -------SessionFragment------***//
 
-    public static final boolean BYCICLE_SELECT = true;
+    public static final boolean BICYCLE_SELECT = true;
     public static final boolean RUNNING_SELECT = false;
 
     //** -------SessionService------- **/
 
-    public static final int LOCATION_UPDATE_TIME = 1000;
-    public static final float LOCATION_UPDATE_DISTANCE = 0;
+    public static final int LOCATION_UPDATE_TIME = 5000;
+    public static final float LOCATION_UPDATE_DISTANCE = 10;
 
+
+    //** -------Calculator------- **/
+
+    public static final int CALCULATOR_FIVE_SECONDS_FACTOR = 720;
+    public static final int CALCULATOR_TEN_SECONDS_FACTOR = 360;
+    public static final int CALCULATOR_ONE_SECOND_FACTOR = 3600;
 
     //** -------Database------- **//
 
