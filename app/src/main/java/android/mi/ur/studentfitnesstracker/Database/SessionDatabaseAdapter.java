@@ -30,10 +30,9 @@ public class SessionDatabaseAdapter {
     public void open() throws SQLException {
         try {
             db = dbHelper.getWritableDatabase();
-            Log.e("DB", "DATABASE OPEN");
         } catch (SQLException e) {
             db = dbHelper.getReadableDatabase();
-            Log.e("DB", "DATABASE CONNECTION FAILED");
+            Log.e(Constants.DB_TAG, e.toString());
         }
     }
 
@@ -52,26 +51,38 @@ public class SessionDatabaseAdapter {
         return false;
     }
 
-    public void updateUserData(int weight) {
+    public void updateUserData(int weight, int sessionAim) {
         String strFilter = "_id=1";
         ContentValues args = new ContentValues();
         args.put(Constants.KEY_WEIGHT, weight);
+        args.put(Constants.KEY_SESSION_AIM, sessionAim);
         db.update(Constants.DATABASE_TABLE_USER, args, strFilter, null);
     }
 
     public int getUserWeight() {
         int weight = Constants.DEFAULT_WEIGHT;
         Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_ID,
-                Constants.KEY_WEIGHT }, null, null, null, null, null);
+                Constants.KEY_WEIGHT, Constants.KEY_SESSION_AIM }, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             weight = cursor.getInt(Constants.COLUMN_WEIGHT_INDEX);
         }
         return weight;
     }
 
-    public long insertUserData(int weight) {
+    public int getUserSessionAim() {
+        int sessionAim = Constants.DEFAULT_SESSION_AIM;
+        Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_ID,
+                Constants.KEY_WEIGHT, Constants.KEY_SESSION_AIM }, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            sessionAim = cursor.getInt(Constants.COLUMN_SESSION_AIM_INDEX);
+        }
+        return sessionAim;
+    }
+
+    public long insertUserData(int weight, int sessionAim) {
         ContentValues userValues = new ContentValues();
         userValues.put(Constants.KEY_WEIGHT, weight);
+        userValues.put(Constants.KEY_SESSION_AIM, sessionAim);
         return db.insert(Constants.DATABASE_TABLE_USER, null, userValues);
     }
 
@@ -114,7 +125,7 @@ public class SessionDatabaseAdapter {
     }
 
 
-    //** private class to create database table **/
+    //** private class to create database tables **/
 
     private class SessionDBOpenHelper extends SQLiteOpenHelper {
         private static final String DATABASE_CREATE = "create table "
@@ -127,7 +138,7 @@ public class SessionDatabaseAdapter {
         private static final String DATABASE_CREATE_USER = "create table "
                 + Constants.DATABASE_TABLE_USER + " (" + Constants.KEY_ID
                 + " integer primary key autoincrement, " + Constants.KEY_WEIGHT
-                + " int not null);";
+                + " int not null, " + Constants.KEY_SESSION_AIM + " int not null);";
 
         public SessionDBOpenHelper(Context c, String dbname,
                                           SQLiteDatabase.CursorFactory factory, int version) {

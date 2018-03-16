@@ -3,6 +3,7 @@ package android.mi.ur.studentfitnesstracker.Fragments;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.location.Location;
+import android.mi.ur.studentfitnesstracker.Constants.Constants;
 import android.mi.ur.studentfitnesstracker.R;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -84,7 +85,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private void redrawLine() {
         googleMap.clear();  //clears all Markers and Polylines
 
-        PolylineOptions options = new PolylineOptions().width(5).color(Color.BLUE).geodesic(true);
+        PolylineOptions options = new PolylineOptions()
+                .width(Constants.POLYLINE_WIDTH)
+                .color(Color.BLUE)
+                .geodesic(true);
         for (int i = 0; i < points.size(); i++) {
             LatLng point = points.get(i);
             options.add(point);
@@ -99,7 +103,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     public void locationChange(Location current) {
         currentLocation = current;
-        CameraPosition currentPosition = CameraPosition.builder().target(new LatLng(current.getLatitude(), current.getLongitude())).zoom(16).bearing(0).tilt(45).build();
+        CameraPosition currentPosition = CameraPosition.builder()
+                .target(new LatLng(current.getLatitude(), current.getLongitude()))
+                .zoom(Constants.CAMERA_DEFAULT_ZOOM)
+                .bearing(Constants.CAMERA_BEARING)
+                .tilt(Constants.CAMERA_TILT).build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(currentPosition));
         LatLng latLng = new LatLng(current.getLatitude(), current.getLongitude());
         points.add(latLng);
@@ -113,7 +121,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     public void onFinishSession() {
         if (currentLocation != null) {
-            CameraPosition currentPosition = CameraPosition.builder().target(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())).zoom(14).bearing(0).tilt(45).build();
+            CameraPosition currentPosition = CameraPosition.builder().target(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()))
+                    .zoom(Constants.CAMERA_ON_SESSION_FINISHED_ZOOM)
+                    .bearing(Constants.CAMERA_BEARING)
+                    .tilt(Constants.CAMERA_TILT)
+                    .build();
             googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(currentPosition));
             redrawLine();
         }
@@ -127,7 +139,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         googleMap.clear();
         points.clear();
         startLocation = first;
-        CameraPosition currentPosition = CameraPosition.builder().target(new LatLng(startLocation.getLatitude(), startLocation.getLongitude())).zoom(16).bearing(0).tilt(45).build();
+        CameraPosition currentPosition = CameraPosition.builder()
+                .target(new LatLng(startLocation.getLatitude(), startLocation.getLongitude()))
+                .zoom(Constants.CAMERA_DEFAULT_ZOOM)
+                .bearing(Constants.CAMERA_BEARING)
+                .tilt(Constants.CAMERA_TILT)
+                .build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(currentPosition));
         LatLng latLng = new LatLng(startLocation.getLatitude(), startLocation.getLongitude());
         points.add(latLng);
@@ -137,9 +154,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private void resetLocation() {
         googleMap.clear();
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(49.013432, 12.101624)).title("Regensburg"));
-        CameraPosition Regensburg = CameraPosition.builder().target(new LatLng(49.013432, 12.101624)).zoom(16).bearing(0).tilt(45).build();
+        googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(Constants.CAMERA_DEFAULT_LATITUDE, Constants.CAMERA_DEFAULT_LONGITUDE))
+                .title(Constants.CAMERA_DEFAULT_TITLE));
+        CameraPosition Regensburg = CameraPosition.builder()
+                .target(new LatLng(Constants.CAMERA_DEFAULT_LATITUDE, Constants.CAMERA_DEFAULT_LONGITUDE))
+                .zoom(Constants.CAMERA_DEFAULT_ZOOM)
+                .bearing(Constants.CAMERA_BEARING)
+                .tilt(Constants.CAMERA_TILT)
+                .build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Regensburg));
     }
 }

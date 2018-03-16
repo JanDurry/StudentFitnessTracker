@@ -12,6 +12,7 @@ public class PersonalData extends AppCompatActivity {
 
     private SessionDatabaseAdapter sessionDB;
     private EditText weight;
+    private EditText sessionAim;
     private Button button;
 
     @Override
@@ -25,12 +26,14 @@ public class PersonalData extends AppCompatActivity {
     private void initButton() {
         button = (Button) findViewById(R.id.button_change_personal_data);
         weight = (EditText) findViewById(R.id.weight_value);
+        sessionAim = (EditText) findViewById(R.id.weekly_aim_value);
+        sessionAim.setText(String.valueOf(sessionDB.getUserSessionAim()));
         weight.setText(String.valueOf(sessionDB.getUserWeight()));
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!weight.getText().equals("") && sessionDB.checkIfUserDataExists()) {
-                    sessionDB.updateUserData(Integer.parseInt(weight.getText().toString()));
+                if (!weight.getText().equals("") && !sessionAim.getText().equals("") && sessionDB.checkIfUserDataExists()) {
+                    sessionDB.updateUserData(Integer.parseInt(weight.getText().toString()), Integer.parseInt(sessionAim.getText().toString()));
                 }
             }
         });

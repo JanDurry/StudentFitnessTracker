@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.location.Location;
 import android.mi.ur.studentfitnesstracker.Activities.MainMenu;
+import android.mi.ur.studentfitnesstracker.Constants.Constants;
 import android.mi.ur.studentfitnesstracker.Database.SessionDatabaseAdapter;
 import android.mi.ur.studentfitnesstracker.Listener.OnSessionDataChangedListener;
 import android.mi.ur.studentfitnesstracker.Objects.Calculator;
@@ -18,7 +19,6 @@ import android.mi.ur.studentfitnesstracker.R;
 import android.mi.ur.studentfitnesstracker.TrackingTools.SessionService;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,9 +31,10 @@ import android.widget.TextView;
 
 public class SessionFragmentOnGoing extends Fragment implements OnSessionDataChangedListener {
 
+
     private SessionFragment sessionFragment;
     private SessionService sessionService;
-    private Calculator calc;
+
     private SessionDatabaseAdapter sessionDB;
 
     private Location startLocation;
@@ -47,6 +48,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     private double kCalTotal;
     private String currentPace;
     private String currentTime;
+    private Calculator calc;
 
     private OnSessionFragmentOnGoingDataChanged onSessionFragmentOnGoingDataChanged;
 
@@ -60,10 +62,12 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     private TextView currentSessionType;
     private String sessionType;
 
+
+    /* set bound when service connected */
+
     private ServiceConnection sessionServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder service) {
-            Log.e("SERVICE CONNECTION", "connected");
             SessionService.LocalBinder binder = (SessionService.LocalBinder) service;
             sessionService = binder.getBinder();
             bound = true;
@@ -74,25 +78,21 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
-            Log.e("SERVICE CONNECTION", "disconnected");
         }
     };
 
+    /** Fragment Override Methods */
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
         return inflater.inflate(R.layout.session_fragment_ongoing, parent, false);
     }
 
-    // This event is triggered soon after onCreateView().
-    // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         initElements();
         initButton();
         initDatabase();
-        // Setup any handles to view objects here
-        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
     }
 
     private void initDatabase() {
@@ -119,8 +119,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
         try {
             onSessionFragmentOnGoingDataChanged = (OnSessionFragmentOnGoingDataChanged) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
-                    + " must implement interface methods");
+            throw new ClassCastException(context.toString());
         }
     }
 
@@ -134,13 +133,11 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     private void initSessionService() {
         Intent intent = new Intent(getActivity(), SessionService.class);
         getActivity().startService(intent);
-        Log.e("Bound", "initSessionService");
     }
 
     private void stopService() {
         Intent intent = new Intent(getActivity(), SessionService.class);
         getActivity().stopService(intent);
-        Log.e("Bound", String.valueOf(bound));
     }
 
     private void bindSessionService() {
@@ -195,12 +192,29 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
 
     private void calculate() {
         Calculator calc = new Calculator();
+        String currentDistanceInMetersString = String.valueOf(currentDistanceInMeters) + " m";
         calc.setValues(currentDistanceInMeters, timeInSecs, distanceInLastTenSec, currentSessionType.getText().toString(), sessionDB.getUserWeight());
         kCalTotal +=  calc.calculateKcal();
         currentPace = calc.calculatePace();
         kCal.setText(String.valueOf((int)kCalTotal));
         pace.setText(currentPace);
-        distance.setText(String.valueOf(currentDistanceInMeters) + " " + "m");
+        distance.setText(currentDistanceInMetersString);
+        checkIfSessionAimAccomplished();
+    }
+
+    /** send Notfication if session aim has been accomplished */
+
+    private void checkIfSessionAimAccomplished() {
+        int sessionAim = sessionDB.getUserSessionAim();
+        Bundle arguments = getArguments();
+        String sessionType = arguments.getString("SESSION_TYPE");
+        if (sessionType.equals(Constants.SESSION_TYPE_CYCLE)) {
+            //.setSmallIcon(R.drawable.img_cycle)
+        } else if (sessionType.equals(Constants.SESSION_TYPE_RUN)){
+            //.setSmallIcon(R.drawable.img_cycle)
+        }
+
+
     }
 
     /** SessionFragmentOnGoing Callbacks */
@@ -209,8 +223,8 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     public void onNewLocation(Location current, Location last) {
         this.endLocation = current;
         //Wert wurde durch 2 geteilt, da die Schätzung der Methode distanceTo doppelt so hoch lag. Durch Testen wurde sich auf /2 geeinigt.
-        currentDistanceInMeters += current.distanceTo(last)/2;
-        distanceInLastTenSec = (int) current.distanceTo(last)/2;
+        currentDistanceInMeters += current.distanceTo(last)/Constants.APPROXIMATION_SMOOTHER;
+        distanceInLastTenSec = (int) current.distanceTo(last)/Constants.APPROXIMATION_SMOOTHER;
         onSessionFragmentOnGoingDataChanged.onDataChanged(current);
         calculate();
     }
@@ -230,14 +244,14 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     @Override
     public void OnGpsProviderDisabled() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Dein GPS ist leider nicht für diese App aktiviert und wird benötigt. GPS aktivieren?")
+        builder.setMessage(R.string.gps_permission_message)
                 .setCancelable(false)
-                .setPositiveButton("Einstellungen", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.gps_permission_settings, new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                     }
                 })
-                .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.gps_permission_deny, new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         dialog.cancel();
                     }
@@ -248,7 +262,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
 
     @Override
     public void onCurrentTimeStamp(long timeInMs) {
-        this.timeInSecs = (timeInMs/(1000));
+        this.timeInSecs = (timeInMs/(Constants.MS_TO_SECONDS));
     }
 
     /* Interface to Communicate with other Fragments through Activity */
