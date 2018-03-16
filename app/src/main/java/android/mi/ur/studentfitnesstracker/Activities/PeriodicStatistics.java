@@ -1,6 +1,7 @@
 package android.mi.ur.studentfitnesstracker.Activities;
 
 import android.content.Intent;
+import android.mi.ur.studentfitnesstracker.Constants.Constants;
 import android.mi.ur.studentfitnesstracker.Database.SessionDatabaseAdapter;
 import android.mi.ur.studentfitnesstracker.Objects.SessionItem;
 import android.mi.ur.studentfitnesstracker.R;
@@ -13,9 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class PeriodicStatistics extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
-
-    private static final int WOCHENZIEL = 1000;
+public class PeriodicStatistics extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private BottomNavigationView bottomNavigationView;
 
@@ -57,7 +56,7 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
     private void initNavgationView() {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        bottomNavigationView.getMenu().getItem(0).setChecked(true);
+        bottomNavigationView.getMenu().getItem(Constants.BOTTOM_NAVIGATION_VIEW_PERIODIC_STATISTICS_ID).setChecked(true);
     }
 
     private void inflateElements() {
@@ -83,7 +82,7 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
             session = sessions.get(i);
             totalMileageValue += session.getDistance();
             totalKCalValue += session.getkCal();
-            if (session.getSessionType().equals("Radfahren")) {
+            if (session.getSessionType().equals(Constants.SESSION_TYPE_CYCLE)) {
                 totalMileageCycleValue += session.getDistance();
             } else {
                 totalMileageRunValue += session.getDistance();
@@ -92,7 +91,7 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
     }
 
     private void getTotalPercentage() {
-        double percentage = ((double) totalKCalValue / WOCHENZIEL);
+        double percentage = ((double) totalKCalValue);
         if (percentage >= 1) {
             goalPercentageString = "Du hast bereits 100% deines Wochenziels erreicht!";
         } else if (percentage < 1) {

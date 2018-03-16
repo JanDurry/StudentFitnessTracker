@@ -23,7 +23,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -119,7 +118,6 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
             case Constants.PERMISSION_REQUEST_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
@@ -144,19 +142,13 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.personal_data) {
             Intent intent = new Intent(this, PersonalData.class);
             startActivity(intent);
@@ -166,13 +158,13 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
         return super.onOptionsItemSelected(item);
     }
 
-    /** andere OnCreate Methoden **/
+    /** Initalisierungs-Methoden **/
 
     private void initDatabase() {
         sessionDB = new SessionDatabaseAdapter(this);
         sessionDB.open();
         if (!sessionDB.checkIfUserDataExists()) {
-            sessionDB.insertUserData(Constants.DEFAULT_WEIGHT);
+            sessionDB.insertUserData(Constants.DEFAULT_WEIGHT, Constants.DEFAULT_SESSION_AIM);
         }
         sessions = sessionDB.getAllSessionItems();
     }
@@ -188,7 +180,7 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
         sessionFragment = new SessionFragment();
         bottomNavigationItemView = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigationItemView.setOnNavigationItemSelectedListener(this);
-        bottomNavigationItemView.getMenu().getItem(1).setChecked(true);
+        bottomNavigationItemView.getMenu().getItem(Constants.BOTTOM_NAVIGATION_VIEW_NEW_SESSION_ID).setChecked(true);
     }
 
     /* Callbacks aus dem SessionFragmentOnGoing
@@ -197,32 +189,29 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
 
     @Override
     public void onDataChanged(Location currentLocation) {
-        Log.e("MAP", "onDataChanged");
         map = (MapFragment) getFragmentManager().findFragmentById(R.id.map_fragment);
         map.locationChange(currentLocation);
     }
 
     @Override
     public void onFinishSession(String sessionType, int distance, String time, double kCal, String pace) {
-        Log.e("MAP", "onFinishSession");
         map = (MapFragment) getFragmentManager().findFragmentById(R.id.map_fragment);
         map.onFinishSession();
         if (kCal > 20) { // If the user burned less than 20 kCal no session item will be created
             Date date = Calendar.getInstance(TimeZone.getTimeZone("CET")).getTime();
-            SimpleDateFormat formatDate = new SimpleDateFormat("dd.MM.yy HH:mm:ss");
+            SimpleDateFormat formatDate = new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT);
             String formattedDate = formatDate.format(date);
             sessionItem = new SessionItem(sessionType, distance, time, kCal, pace, formattedDate);
             sessionDB.insertSessionItem(sessionItem);
             Toast.makeText(this, "Glückwunsch! Du hast " + (int)kCal + " kCal verbraucht!", Toast.LENGTH_LONG).show();
             // save in Database
         } else {
-            Toast.makeText(this, "Es wurde keine Session hinzugefügt, weil dein Kalorienverbrauch zu gering war!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.no_kalories_burned, Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     public void onSessionStart(Location startLocation) {
-        Log.e("MAP", "onSessionStart");
         map = (MapFragment) getFragmentManager().findFragmentById(R.id.map_fragment);
         map.onStartLocation(startLocation);
     }

@@ -2,6 +2,7 @@ package android.mi.ur.studentfitnesstracker.Activities;
 
 import android.content.Intent;
 import android.mi.ur.studentfitnesstracker.Adapter.SessionItemAdapter;
+import android.mi.ur.studentfitnesstracker.Constants.Constants;
 import android.mi.ur.studentfitnesstracker.Database.SessionDatabaseAdapter;
 import android.mi.ur.studentfitnesstracker.Objects.SessionItem;
 import android.mi.ur.studentfitnesstracker.R;
@@ -39,7 +40,7 @@ public class SessionOverview extends AppCompatActivity implements BottomNavigati
     private void initNavgationView() {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        bottomNavigationView.getMenu().getItem(2).setChecked(true);
+        bottomNavigationView.getMenu().getItem(Constants.BOTTOM_NAVIGATION_VIEW_SESSION_OVERVIEW_ID).setChecked(true);
     }
 
     private void initListView() {
