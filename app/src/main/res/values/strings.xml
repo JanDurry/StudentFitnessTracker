@@ -39,7 +39,7 @@
     <string name="session_type_cycle">Radfahren</string>
     <string name="session_start">Session starten</string>
 
-    <string name="current_session_type">Laufen/Radfahren</string>
+    <string name="current_session_type">Laufen/Rad</string>
     <string name="session_header_time">Zeit: </string>
     <string name="session_current_time">00:00</string>
     <string name="session_header_kCal">kCal: </string>
