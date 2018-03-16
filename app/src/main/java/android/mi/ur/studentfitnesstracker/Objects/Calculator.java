@@ -1,38 +1,38 @@
 package android.mi.ur.studentfitnesstracker.Objects;
 
+import android.mi.ur.studentfitnesstracker.Constants.Constants;
+
 /**
  * Created by JanDurry on 27.02.2018.
  *
- * INFO: WURDE VON ÜBUNGSEINHEIT 3 "LAUFAPP" ÜBERNOMMEN
+ * INFO: WURDE TEILWEISE VON ÜBUNGSEINHEIT 3 "LAUFAPP" ÜBERNOMMEN
  */
 
 public class Calculator {
 
-    private static final int FAST_JOGGING_KCAL_PER_HOUR = 840;
-    private static final int SLOW_JOGGING_KCAL_PER_HOUR = 530;
-    private static final double MAX_SLOW_KM_PER_HOUR = 7;
-    private final static double MAX_SLOW_KM_H = 7;
 
     private float distance;
-    private float distanceLastSec;
+    private float distanceInLastTenSec;
     private long time;
     private String type;
+    private int weight;
 
  // bei sekündlicher kCal-Berechnung nicht benötigt:   private long pause;
     private double kCalTotal;
 
-    public void setValues(int distance, long time, int distanceLastSec, String type) {
+    public void setValues(int distance, long time, int distanceInLastTenSec, String type, int weight) {
         this.type = type;
         this.distance = distance;
         this.time = time;
-        this.distanceLastSec = distanceLastSec;
+        this.distanceInLastTenSec = distanceInLastTenSec;
+        this.weight = weight;
     }
 
 
     //berechnet Speed für 1 Std. in km/h
     private double calculateSpeed() {
-        double distanceInKm = (double) distanceLastSec / 1000;
-        return (distanceInKm * 3600);
+        double distanceInKm = (double) distanceInLastTenSec / 1000;
+        return (distanceInKm * Constants.CALCULATOR_FIVE_SECONDS_FACTOR);
     }
 
     //berechnet Pace in min/km
@@ -55,10 +55,7 @@ public class Calculator {
 
     //berechnet verbrauchte kCal in der letzten Sekunde
     public double calculateKcal() {
-
-        int weight = 75;
-
-        /**MET value multiplied by weight in kilograms tells you calories burned per hour (MET*weight in kg=calories/hour)
+                /**MET value multiplied by weight in kilograms tells you calories burned per hour (MET*weight in kg=calories/hour)
          * source: http://www.businessinsider.de/how-to-calculate-calories-burned-exercise-met-value-2017-8?r=US&IR=T, 15.03.17
          default weight = 75kg
          z.B: 3.5 * 75kg * 1h / 3600 = 0,072916 kCal/sec
@@ -70,9 +67,9 @@ public class Calculator {
         double currentkCal = 0;
 
         if(type.equals("Laufen")) {
-            currentkCal = calculateSpeed() / 3600 * weight;
+            currentkCal = calculateSpeed() / Constants.CALCULATOR_FIVE_SECONDS_FACTOR * weight;
         } else {
-            currentkCal = calculateSpeed() / 3600 / 2.6 * weight;
+            currentkCal = calculateSpeed() / Constants.CALCULATOR_FIVE_SECONDS_FACTOR / 2.6 * weight;
         }
         return currentkCal;
     }

@@ -39,56 +39,14 @@
                 android:textSize="@dimen/session_type_text_size"
                 android:text="@string/header_weight"/>
 
-            <TextView
-                android:id="@+id/edit_weight"
+            <EditText
+                android:id="@+id/weight_value"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/text_weight"
                 android:textSize="@dimen/session_type_text_size"
-                android:text="@string/edit_weight" />
-
-            <TextView
-                android:id="@+id/text_kg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/edit_weight"
-                android:textSize="@dimen/session_type_text_size"
-                android:text="@string/text_kg"/>
-
-        </RelativeLayout>
-
-        <!-- Height -->
-
-        <RelativeLayout
-            android:id="@+id/height_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/weight_layout"
-            android:paddingBottom="20dp">
-
-            <TextView
-                android:id="@+id/text_height"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/param_padding"
-                android:textSize="@dimen/session_type_text_size"
-                android:text="@string/header_height"/>
-
-            <TextView
-                android:id="@+id/edit_height"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/text_height"
-                android:textSize="@dimen/session_type_text_size"
-                android:text="@string/edit_height" />
-
-            <TextView
-                android:id="@+id/text_cm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/edit_height"
-                android:textSize="@dimen/session_type_text_size"
-                android:text="@string/text_cm"/>
+                android:inputType="numberDecimal"
+                android:text="@string/edit_weight"/>
 
         </RelativeLayout>
 
@@ -96,7 +54,7 @@
             android:id="@+id/button_change_personal_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/height_layout"
+            android:layout_below="@id/weight_layout"
             android:textSize="@dimen/button"
             android:layout_centerHorizontal="true"
             android:text="@string/button_change_personal_data"/>

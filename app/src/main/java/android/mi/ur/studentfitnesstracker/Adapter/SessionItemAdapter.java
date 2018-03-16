@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class SessionItemAdapter extends ArrayAdapter<SessionItem> {
         SessionItem sessionItem = sessionList.get(position);
 
         if (sessionItem != null) {
+            ImageView sessionImg = (ImageView) v.findViewById(R.id.session_item_img);
             TextView sessionType = (TextView) v.findViewById(R.id.session_item_type);
             TextView sessionDate = (TextView) v.findViewById(R.id.session_item_date);
             TextView sessionTime = (TextView) v.findViewById(R.id.session_item_time);
@@ -47,19 +49,37 @@ public class SessionItemAdapter extends ArrayAdapter<SessionItem> {
             TextView sessionPace = (TextView) v.findViewById(R.id.session_item_pace);
             TextView sessionKCal = (TextView) v.findViewById(R.id.session_item_kCal);
 
-            String kCal = String.valueOf((int) sessionItem.getkCal() + " kCal");
-            String distance = String.valueOf(sessionItem.getDistance() + " m");
+            int distance = sessionItem.getDistance();
 
-            sessionType.setText(sessionItem.getSessionType());
+
+            String kCal = String.valueOf((int) sessionItem.getkCal() + " kCal");
+            
             sessionDate.setText(sessionItem.getDate());
-            sessionTime.setText(sessionItem.getTime() + " minutes");
-            sessionDistance.setText(distance);
+            sessionTime.setText(sessionItem.getTime() + " min");
+            sessionDistance.setText(formatDistance(distance));
             sessionPace.setText(sessionItem.getPace());
             sessionKCal.setText(kCal);
 
+            String isCycle = "Radfahren";
+
+            if(sessionItem.getSessionType().equals(isCycle)) {
+                sessionImg.setImageResource(R.drawable.img_cycle);
+            } else
+            sessionImg.setImageResource(R.drawable.img_run);
         }
 
         return v;
+    }
+
+    private String formatDistance(int distance) {
+        if(distance > 1000) {
+            int distanceKMBeforeComma = (distance - (distance%1000)) / 1000;
+            int distanceKMAfterComma = (distance%1000) / 10;
+             String distanceKMString = "" + distanceKMBeforeComma + "," + distanceKMAfterComma;
+             return  distanceKMString + " km";
+        } else {
+            return String.valueOf(distance) + " m";
+        }
     }
 
 

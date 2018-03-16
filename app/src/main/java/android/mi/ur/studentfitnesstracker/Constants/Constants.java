@@ -11,14 +11,20 @@ public class Constants {
     public static final int PERMISSION_REQUEST_LOCATION = 99;
     //** -------SessionFragment------***//
 
-    public static final boolean BYCICLE_SELECT = true;
+    public static final boolean BICYCLE_SELECT = true;
     public static final boolean RUNNING_SELECT = false;
 
     //** -------SessionService------- **/
 
-    public static final int LOCATION_UPDATE_TIME = 1000;
-    public static final float LOCATION_UPDATE_DISTANCE = 0;
+    public static final int LOCATION_UPDATE_TIME = 5000;
+    public static final float LOCATION_UPDATE_DISTANCE = 10;
 
+
+    //** -------Calculator------- **/
+
+    public static final int CALCULATOR_FIVE_SECONDS_FACTOR = 720;
+    public static final int CALCULATOR_TEN_SECONDS_FACTOR = 360;
+    public static final int CALCULATOR_ONE_SECOND_FACTOR = 3600;
 
     //** -------Database------- **//
 
@@ -26,6 +32,7 @@ public class Constants {
     public static final int DATABASE_VERSION = 2;
 
     public static final String DATABASE_TABLE = "sessionitems";
+    public static final String DATABASE_TABLE_USER = "sessionUserData";
 
     public static final String KEY_ID = "_id";
     public static final String KEY_TYPE = "type";
@@ -34,6 +41,12 @@ public class Constants {
     public static final String KEY_PACE = "pace";
     public static final String KEY_KCAL = "kCal";
     public static final String KEY_TIME = "time";
+
+    public static final String KEY_WEIGHT = "weight";
+
+    public static final int COLUMN_WEIGHT_INDEX = 1;
+
+    public static final int DEFAULT_WEIGHT = 75;
 
 
     public static final int COLUMN_ID_INDEX = 0;

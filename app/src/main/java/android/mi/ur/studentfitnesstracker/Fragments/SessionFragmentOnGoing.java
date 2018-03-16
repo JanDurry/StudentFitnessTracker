@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.location.Location;
 import android.mi.ur.studentfitnesstracker.Activities.MainMenu;
+import android.mi.ur.studentfitnesstracker.Database.SessionDatabaseAdapter;
 import android.mi.ur.studentfitnesstracker.Listener.OnSessionDataChangedListener;
 import android.mi.ur.studentfitnesstracker.Objects.Calculator;
 import android.mi.ur.studentfitnesstracker.R;
@@ -33,6 +34,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     private SessionFragment sessionFragment;
     private SessionService sessionService;
     private Calculator calc;
+    private SessionDatabaseAdapter sessionDB;
 
     private Location startLocation;
     private Location endLocation;
@@ -40,9 +42,8 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     private Location lastLocation;
 
     private long timeInSecs;
-    private long pausesInSecs;
     private int currentDistanceInMeters;
-    private int distanceInLastSec;
+    private int distanceInLastTenSec;
     private double kCalTotal;
     private String currentPace;
     private String currentTime;
@@ -89,8 +90,14 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     public void onViewCreated(View view, Bundle savedInstanceState) {
         initElements();
         initButton();
+        initDatabase();
         // Setup any handles to view objects here
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+    }
+
+    private void initDatabase() {
+        sessionDB = new SessionDatabaseAdapter(getActivity());
+        sessionDB.open();
     }
 
     @Override
@@ -188,7 +195,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
 
     private void calculate() {
         Calculator calc = new Calculator();
-        calc.setValues(currentDistanceInMeters, timeInSecs, distanceInLastSec, currentSessionType.getText().toString());
+        calc.setValues(currentDistanceInMeters, timeInSecs, distanceInLastTenSec, currentSessionType.getText().toString(), sessionDB.getUserWeight());
         kCalTotal +=  calc.calculateKcal();
         currentPace = calc.calculatePace();
         kCal.setText(String.valueOf((int)kCalTotal));
@@ -201,11 +208,9 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     @Override
     public void onNewLocation(Location current, Location last) {
         this.endLocation = current;
-        if ((int) current.distanceTo(last) == 0) {
-            pausesInSecs += ((current.getElapsedRealtimeNanos() - last.getElapsedRealtimeNanos())/ (1000*1000*1000)) % 60;
-        }
-        distanceInLastSec = (int) current.distanceTo(last);
-        currentDistanceInMeters += current.distanceTo(last);
+        //Wert wurde durch 2 geteilt, da die Schätzung der Methode distanceTo doppelt so hoch lag. Durch Testen wurde sich auf /2 geeinigt.
+        currentDistanceInMeters += current.distanceTo(last)/2;
+        distanceInLastTenSec = (int) current.distanceTo(last)/2;
         onSessionFragmentOnGoingDataChanged.onDataChanged(current);
         calculate();
     }
