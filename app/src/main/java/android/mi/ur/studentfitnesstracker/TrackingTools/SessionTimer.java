@@ -63,7 +63,15 @@ public class SessionTimer {
     }
 
     public String toString() {
-        return getFormattedMins() + ":" + getFormattedSecs();
+        return getFormattedHours() + ":" + getFormattedMins() + ":" + getFormattedSecs();
+    }
+
+    private String getFormattedHours() {
+        if (getTimeHour() < 10) {
+            String formattedHours = "0" + getTimeHour();
+            return formattedHours;
+        }
+        return String.valueOf(getTimeHour());
     }
 
     private String getFormattedMins() {

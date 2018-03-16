@@ -36,9 +36,6 @@ public class SessionService extends Service {
             new LocationListener(LocationManager.NETWORK_PROVIDER)
     };
 
-    /** Test **/
-    private static final String TAG = "TESTGPS";
-
     /* Binding Service */
 
     public class LocalBinder extends Binder {
@@ -51,7 +48,6 @@ public class SessionService extends Service {
     /* -------- Service Methods --------- */
 
     private void initializeLocationManager() {
-        Log.e(TAG, "initializeLocationManager");
         if (locationManager == null) {
             locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         }
@@ -59,7 +55,6 @@ public class SessionService extends Service {
     }
 
     private void initializeStopWatch() {
-        Log.e(TAG, "initializeStopWatch");
         final Handler handler = new Handler();
         final SessionTimer timer = new SessionTimer();
         timer.startTimer();
@@ -79,11 +74,9 @@ public class SessionService extends Service {
     /** After register listener, check if GPS_Provider is enabled **/
 
     public void registerListeners(OnSessionDataChangedListener listener) {
-        Log.e(TAG, "registerListeners");
         this.onSessionDataChangedListener = listener;
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ) {
             onSessionDataChangedListener.OnGpsProviderDisabled();
-            Log.e(TAG, "PROVIDER DISABLED");
         }
     }
 
@@ -100,7 +93,6 @@ public class SessionService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        Log.e(TAG, "onStartCommand");
         super.onStartCommand(intent, flags, startId);
         return START_STICKY;
     }
@@ -110,38 +102,32 @@ public class SessionService extends Service {
     {
         initializeLocationManager();
         initializeStopWatch();
-        Log.e(TAG, "onCreate");
         try {
             locationManager.requestLocationUpdates(
                     LocationManager.NETWORK_PROVIDER, Constants.LOCATION_UPDATE_TIME, Constants.LOCATION_UPDATE_DISTANCE,
-                    locationListeners[1]);
+                    locationListeners[Constants.GPS_PROVIDER_LISTENER_INDEX]);
         } catch (java.lang.SecurityException ex) {
-            Log.i(TAG, "fail to request location update, ignore", ex);
-        } catch (IllegalArgumentException ex) {
-            Log.d(TAG, "network provider does not exist, " + ex.getMessage());
+            Log.e(Constants.EXCEPTION_TAG, "SessionService onCreate " + ex.toString());
         }
         try {
             locationManager.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER, Constants.LOCATION_UPDATE_TIME, Constants.LOCATION_UPDATE_DISTANCE,
-                    locationListeners[0]);
+                    locationListeners[Constants.NETWORK_PROVIDER_LISTENER_INDEX]);
         } catch (java.lang.SecurityException ex) {
-            Log.i(TAG, "fail to request location update, ignore", ex);
-        } catch (IllegalArgumentException ex) {
-            Log.d(TAG, "gps provider does not exist " + ex.getMessage());
+            Log.e(Constants.EXCEPTION_TAG, "SessionService onCreate " + ex.toString());
         }
     }
 
     @Override
     public void onDestroy()
     {
-        Log.e(TAG, "onDestroy");
         super.onDestroy();
         if (locationManager != null) {
             for (int i = 0; i < locationListeners.length; i++) {
                 try {
                     locationManager.removeUpdates(locationListeners[i]);
                 } catch (Exception ex) {
-                    Log.i(TAG, "fail to remove location listners, ignore", ex);
+                    Log.e(Constants.EXCEPTION_TAG, "SessionService onDestroy " + ex.toString());
                 }
             }
         }
@@ -160,13 +146,11 @@ public class SessionService extends Service {
 
         public LocationListener(String provider)
         {
-            Log.e(TAG, "LocationListener " + provider);
             current = new Location(provider);
         }
 
         @Override
         public void onLocationChanged(Location location) {
-            Log.e(TAG, "onLocationChanged: " + location);
             if (onSessionDataChangedListener != null) {
                 if (startLocation == null) {
                     startLocation = location;
@@ -182,17 +166,14 @@ public class SessionService extends Service {
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle bundle) {
-            Log.e(TAG, "onStatusChanged: " + provider);
         }
 
         @Override
         public void onProviderEnabled(String provider) {
-            Log.e(TAG, "onProviderEnabled: " + provider);
         }
 
         @Override
         public void onProviderDisabled(String provider) {
-            Log.e(TAG, "onProviderDisabled: " + provider);
         }
     }
 
