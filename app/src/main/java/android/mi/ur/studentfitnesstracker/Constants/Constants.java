@@ -66,6 +66,11 @@ public class Constants {
     public static final int GPS_PROVIDER_LISTENER_INDEX = 0;
     public static final int NETWORK_PROVIDER_LISTENER_INDEX = 1;
 
+    /** ------ Periodic Statistics ------ **/
+
+    public static final int TOTALS_RUN_INDEX = 0;
+    public static final int TOTALS_CYCLE_INDEX = 1;
+
 
 
 

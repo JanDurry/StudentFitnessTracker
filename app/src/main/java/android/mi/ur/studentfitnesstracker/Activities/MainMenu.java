@@ -41,6 +41,8 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
     private SessionFragmentOnGoing sessionFragmentOnGoing;
     private BottomNavigationView bottomNavigationItemView;
 
+    private Toolbar toolbar;
+
     private SessionItem sessionItem;
     private ArrayList<SessionItem> sessions;
     private SessionItemAdapter sessionsAdapter;
@@ -52,7 +54,7 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         checkLocationPermission();
         setSupportActionBar(toolbar);
         initFragmentLayouts();
@@ -60,7 +62,21 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
         initDatabase();
     }
 
-    /** public Method to disable BottomNavigationItems during session */
+    /** public Method to disable BottomNavigationItems and Toolbar Items during session */
+
+    public void disableToolBar() {
+        Menu toolbarMenu = toolbar.getMenu();
+        for (int i = 0; i < toolbarMenu.size(); i++) {
+            toolbarMenu.getItem(i).setEnabled(false);
+        }
+    }
+
+    public void enableToolBar() {
+        Menu toolbarMenu = toolbar.getMenu();
+        for (int i = 0; i < toolbarMenu.size(); i++) {
+            toolbarMenu.getItem(i).setEnabled(true);
+        }
+    }
 
     public void disableNavigationBar() {
         Menu menu = bottomNavigationItemView.getMenu();
