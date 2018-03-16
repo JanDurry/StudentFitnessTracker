@@ -65,6 +65,7 @@ public class SessionFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ((MainMenu)getActivity()).disableNavigationBar();
+                ((MainMenu)getActivity()).disableToolBar();
                 FragmentManager fragmentManager = getFragmentManager();
                 Bundle type = new Bundle();
                 type.putString( "SESSION_TYPE" , getSessionType());

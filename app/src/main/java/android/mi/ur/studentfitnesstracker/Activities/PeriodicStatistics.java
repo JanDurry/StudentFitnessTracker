@@ -22,23 +22,30 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
     private ArrayList<SessionItem> sessions;
 
     private SessionItem session;
-
     private TextView totalMileage;
     private TextView mileageCycle;
     private TextView mileageRun;
+    private TextView mileageAvgRun;
+    private TextView mileageAvgCycle;
+
     private TextView totalKCal;
     private TextView goalPercentage;
+
 
     private int totalMileageValue = 0;
     private int totalMileageRunValue = 0;
     private int totalMileageCycleValue = 0;
     private int totalKCalValue = 0;
 
-    private String goalPercentageString;
+    private double avgRun;
+    private double avgCycle;
+
     private String totalMileageString;
     private String totalMileageRunString;
     private String totalMileageCycleString;
     private String totalKCalString;
+    private String avgRunString;
+    private String avgCycleString;
 
 
 
@@ -61,20 +68,45 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
 
     private void inflateElements() {
         setTotalValues();
+        getAverageValues();
         setStrings();
         mileageRun.setText(totalMileageRunString);
         mileageCycle.setText(totalMileageCycleString);
         totalMileage.setText(totalMileageString);
         totalKCal.setText(totalKCalString);
-        goalPercentage.setText(goalPercentageString);
+        mileageAvgRun.setText(avgRunString);
+        mileageAvgCycle.setText(avgCycleString);
     }
 
     private void setStrings() {
-        getTotalPercentage();
         totalMileageCycleString = String.valueOf(totalMileageCycleValue) + " m";
         totalMileageRunString = String.valueOf(totalMileageRunValue) + " m";
+        avgRunString = String.valueOf(avgRun) + " m im avg.";
+        avgCycleString = String.valueOf(avgCycle) + " m im avg.";
         totalKCalString = "Du hast ingesamt " + String.valueOf(totalKCalValue) + " kCal verbraucht!";
         totalMileageString = "Du hast insgesamt " + String.valueOf(totalMileageValue) + " m zurückgelegt!";
+    }
+
+    private void getAverageValues() {
+        int[] totals = getTotalCycleSessions();
+        avgRun = (double) totalMileageRunValue/totals[Constants.TOTALS_RUN_INDEX];
+        avgCycle = (double) totalMileageCycleValue/totals[Constants.TOTALS_CYCLE_INDEX];
+    }
+
+    private int[] getTotalCycleSessions() {
+        int totalRun = 0;
+        int totalCycle = 0;
+        int [] totals = new int[2];
+        for (SessionItem session : sessions) {
+            if (session.getSessionType().equals(Constants.SESSION_TYPE_RUN)) {
+                totalRun += 1;
+            } else {
+                totalCycle += 1;
+            }
+        }
+        totals[Constants.TOTALS_RUN_INDEX] = totalRun;
+        totals[Constants.TOTALS_CYCLE_INDEX] = totalCycle;
+        return totals;
     }
 
     private void setTotalValues() {
@@ -90,21 +122,14 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
         }
     }
 
-    private void getTotalPercentage() {
-        double percentage = ((double) totalKCalValue);
-        if (percentage >= 1) {
-            goalPercentageString = "Du hast bereits 100% deines Wochenziels erreicht!";
-        } else if (percentage < 1) {
-            goalPercentageString = "Du hast bisher "+(int)(percentage * 100)+"% deines Wochenziels erreicht!";
-        }
-    }
-
     private void initElements() {
         totalMileage = (TextView) findViewById(R.id.total_mileage);
         mileageCycle = (TextView) findViewById(R.id.mileage_cycle_value);
         mileageRun = (TextView) findViewById(R.id.mileage_run_value);
         totalKCal = (TextView) findViewById(R.id.total_kCal_burnt);
         goalPercentage = (TextView) findViewById(R.id.goal_percentage);
+        mileageAvgCycle = (TextView) findViewById(R.id.mileage_cycle_avg_value);
+        mileageAvgRun = (TextView) findViewById(R.id.mileage_run_avg_value);
     }
 
 
