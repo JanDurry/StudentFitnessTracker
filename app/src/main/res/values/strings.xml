@@ -4,6 +4,9 @@
     <!-- Settings -->
 
     <string name="settings">Settings</string>
+
+    <!--Personal Data -->
+
     <string name="personal_data">Persönliche Daten</string>
 
     <string name="header_weight">Gewicht: </string>
@@ -12,10 +15,20 @@
 
     <string name="session_aim">Sessionziel: </string>
     <string name="edit_session_aim"></string>
-    <string name="text_kCal"> kCal</string>
+    <string name="text_kCal_bis">kCal bis</string>
 
     <string name="button_change_personal_data">Ändern</string>
     <string name="button_save_personal_data">Speichern</string>
+
+    <!-- Goal -->
+
+    <string name="personal_goal">Persönliches Ziel</string>
+    <string name="current_goal">Aktuelles Ziel</string>
+    <string name="current_goal_value_date">5000 kCal bis 01.01.2019</string>
+    <string name="set_new_goal">Neues Ziel setzen</string>
+    <string name="set_new_goal_value"></string>
+    <string name="set_new_goal_date">02.01.2019 12:00</string>
+    <string name="set_new_goal_button">Neues Ziel setzen</string>
 
 
     <!-- Fragments/Activites -->

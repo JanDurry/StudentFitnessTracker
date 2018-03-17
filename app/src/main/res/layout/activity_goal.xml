@@ -11,103 +11,101 @@
         android:layout_height="match_parent"
         >
 
-        <TextView
-            android:id="@+id/title_personal_data"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/param_padding"
-            android:text="@string/personal_data"
-            android:textSize="@dimen/session_type_text_size"
 
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"/>
 
         <!-- Weight -->
 
         <RelativeLayout
-            android:id="@+id/weight_layout"
-            android:paddingTop="50dp"
+            android:id="@+id/current_goal_layout"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title_personal_data"
             android:paddingBottom="20dp">
 
             <TextView
-                android:id="@+id/text_weight"
-                android:layout_width="200dp"
+                android:id="@+id/current_goal"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_height="50dp"
                 android:paddingTop="15dp"
                 android:paddingStart="@dimen/param_padding"
                 android:textAlignment="center"
                 android:textSize="@dimen/session_type_text_size"
-                android:text="@string/header_weight"/>
+                android:text="@string/current_goal"/>
 
-            <EditText
-                android:id="@+id/weight_value"
-                android:layout_width="100dp"
-                android:textAlignment="center"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/text_weight"
-                android:textSize="@dimen/session_type_text_size"
-                android:inputType="numberDecimal"
-                android:text="@string/edit_weight"/>
 
             <TextView
                 android:id="@+id/text_kg"
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"
                 android:layout_height="50dp"
-                android:layout_toEndOf="@id/weight_value"
+                android:layout_below="@id/current_goal"
                 android:paddingStart="@dimen/param_padding"
                 android:textSize="@dimen/session_type_text_size"
-                android:text="@string/text_kg"/>
+                android:text="@string/current_goal_value_date"/>
 
         </RelativeLayout>
 
         <!--- Weekly Aim -->
 
         <RelativeLayout
-            android:id="@+id/weekly_aim_layout"
+            android:id="@+id/new_goal_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/weight_layout"
-            android:paddingTop="50dp"
-            android:paddingBottom="20dp">
+            android:layout_below="@id/current_goal_layout"
+            android:paddingTop="50dp">
 
             <TextView
-                android:id="@+id/weekly_aim"
-                android:layout_width="200dp"
+                android:id="@+id/new_goal"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_height="50dp"
                 android:paddingTop="15dp"
                 android:paddingStart="@dimen/param_padding"
                 android:textAlignment="center"
                 android:textSize="@dimen/session_type_text_size"
-                android:text="@string/session_aim"/>
+                android:text="@string/set_new_goal"/>
 
             <EditText
-                android:id="@+id/weekly_aim_value"
+                android:id="@+id/new_goal_value"
                 android:layout_width="100dp"
                 android:textAlignment="center"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/weekly_aim"
+                android:layout_below="@id/new_goal"
+                android:layout_toStartOf="@id/text_kCal_bis"
                 android:textSize="@dimen/session_type_text_size"
                 android:inputType="numberDecimal"
-                android:text="@string/edit_weight"/>
+                android:text="@string/set_new_goal_value"/>
 
             <TextView
-                android:id="@+id/text_kCal"
-                android:layout_width="200dp"
+                android:id="@+id/text_kCal_bis"
+                android:layout_width="wrap_content"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"
                 android:layout_height="50dp"
-                android:layout_toEndOf="@id/weekly_aim_value"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/new_goal"
                 android:paddingStart="@dimen/param_padding"
+                android:paddingEnd="@dimen/space"
                 android:textSize="@dimen/session_type_text_size"
                 android:text="@string/text_kCal_bis"/>
 
+            <EditText
+
+                android:id="@+id/new_date"
+                android:focusable="false"
+
+                android:inputType="date"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_goal"
+                android:layout_toEndOf="@id/text_kCal_bis" />
+
+
         </RelativeLayout>
+
 
         <Button
             android:id="@+id/button_change_personal_data"
@@ -121,7 +119,7 @@
             android:textAlignment="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/weekly_aim_layout"
+            android:layout_below="@id/new_goal_layout"
             android:textSize="@dimen/button"
             android:layout_centerHorizontal="true"
             android:text="@string/button_change_personal_data"/>

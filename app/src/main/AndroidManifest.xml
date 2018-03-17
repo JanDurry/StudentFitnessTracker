@@ -44,6 +44,15 @@
 
         </activity>
 
+        <!-- Goal Activity -->
+
+        <activity android:name=".Activities.Goal"
+            android:label="StudentFitnessTracker"
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
+
         <!-- PeriodicStatistics Activity -->
 
         <activity
