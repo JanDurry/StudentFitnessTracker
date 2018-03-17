@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.location.Location;
 import android.mi.ur.studentfitnesstracker.Activities.MainMenu;
+import android.mi.ur.studentfitnesstracker.Activities.PeriodicStatistics;
 import android.mi.ur.studentfitnesstracker.Constants.Constants;
 import android.mi.ur.studentfitnesstracker.Database.SessionDatabaseAdapter;
 import android.mi.ur.studentfitnesstracker.Listener.OnSessionDataChangedListener;
@@ -180,6 +181,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
                 ((MainMenu)getActivity()).enableToolBar();
                 unbindSessionService();
                 stopService();
+                checkIfSessionGoalAccomplished();
                 closeFragment();
             }
         });
@@ -206,7 +208,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
         kCal.setText(String.valueOf((int)kCalTotal));
         pace.setText(currentPace);
         distance.setText(currentDistanceInMetersString);
-        checkIfSessionGoalAccomplished();
+
     }
 
     /** send Notfication if session aim has been accomplished */
@@ -233,7 +235,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
             notification.setContentText("Super! Du hast dein kCal-Ziel erreicht!");
         }
         if(notification != null) {
-            Intent intent = new Intent(getActivity(), MainMenu.class);
+            Intent intent = new Intent(getActivity(), PeriodicStatistics.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             notification.setContentIntent(pendingIntent);
 

@@ -9,6 +9,12 @@
         android:title="@string/personal_data"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/personal_goal"
+        android:orderInCategory="101"
+        android:title="@string/personal_goal"
+        app:showAsAction="never" />
+
 </menu>
 
 
