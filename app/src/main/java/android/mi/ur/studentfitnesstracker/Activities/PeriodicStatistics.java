@@ -81,8 +81,8 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
     private void setStrings() {
         totalMileageCycleString = String.valueOf(totalMileageCycleValue) + " m";
         totalMileageRunString = String.valueOf(totalMileageRunValue) + " m";
-        avgRunString = String.valueOf(avgRun) + " m im avg.";
-        avgCycleString = String.valueOf(avgCycle) + " m im avg.";
+        avgRunString = "Ø " + String.valueOf((int)avgRun) + " m";
+        avgCycleString = "Ø " + String.valueOf((int)avgCycle) + " m";
         totalKCalString = "Du hast ingesamt " + String.valueOf(totalKCalValue) + " kCal verbraucht!";
         totalMileageString = "Du hast insgesamt " + String.valueOf(totalMileageValue) + " m zurückgelegt!";
     }

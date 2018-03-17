@@ -101,13 +101,13 @@ public class Constants {
     public static final String KEY_TIME = "time";
 
     public static final String KEY_WEIGHT = "weight";
-    public static final String KEY_SESSION_AIM = "session_aim";
+    public static final String KEY_SESSION_GOAL = "session_goal";
 
     public static final int COLUMN_WEIGHT_INDEX = 1;
-    public static final int COLUMN_SESSION_AIM_INDEX = 2;
+    public static final int COLUMN_SESSION_GOAL_INDEX = 2;
 
     public static final int DEFAULT_WEIGHT = 75;
-    public static final int DEFAULT_SESSION_AIM = 200; // 300 Gramm Körperfett in Kalorien
+    public static final int DEFAULT_SESSION_GOAL = 200; // 300 Gramm Körperfett in Kalorien
 
     public static final int COLUMN_ID_INDEX = 0;
     public static final int COLUMN_TYPE_INDEX = 1;
@@ -130,7 +130,10 @@ public class Constants {
     public static final String DB_TAG = "DATABASE";
 
 
+    /** --------------NOTIFICATION-------------- **/
 
+    public static final String CHANNEL_ID = "123";
+    public static final int UNIQUE_ID = 7654;
 
 
     /** -------------BOTTOM NAVIGATION VIEW ID´S----------------- **/

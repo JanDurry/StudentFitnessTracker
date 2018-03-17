@@ -51,38 +51,38 @@ public class SessionDatabaseAdapter {
         return false;
     }
 
-    public void updateUserData(int weight, int sessionAim) {
+    public void updateUserData(int weight, int sessionGoal) {
         String strFilter = "_id=1";
         ContentValues args = new ContentValues();
         args.put(Constants.KEY_WEIGHT, weight);
-        args.put(Constants.KEY_SESSION_AIM, sessionAim);
+        args.put(Constants.KEY_SESSION_GOAL, sessionGoal);
         db.update(Constants.DATABASE_TABLE_USER, args, strFilter, null);
     }
 
     public int getUserWeight() {
         int weight = Constants.DEFAULT_WEIGHT;
         Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_ID,
-                Constants.KEY_WEIGHT, Constants.KEY_SESSION_AIM }, null, null, null, null, null);
+                Constants.KEY_WEIGHT, Constants.KEY_SESSION_GOAL}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             weight = cursor.getInt(Constants.COLUMN_WEIGHT_INDEX);
         }
         return weight;
     }
 
-    public int getUserSessionAim() {
-        int sessionAim = Constants.DEFAULT_SESSION_AIM;
+    public int getUserSessionGoal() {
+        int sessionGoal = Constants.DEFAULT_SESSION_GOAL;
         Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_ID,
-                Constants.KEY_WEIGHT, Constants.KEY_SESSION_AIM }, null, null, null, null, null);
+                Constants.KEY_WEIGHT, Constants.KEY_SESSION_GOAL}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
-            sessionAim = cursor.getInt(Constants.COLUMN_SESSION_AIM_INDEX);
+            sessionGoal = cursor.getInt(Constants.COLUMN_SESSION_GOAL_INDEX);
         }
-        return sessionAim;
+        return sessionGoal;
     }
 
-    public long insertUserData(int weight, int sessionAim) {
+    public long insertUserData(int weight, int sessionGoal) {
         ContentValues userValues = new ContentValues();
         userValues.put(Constants.KEY_WEIGHT, weight);
-        userValues.put(Constants.KEY_SESSION_AIM, sessionAim);
+        userValues.put(Constants.KEY_SESSION_GOAL, sessionGoal);
         return db.insert(Constants.DATABASE_TABLE_USER, null, userValues);
     }
 
@@ -138,7 +138,7 @@ public class SessionDatabaseAdapter {
         private static final String DATABASE_CREATE_USER = "create table "
                 + Constants.DATABASE_TABLE_USER + " (" + Constants.KEY_ID
                 + " integer primary key autoincrement, " + Constants.KEY_WEIGHT
-                + " int not null, " + Constants.KEY_SESSION_AIM + " int not null);";
+                + " int not null, " + Constants.KEY_SESSION_GOAL + " int not null);";
 
         public SessionDBOpenHelper(Context c, String dbname,
                                           SQLiteDatabase.CursorFactory factory, int version) {
