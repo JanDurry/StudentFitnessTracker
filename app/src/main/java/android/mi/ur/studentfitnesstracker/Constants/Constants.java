@@ -105,9 +105,11 @@ public class Constants {
 
     public static final int COLUMN_WEIGHT_INDEX = 1;
     public static final int COLUMN_SESSION_GOAL_INDEX = 2;
+    public static final int COLUMN_GOAL_DATE_INDEX = 3;
 
     public static final int DEFAULT_WEIGHT = 75;
-    public static final int DEFAULT_SESSION_GOAL = 200; // 300 Gramm Körperfett in Kalorien
+    public static final int DEFAULT_GOAL_KCAL = 10000; // 15 kg Körperfett in Kalorien
+    public static final String DEFAULT_GOAL_DATE = "31.12.2020";
 
     public static final int COLUMN_ID_INDEX = 0;
     public static final int COLUMN_TYPE_INDEX = 1;

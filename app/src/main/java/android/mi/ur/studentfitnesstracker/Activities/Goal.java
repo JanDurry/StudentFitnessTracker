@@ -1,6 +1,7 @@
 package android.mi.ur.studentfitnesstracker.Activities;
 
 import android.app.DatePickerDialog;
+import android.mi.ur.studentfitnesstracker.Database.SessionDatabaseAdapter;
 import android.mi.ur.studentfitnesstracker.R;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +18,7 @@ public class Goal extends AppCompatActivity{
 
     private EditText newkCalGoal;
     private TextView currentGoal;
-
+    private SessionDatabaseAdapter sessionDB;
     private Calendar mcalendar;
     private EditText newDate;
     private int day,month,year;
@@ -27,8 +28,14 @@ public class Goal extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goal);
+        initDatabase();
         initElements();
         initButton();
+    }
+
+    private void initDatabase() {
+        sessionDB = new SessionDatabaseAdapter(this);
+        sessionDB.open();
     }
 
     private void initButton() {
@@ -36,7 +43,16 @@ public class Goal extends AppCompatActivity{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentGoal.setText(newkCalGoal + " kCal bis ");
+                String newGoalString = newkCalGoal.getText().toString() + " kCal bis " + newDate.getText().toString();
+                currentGoal.setText(newGoalString);
+                //DB funktioniert noch nicht
+                /*newDate.setText(String.valueOf(sessionDB.getUserGoalDate()));
+
+                currentGoal.setText(String.valueOf(sessionDB.getUserGoal()) + "kCal bis" + String.valueOf(sessionDB.getUserGoalDate()));
+
+                if (!newDate.getText().equals("") && !newkCalGoal.getText().equals("") && sessionDB.checkIfUserDataExists()) {
+                    sessionDB.updateUserGoal(Integer.parseInt(newkCalGoal.getText().toString()), newDate.getText().toString());
+                }*/
             }
         });
     }

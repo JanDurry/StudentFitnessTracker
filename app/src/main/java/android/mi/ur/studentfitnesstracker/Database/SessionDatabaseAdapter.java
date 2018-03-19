@@ -59,6 +59,14 @@ public class SessionDatabaseAdapter {
         db.update(Constants.DATABASE_TABLE_USER, args, strFilter, null);
     }
 
+    public void updateUserGoal(int sessionGoal, String date) {
+        String strFilter = "_id=1";
+        ContentValues args = new ContentValues();
+        args.put(Constants.KEY_DATE, date);
+        args.put(Constants.KEY_SESSION_GOAL, sessionGoal);
+        db.update(Constants.DATABASE_TABLE_USER, args, strFilter, null);
+    }
+
     public int getUserWeight() {
         int weight = Constants.DEFAULT_WEIGHT;
         Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_ID,
@@ -69,8 +77,18 @@ public class SessionDatabaseAdapter {
         return weight;
     }
 
-    public int getUserSessionGoal() {
-        int sessionGoal = Constants.DEFAULT_SESSION_GOAL;
+        public String getUserGoalDate() {
+        String date = Constants.DEFAULT_GOAL_DATE;
+        Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_ID,
+                Constants.KEY_WEIGHT, Constants.KEY_SESSION_GOAL}, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            date = cursor.getString(Constants.COLUMN_GOAL_DATE_INDEX);
+        }
+        return date;
+    }
+
+    public int getUserGoal() {
+        int sessionGoal = Constants.DEFAULT_GOAL_KCAL;
         Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_ID,
                 Constants.KEY_WEIGHT, Constants.KEY_SESSION_GOAL}, null, null, null, null, null);
         if (cursor.moveToFirst()) {

@@ -27,7 +27,7 @@ public class PersonalData extends AppCompatActivity {
         button = (Button) findViewById(R.id.button_change_personal_data);
         weight = (EditText) findViewById(R.id.weight_value);
         sessionAim = (EditText) findViewById(R.id.weekly_aim_value);
-        sessionAim.setText(String.valueOf(sessionDB.getUserSessionGoal()));
+        sessionAim.setText(String.valueOf(sessionDB.getUserGoal()));
         weight.setText(String.valueOf(sessionDB.getUserWeight()));
         button.setOnClickListener(new View.OnClickListener() {
             @Override

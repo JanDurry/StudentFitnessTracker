@@ -214,7 +214,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     /** send Notfication if session aim has been accomplished */
 
     private void checkIfSessionGoalAccomplished() {
-        int sessionGoal = sessionDB.getUserSessionGoal();
+        int sessionGoal = sessionDB.getUserGoal();
         Bundle arguments = getArguments();
         String sessionType = arguments.getString("SESSION_TYPE");
         NotificationCompat.Builder notification = null;if (sessionType.equals(Constants.SESSION_TYPE_CYCLE)) {

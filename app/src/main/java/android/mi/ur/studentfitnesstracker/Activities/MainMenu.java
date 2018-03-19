@@ -187,7 +187,7 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
         sessionDB = new SessionDatabaseAdapter(this);
         sessionDB.open();
         if (!sessionDB.checkIfUserDataExists()) {
-            sessionDB.insertUserData(Constants.DEFAULT_WEIGHT, Constants.DEFAULT_SESSION_GOAL);
+            sessionDB.insertUserData(Constants.DEFAULT_WEIGHT, Constants.DEFAULT_GOAL_KCAL);
         }
         sessions = sessionDB.getAllSessionItems();
     }
