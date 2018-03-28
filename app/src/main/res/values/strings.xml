@@ -13,7 +13,7 @@
     <string name="edit_weight"></string>
     <string name="text_kg"> kg</string>
 
-    <string name="session_aim">Sessionziel: </string>
+    <string name="session_aim">Neues Ziel: </string>
     <string name="edit_session_aim"></string>
     <string name="text_kCal">kCal</string>
 

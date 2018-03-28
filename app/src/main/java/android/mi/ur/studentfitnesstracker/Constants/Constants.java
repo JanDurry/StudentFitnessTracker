@@ -101,7 +101,7 @@ public class Constants {
     public static final String KEY_TIME = "time";
 
     public static final String KEY_WEIGHT = "weight";
-    public static final String KEY_SESSION_GOAL = "session_goal";
+    public static final String KEY_GOAL = "key_goal";
 
     public static final int COLUMN_WEIGHT_INDEX = 1;
     public static final int COLUMN_SESSION_GOAL_INDEX = 2;
@@ -110,6 +110,7 @@ public class Constants {
     public static final int DEFAULT_WEIGHT = 75;
     public static final int DEFAULT_GOAL_KCAL = 10000; // 15 kg Körperfett in Kalorien
     public static final String DEFAULT_GOAL_DATE = "31.12.2020";
+    public static final String KEY_GOAL_DATE = "goal_date";
 
     public static final int COLUMN_ID_INDEX = 0;
     public static final int COLUMN_TYPE_INDEX = 1;

@@ -11,6 +11,8 @@ import android.mi.ur.studentfitnesstracker.Objects.SessionItem;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by JanDurry on 24.02.2018.
@@ -55,22 +57,25 @@ public class SessionDatabaseAdapter {
         String strFilter = "_id=1";
         ContentValues args = new ContentValues();
         args.put(Constants.KEY_WEIGHT, weight);
-        args.put(Constants.KEY_SESSION_GOAL, sessionGoal);
+        args.put(Constants.KEY_GOAL, sessionGoal);
+        Date currentTime = Calendar.getInstance().getTime();
+        args.put(Constants.KEY_GOAL_DATE, currentTime.toString());
         db.update(Constants.DATABASE_TABLE_USER, args, strFilter, null);
     }
 
-    public void updateUserGoal(int sessionGoal, String date) {
+    public void updateUserGoal(int sessionGoal, String date, String goalDate) {
         String strFilter = "_id=1";
         ContentValues args = new ContentValues();
         args.put(Constants.KEY_DATE, date);
-        args.put(Constants.KEY_SESSION_GOAL, sessionGoal);
+        args.put(Constants.KEY_GOAL, sessionGoal);
+        args.put(Constants.KEY_GOAL_DATE, goalDate);
         db.update(Constants.DATABASE_TABLE_USER, args, strFilter, null);
     }
 
     public int getUserWeight() {
         int weight = Constants.DEFAULT_WEIGHT;
         Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_ID,
-                Constants.KEY_WEIGHT, Constants.KEY_SESSION_GOAL}, null, null, null, null, null);
+                Constants.KEY_WEIGHT, Constants.KEY_GOAL}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             weight = cursor.getInt(Constants.COLUMN_WEIGHT_INDEX);
         }
@@ -80,28 +85,39 @@ public class SessionDatabaseAdapter {
     public String getUserGoalDate() {
         String date = Constants.DEFAULT_GOAL_DATE;
         Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_ID,
-                Constants.KEY_WEIGHT, Constants.KEY_SESSION_GOAL, Constants.KEY_DATE}, null, null, null, null, null);
+                Constants.KEY_WEIGHT, Constants.KEY_GOAL, Constants.KEY_DATE}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             date = cursor.getString(Constants.COLUMN_GOAL_DATE_INDEX);
         }
         return date;
     }
 
+    public String getNewUserGoalDate() {
+        String date = Constants.KEY_GOAL_DATE;
+        Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_GOAL_DATE}, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            date = cursor.getString(Constants.COLUMN_GOAL_DATE_INDEX);
+        }
+        return date;
+    }
+
+
     public int getUserGoal() {
         int sessionGoal = Constants.DEFAULT_GOAL_KCAL;
         Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_ID,
-                Constants.KEY_WEIGHT, Constants.KEY_SESSION_GOAL}, null, null, null, null, null);
+                Constants.KEY_WEIGHT, Constants.KEY_GOAL}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             sessionGoal = cursor.getInt(Constants.COLUMN_SESSION_GOAL_INDEX);
         }
         return sessionGoal;
     }
 
-    public long insertUserData(int weight, int sessionGoal, String date) {
+    public long insertUserData(int weight, int sessionGoal, String date, String goalDate) {
         ContentValues userValues = new ContentValues();
         userValues.put(Constants.KEY_WEIGHT, weight);
-        userValues.put(Constants.KEY_SESSION_GOAL, sessionGoal);
+        userValues.put(Constants.KEY_GOAL, sessionGoal);
         userValues.put(Constants.KEY_DATE, date);
+        userValues.put(Constants.KEY_GOAL_DATE, goalDate);
         return db.insert(Constants.DATABASE_TABLE_USER, null, userValues);
     }
 
@@ -151,13 +167,13 @@ public class SessionDatabaseAdapter {
                 + Constants.DATABASE_TABLE + " (" + Constants.KEY_ID
                 + " integer primary key autoincrement, " + Constants.KEY_TYPE
                 + " text not null, " + Constants.KEY_DISTANCE + " integer not null, "
-                + Constants.KEY_DATE + " text, " + Constants.KEY_PACE + " text not null, "
+                + Constants.KEY_DATE + " text, " + Constants.KEY_GOAL_DATE + " text, " + Constants.KEY_PACE + " text not null, "
                 + Constants.KEY_KCAL + " double not null, " + Constants.KEY_TIME + " text not null);";
 
         private static final String DATABASE_CREATE_USER = "create table "
                 + Constants.DATABASE_TABLE_USER + " (" + Constants.KEY_ID
                 + " integer primary key autoincrement, " + Constants.KEY_WEIGHT
-                + " int not null, " + Constants.KEY_SESSION_GOAL + " int not null, " + Constants.KEY_DATE + " String);";
+                + " int not null, " + Constants.KEY_GOAL + " int not null, " + Constants.KEY_DATE + " String);";
 
         public SessionDBOpenHelper(Context c, String dbname,
                                           SQLiteDatabase.CursorFactory factory, int version) {

@@ -190,7 +190,7 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
             Date date = Calendar.getInstance(TimeZone.getTimeZone("CET")).getTime();
             SimpleDateFormat formatDate = new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT);
             String formattedDate = formatDate.format(date);
-            sessionDB.insertUserData(Constants.DEFAULT_WEIGHT, Constants.DEFAULT_GOAL_KCAL, formattedDate);
+            sessionDB.insertUserData(Constants.DEFAULT_WEIGHT, Constants.DEFAULT_GOAL_KCAL, formattedDate, Constants.KEY_GOAL_DATE);
         }
         sessions = sessionDB.getAllSessionItems();
     }
