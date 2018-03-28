@@ -77,10 +77,10 @@ public class SessionDatabaseAdapter {
         return weight;
     }
 
-        public String getUserGoalDate() {
+    public String getUserGoalDate() {
         String date = Constants.DEFAULT_GOAL_DATE;
         Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_ID,
-                Constants.KEY_WEIGHT, Constants.KEY_SESSION_GOAL}, null, null, null, null, null);
+                Constants.KEY_WEIGHT, Constants.KEY_SESSION_GOAL, Constants.KEY_DATE}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             date = cursor.getString(Constants.COLUMN_GOAL_DATE_INDEX);
         }
@@ -97,10 +97,11 @@ public class SessionDatabaseAdapter {
         return sessionGoal;
     }
 
-    public long insertUserData(int weight, int sessionGoal) {
+    public long insertUserData(int weight, int sessionGoal, String date) {
         ContentValues userValues = new ContentValues();
         userValues.put(Constants.KEY_WEIGHT, weight);
         userValues.put(Constants.KEY_SESSION_GOAL, sessionGoal);
+        userValues.put(Constants.KEY_DATE, date);
         return db.insert(Constants.DATABASE_TABLE_USER, null, userValues);
     }
 
@@ -156,7 +157,7 @@ public class SessionDatabaseAdapter {
         private static final String DATABASE_CREATE_USER = "create table "
                 + Constants.DATABASE_TABLE_USER + " (" + Constants.KEY_ID
                 + " integer primary key autoincrement, " + Constants.KEY_WEIGHT
-                + " int not null, " + Constants.KEY_SESSION_GOAL + " int not null);";
+                + " int not null, " + Constants.KEY_SESSION_GOAL + " int not null, " + Constants.KEY_DATE + " String);";
 
         public SessionDBOpenHelper(Context c, String dbname,
                                           SQLiteDatabase.CursorFactory factory, int version) {

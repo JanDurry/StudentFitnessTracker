@@ -4,6 +4,7 @@ import android.mi.ur.studentfitnesstracker.Database.SessionDatabaseAdapter;
 import android.mi.ur.studentfitnesstracker.R;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,10 +30,12 @@ public class PersonalData extends AppCompatActivity {
         sessionAim = (EditText) findViewById(R.id.weekly_aim_value);
         sessionAim.setText(String.valueOf(sessionDB.getUserGoal()));
         weight.setText(String.valueOf(sessionDB.getUserWeight()));
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!weight.getText().equals("") && !sessionAim.getText().equals("") && sessionDB.checkIfUserDataExists()) {
+//                    Log.v("DATUM", sessionDB.getUserGoalDate());
                     sessionDB.updateUserData(Integer.parseInt(weight.getText().toString()), Integer.parseInt(sessionAim.getText().toString()));
                 }
             }

@@ -13,15 +13,11 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 
-// Orientierung für newDate EditText: http://findnerd.com/list/view/How-to-open-Calendar-on-clicking-the-EditText-and-set-the-date-/15238/ am 17.03.18
 public class Goal extends AppCompatActivity{
 
     private EditText newkCalGoal;
     private TextView currentGoal;
     private SessionDatabaseAdapter sessionDB;
-    private Calendar mcalendar;
-    private EditText newDate;
-    private int day,month,year;
     private Button button;
 
     @Override
@@ -43,7 +39,7 @@ public class Goal extends AppCompatActivity{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String newGoalString = newkCalGoal.getText().toString() + " kCal bis " + newDate.getText().toString();
+                String newGoalString = newkCalGoal.getText().toString() + " kCal (" + sessionDB.getUserGoalDate() + ")";
                 currentGoal.setText(newGoalString);
                 //DB funktioniert noch nicht
                 /*newDate.setText(String.valueOf(sessionDB.getUserGoalDate()));
@@ -58,31 +54,8 @@ public class Goal extends AppCompatActivity{
     }
 
     private void initElements() {
-        newkCalGoal = (EditText)findViewById(R.id.new_goal_value);
-        newDate = (EditText)findViewById(R.id.new_date);
-        newDate.setOnClickListener(dateClickListener);
-        currentGoal = (TextView)findViewById(R.id.current_goal_value);
-        /*day = mcalendar.get(Calendar.DAY_OF_MONTH);
-        year = mcalendar.get(Calendar.YEAR);
-        month = mcalendar.get(Calendar.MONTH);*/
-    }
-
-    View.OnClickListener dateClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DateDialog();
-            }
-    };
-
-    public void DateDialog() {
-            DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    newDate.setText(dayOfMonth + "." + (monthOfYear+1) + "." + year);
-                }
-            };
-            DatePickerDialog dpDialog = new DatePickerDialog(Goal.this, listener, year, month, day);
-            dpDialog.show();
+        newkCalGoal = (EditText) findViewById(R.id.new_goal_value);
+        currentGoal = (TextView) findViewById(R.id.current_goal_value);
     }
 
 }

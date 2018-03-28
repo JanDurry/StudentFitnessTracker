@@ -74,13 +74,15 @@
                 android:textAlignment="center"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/new_goal"
-                android:layout_toStartOf="@id/text_kCal_bis"
+                android:layout_toStartOf="@id/text_kCal"
                 android:textSize="@dimen/session_type_text_size"
                 android:inputType="numberDecimal"
                 android:text="@string/set_new_goal_value"/>
 
+
+
             <TextView
-                android:id="@+id/text_kCal_bis"
+                android:id="@+id/text_kCal"
                 android:layout_width="wrap_content"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart"
@@ -90,18 +92,9 @@
                 android:paddingStart="@dimen/param_padding"
                 android:paddingEnd="@dimen/space"
                 android:textSize="@dimen/session_type_text_size"
-                android:text="@string/text_kCal_bis"/>
+                android:text="@string/text_kCal"/>
 
-            <EditText
 
-                android:id="@+id/new_date"
-                android:focusable="false"
-
-                android:inputType="date"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/new_goal"
-                android:layout_toEndOf="@id/text_kCal_bis" />
 
 
         </RelativeLayout>
