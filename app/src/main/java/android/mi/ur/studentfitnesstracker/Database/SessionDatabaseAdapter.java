@@ -85,22 +85,22 @@ public class SessionDatabaseAdapter {
     public String getUserGoalDate() {
         String date = Constants.DEFAULT_GOAL_DATE;
         Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_ID,
-                Constants.KEY_WEIGHT, Constants.KEY_GOAL, Constants.KEY_DATE}, null, null, null, null, null);
+                Constants.KEY_WEIGHT, Constants.KEY_GOAL, Constants.KEY_DATE, Constants.KEY_GOAL_DATE}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
-            date = cursor.getString(Constants.COLUMN_GOAL_DATE_INDEX);
+            date = cursor.getString(4);
         }
         return date;
     }
 
     public String getNewUserGoalDate() {
-        String date = Constants.KEY_GOAL_DATE;
-        Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_GOAL_DATE}, null, null, null, null, null);
+        String date = Constants.DEFAULT_GOAL_DATE;
+        Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_ID,
+                Constants.KEY_WEIGHT, Constants.KEY_GOAL, Constants.KEY_GOAL_DATE}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
-            date = cursor.getString(Constants.COLUMN_GOAL_DATE_INDEX);
+            date = cursor.getString(4);
         }
         return date;
     }
-
 
     public int getUserGoal() {
         int sessionGoal = Constants.DEFAULT_GOAL_KCAL;
@@ -173,7 +173,7 @@ public class SessionDatabaseAdapter {
         private static final String DATABASE_CREATE_USER = "create table "
                 + Constants.DATABASE_TABLE_USER + " (" + Constants.KEY_ID
                 + " integer primary key autoincrement, " + Constants.KEY_WEIGHT
-                + " int not null, " + Constants.KEY_GOAL + " int not null, " + Constants.KEY_DATE + " String);";
+                + " int not null, " + Constants.KEY_GOAL + " int not null, " + Constants.KEY_DATE + " String, " + Constants.KEY_GOAL_DATE + " int not null);";
 
         public SessionDBOpenHelper(Context c, String dbname,
                                           SQLiteDatabase.CursorFactory factory, int version) {

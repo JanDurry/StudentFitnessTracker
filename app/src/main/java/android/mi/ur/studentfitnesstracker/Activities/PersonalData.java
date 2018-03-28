@@ -43,8 +43,7 @@ public class PersonalData extends AppCompatActivity {
             public void onClick(View view) {
                 if (!weight.getText().equals("") && !goalValue.getText().equals("") && sessionDB.checkIfUserDataExists()) {
                     sessionDB.updateUserData(Integer.parseInt(weight.getText().toString()), Integer.parseInt(goalValue.getText().toString()));
-                    String newGoalString = newkCalGoal.getText().toString() + " kCal (" + sessionDB.getNewUserGoalDate() + ")";
-                    currentGoal.setText(newGoalString);
+                    currentGoal.setText(newkCalGoal.getText().toString() + sessionDB.getUserGoalDate());
                 }
             }
         });
