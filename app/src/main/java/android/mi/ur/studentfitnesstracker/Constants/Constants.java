@@ -41,7 +41,8 @@ public class Constants {
 
     //* ----------DATE---------------- *//
 
-    public static final String SIMPLE_DATE_FORMAT = "dd.MM.yy HH:mm:ss";
+    public static final String SIMPLE_DATE_FORMAT = "dd.MM.yy, HH:mm:ss";
+    public static final String DEFAULT_DATE_FORMAT = "EEE MMM dd HH:mm:ss z yyyy";
 
 
 

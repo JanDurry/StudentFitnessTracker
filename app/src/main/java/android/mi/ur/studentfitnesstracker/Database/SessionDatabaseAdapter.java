@@ -173,7 +173,7 @@ public class SessionDatabaseAdapter {
         private static final String DATABASE_CREATE_USER = "create table "
                 + Constants.DATABASE_TABLE_USER + " (" + Constants.KEY_ID
                 + " integer primary key autoincrement, " + Constants.KEY_WEIGHT
-                + " int not null, " + Constants.KEY_GOAL + " int not null, " + Constants.KEY_DATE + " String, " + Constants.KEY_GOAL_DATE + " int not null);";
+                + " int not null, " + Constants.KEY_GOAL + " int not null, " + Constants.KEY_DATE + " String, " + Constants.KEY_GOAL_DATE + " String);";
 
         public SessionDBOpenHelper(Context c, String dbname,
                                           SQLiteDatabase.CursorFactory factory, int version) {
