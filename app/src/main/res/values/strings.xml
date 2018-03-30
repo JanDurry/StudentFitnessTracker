@@ -40,7 +40,7 @@
     <string name="goal_title">Deine Persönliche Statistik</string>
 
     <string name="total_mileage_start">Du hast insgesamt</string>
-    <string name="total_mileage">0 m zurückgelegt!</string>
+    <string name="total_mileage">Du hast bisher 0 m zurückgelegt!</string>
     <string name="mileage_cycle">Auf dem Rad: </string>
     <string name="mileage_run">Zu Fuß: </string>
     <string name="mileage_cycle_value"></string>
