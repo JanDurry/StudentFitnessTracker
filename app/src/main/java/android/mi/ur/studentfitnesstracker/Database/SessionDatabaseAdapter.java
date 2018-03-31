@@ -87,17 +87,7 @@ public class SessionDatabaseAdapter {
         Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_ID,
                 Constants.KEY_WEIGHT, Constants.KEY_GOAL, Constants.KEY_DATE, Constants.KEY_GOAL_DATE}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
-            date = cursor.getString(4);
-        }
-        return date;
-    }
-
-    public String getNewUserGoalDate() {
-        String date = Constants.DEFAULT_GOAL_DATE;
-        Cursor cursor = db.query(Constants.DATABASE_TABLE_USER, new String[] { Constants.KEY_ID,
-                Constants.KEY_WEIGHT, Constants.KEY_GOAL, Constants.KEY_GOAL_DATE}, null, null, null, null, null);
-        if (cursor.moveToFirst()) {
-            date = cursor.getString(4);
+            date = cursor.getString(Constants.COLUMN_GOAL_DATE_INDEX);
         }
         return date;
     }
@@ -111,6 +101,16 @@ public class SessionDatabaseAdapter {
         }
         return sessionGoal;
     }
+
+   /* public int getTotalkCal() {
+        int totalkCal = Constants.DEFAULT_TOTAL_KCAL;
+        Cursor cursor = db.query(Constants.DATABASE_TABLE, new String[] { Constants.KEY_TOTAL_KCAL},
+                null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            totalkCal = cursor.getInt(Constants.COLUMN_TOTAL_KCAL_INDEX);
+        }
+        return totalkCal;
+    }*/
 
     public long insertUserData(int weight, int sessionGoal, String date, String goalDate) {
         ContentValues userValues = new ContentValues();
@@ -131,6 +131,12 @@ public class SessionDatabaseAdapter {
         sessionValues.put(Constants.KEY_TIME, session.getTime());
         return db.insert(Constants.DATABASE_TABLE, null, sessionValues);
     }
+
+    /*public long resetTotalkCal() {
+        ContentValues totalkCalValue = new ContentValues();
+        totalkCalValue.put(Constants.KEY_TOTAL_KCAL, "0");
+        return db.insert(Constants.DATABASE_TABLE, null, totalkCalValue);
+    }*/
 
     public void removeSessionItem(SessionItem session) {
         String toDelete = Constants.KEY_DATE + "=?";
@@ -163,17 +169,22 @@ public class SessionDatabaseAdapter {
     //** private class to create database tables **/
 
     private class SessionDBOpenHelper extends SQLiteOpenHelper {
-        private static final String DATABASE_CREATE = "create table "
-                + Constants.DATABASE_TABLE + " (" + Constants.KEY_ID
-                + " integer primary key autoincrement, " + Constants.KEY_TYPE
-                + " text not null, " + Constants.KEY_DISTANCE + " integer not null, "
-                + Constants.KEY_DATE + " text, " + Constants.KEY_GOAL_DATE + " text, " + Constants.KEY_PACE + " text not null, "
-                + Constants.KEY_KCAL + " double not null, " + Constants.KEY_TIME + " text not null);";
+        private static final String DATABASE_CREATE = "create table " + Constants.DATABASE_TABLE
+                + " (" + Constants.KEY_ID + " integer primary key autoincrement, "
+                + Constants.KEY_TYPE + " text not null, "
+                + Constants.KEY_DISTANCE + " integer not null, "
+                + Constants.KEY_DATE + " text, "
+                + Constants.KEY_GOAL_DATE + " text, "
+                + Constants.KEY_PACE + " text not null, "
+                + Constants.KEY_KCAL + " double not null, "
+                + Constants.KEY_TIME + " text not null);";
 
-        private static final String DATABASE_CREATE_USER = "create table "
-                + Constants.DATABASE_TABLE_USER + " (" + Constants.KEY_ID
-                + " integer primary key autoincrement, " + Constants.KEY_WEIGHT
-                + " int not null, " + Constants.KEY_GOAL + " int not null, " + Constants.KEY_DATE + " String, " + Constants.KEY_GOAL_DATE + " String);";
+        private static final String DATABASE_CREATE_USER = "create table " + Constants.DATABASE_TABLE_USER
+                + " (" + Constants.KEY_ID + " integer primary key autoincrement, "
+                + Constants.KEY_WEIGHT + " int not null, "
+                + Constants.KEY_GOAL + " int not null, "
+                + Constants.KEY_DATE + " String, "
+                + Constants.KEY_GOAL_DATE + " String);";
 
         public SessionDBOpenHelper(Context c, String dbname,
                                           SQLiteDatabase.CursorFactory factory, int version) {

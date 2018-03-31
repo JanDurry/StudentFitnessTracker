@@ -89,7 +89,7 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
         avgCycleString = "Ø " + String.valueOf((int)avgCycle) + " m";
         totalKCalString = "Du hast ingesamt " + String.valueOf(totalKCalValue) + " kCal verbraucht!";
         totalMileageString = "Du hast insgesamt " + String.valueOf(totalMileageValue) + " m zurückgelegt!";
-        goalString.setText("Du hast bisher " + getGoalTotal() + " kCal von " + sessionDB.getUserGoal() + " kCal erreicht. Das sind " + new DecimalFormat("##.##").format(getGoalPercentage()) + " % deines aktuellen Ziels.");
+        goalString.setText(makeGoalString());
     }
 
     private double getGoalPercentage() {
@@ -99,7 +99,6 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
     private int getGoalTotal() {
         int sum = 0;
         for(SessionItem item : sessions) {
-            
             if(userGoalStringToDate(item.getDate()).after(userGoalStringToDate(sessionDB.getUserGoalDate()))) {
                 sum += item.getkCal();
             }
@@ -107,11 +106,18 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
         return sum;
     }
 
-    private Date userGoalStringToDate(String date) {
+    private String makeGoalString() {
+        if(getGoalTotal() < sessionDB.getUserGoal()) {
+            return "Du hast bisher " + getGoalTotal() + " kCal von " + sessionDB.getUserGoal() + " kCal verbraucht. Das sind " + new DecimalFormat("##.##").format(getGoalPercentage()) + " % deines aktuellen Ziels.";
+        }
+        return "Du hast " + sessionDB.getUserGoal() + " kCal von " + sessionDB.getUserGoal() + " kCal verbraucht. Du hast dein Ziel erreicht!";
+    }
+
+    private Date userGoalStringToDate(String dateString) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DEFAULT_DATE_FORMAT);
         Date convertedDate = new Date();
         try {
-             convertedDate = dateFormat.parse(date);
+             convertedDate = dateFormat.parse(dateString);
         } catch (ParseException e) {
             e.printStackTrace();
         }

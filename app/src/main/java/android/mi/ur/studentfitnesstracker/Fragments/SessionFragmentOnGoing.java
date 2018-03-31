@@ -214,26 +214,24 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     /** send Notfication if session aim has been accomplished */
 
     private void checkIfSessionGoalAccomplished() {
-        int sessionGoal = sessionDB.getUserGoal();
+        //int sessionGoal = sessionDB.getUserGoal();
+        //int totalkCal = sessionDB.getTotalkCal();
         Bundle arguments = getArguments();
         String sessionType = arguments.getString("SESSION_TYPE");
-        NotificationCompat.Builder notification = null;if (sessionType.equals(Constants.SESSION_TYPE_CYCLE)) {
+        NotificationCompat.Builder notification = null;
+
             notification = new  NotificationCompat.Builder(getActivity(), Constants.CHANNEL_ID);
             notification.setAutoCancel(true);
-            //builds notification
-            notification.setSmallIcon(R.drawable.img_cycle);
+            if(sessionType.equals(Constants.SESSION_TYPE_CYCLE)) {
+                notification.setSmallIcon(R.drawable.img_cycle);
+            } else if(sessionType.equals(Constants.SESSION_TYPE_RUN)){
+                notification.setSmallIcon(R.drawable.img_run);
+            }
             notification.setTicker("kCal-Ziel erreicht!");
             notification.setContentTitle("kCal-Ziel");
             notification.setContentText("Super! Du hast dein kCal-Ziel erreicht!");
-        } else if (sessionType.equals(Constants.SESSION_TYPE_RUN)){
-            notification = new  NotificationCompat.Builder(getActivity(), Constants.CHANNEL_ID);
-            notification.setAutoCancel(true);
-            //builds notification
-            notification.setSmallIcon(R.drawable.img_run);
-            notification.setTicker("kCal-Ziel erreicht!");
-            notification.setContentTitle("kCal-Ziel");
-            notification.setContentText("Super! Du hast dein kCal-Ziel erreicht!");
-        }
+
+
         if(notification != null) {
             Intent intent = new Intent(getActivity(), PeriodicStatistics.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -241,9 +239,10 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
 
             NotificationManager nManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
             nManager.notify(Constants.UNIQUE_ID, notification.build());
-
+            //sessionDB.resetTotalkCal();
         }
     }
+
 
     /** SessionFragmentOnGoing Callbacks */
 

@@ -172,12 +172,6 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
             return true;
         }
 
-        if (id == R.id.personal_goal) {
-            Intent intent = new Intent(this, Goal.class);
-            startActivity(intent);
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 

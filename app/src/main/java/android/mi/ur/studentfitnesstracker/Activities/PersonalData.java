@@ -1,5 +1,6 @@
 package android.mi.ur.studentfitnesstracker.Activities;
 
+import android.content.Intent;
 import android.mi.ur.studentfitnesstracker.Constants.Constants;
 import android.mi.ur.studentfitnesstracker.Database.SessionDatabaseAdapter;
 import android.mi.ur.studentfitnesstracker.R;
@@ -53,6 +54,8 @@ public class PersonalData extends AppCompatActivity {
                     String formattedDate = formatDate.format(date);
                     sessionDB.updateUserData(Integer.parseInt(weight.getText().toString()), Integer.parseInt(newGoalValue.getText().toString()));
                     currentGoal.setText(newGoalValue.getText().toString() + "kcal (" + formattedDate + ")");
+                    Intent intent = new Intent(view.getContext(), MainMenu.class);
+                    startActivity(intent);
                 }
             }
         });
@@ -64,7 +67,6 @@ public class PersonalData extends AppCompatActivity {
         try {
             convertedDate = dateFormat.parse(sessionDB.getUserGoalDate());
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         SimpleDateFormat formatDate = new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT);

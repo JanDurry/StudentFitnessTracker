@@ -100,17 +100,19 @@ public class Constants {
     public static final String KEY_PACE = "pace";
     public static final String KEY_KCAL = "kCal";
     public static final String KEY_TIME = "time";
+    public static final String KEY_TOTAL_KCAL = "total_kCal";
 
     public static final String KEY_WEIGHT = "weight";
     public static final String KEY_GOAL = "key_goal";
 
     public static final int COLUMN_WEIGHT_INDEX = 1;
     public static final int COLUMN_SESSION_GOAL_INDEX = 2;
-    public static final int COLUMN_GOAL_DATE_INDEX = 3;
+    public static final int COLUMN_GOAL_DATE_INDEX = 4;
 
     public static final int DEFAULT_WEIGHT = 75;
     public static final int DEFAULT_GOAL_KCAL = 10000; // 15 kg Körperfett in Kalorien
     public static final String DEFAULT_GOAL_DATE = "31.12.2020";
+    public static final int DEFAULT_TOTAL_KCAL = 0;
     public static final String KEY_GOAL_DATE = "goal_date";
 
     public static final int COLUMN_ID_INDEX = 0;
@@ -120,6 +122,7 @@ public class Constants {
     public static final int COLUMN_PACE_INDEX = 4;
     public static final int COLUMN_KCAL_INDEX = 5;
     public static final int COLUMN_TIME_INDEX = 6;
+    public static final int COLUMN_TOTAL_KCAL_INDEX = 7;
 
     //** ---------------------DATABASE---ENDE-------------- **//
 
