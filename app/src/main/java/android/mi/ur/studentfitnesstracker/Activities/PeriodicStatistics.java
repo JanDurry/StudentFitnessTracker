@@ -97,10 +97,10 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
     }
 
     private double getGoalPercentage() {
-        return  ((double) getGoalTotal() / (double) sessionDB.getUserGoal() * 100);
+        return  ((double) /*getGoalTotal()*/ totalKCalValue / (double) sessionDB.getUserGoal() * 100);
     }
 
-    private int getGoalTotal() {
+    /*private int getGoalTotal() {
         int sum = 0;
         for(SessionItem item : sessions) {
             if(userGoalStringToDate(item.getDate()).after(userGoalStringToDate(sessionDB.getUserGoalDate()))) {
@@ -108,19 +108,19 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
             }
         }
         return sum;
-    }
+    }*/
 
     private int getAveragekCal() {
         int sessionSum = 0;
         for(SessionItem item: sessions) {
             sessionSum++;
         }
-        return (getGoalTotal() / sessionSum);
+        return (/*getGoalTotal()*/ totalKCalValue / sessionSum);
     }
 
     private String makeGoalString() {
-        if(getGoalTotal() < sessionDB.getUserGoal()) {
-            return "Du hast bisher " + getGoalTotal() + " kCal von " + sessionDB.getUserGoal() + " kCal verbraucht. Das sind " + new DecimalFormat("##.##").format(getGoalPercentage()) + " % deines aktuellen Ziels.";
+        if(/*getGoalTotal()*/ totalKCalValue < sessionDB.getUserGoal()) {
+            return "Du hast bisher " + /*getGoalTotal()*/ totalKCalValue + " kCal von " + sessionDB.getUserGoal() + " kCal verbraucht. Das sind " + new DecimalFormat("##.##").format(getGoalPercentage()) + " % deines aktuellen Ziels.";
         }
         return "Du hast " + sessionDB.getUserGoal() + " kCal von " + sessionDB.getUserGoal() + " kCal verbraucht. Du hast dein Ziel erreicht!";
     }

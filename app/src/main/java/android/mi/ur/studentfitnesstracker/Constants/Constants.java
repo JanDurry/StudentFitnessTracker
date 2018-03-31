@@ -62,7 +62,7 @@ public class Constants {
 
     //** -------SessionService------- **/
 
-    public static final int LOCATION_UPDATE_TIME = 5000;
+    public static final int LOCATION_UPDATE_TIME = 10000;
     public static final float LOCATION_UPDATE_DISTANCE = 10;
     public static final int GPS_PROVIDER_LISTENER_INDEX = 0;
     public static final int NETWORK_PROVIDER_LISTENER_INDEX = 1;
