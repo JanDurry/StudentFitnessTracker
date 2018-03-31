@@ -27,6 +27,9 @@ public class SessionFragment extends Fragment {
 
     private Button startSessionButton;
 
+    private boolean backEnabled;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.session_fragment, parent, false);
@@ -66,6 +69,7 @@ public class SessionFragment extends Fragment {
             public void onClick(View view) {
                 ((MainMenu)getActivity()).disableNavigationBar();
                 ((MainMenu)getActivity()).disableToolBar();
+                ((MainMenu)getActivity()).disableBackButton();
                 FragmentManager fragmentManager = getFragmentManager();
                 Bundle type = new Bundle();
                 type.putString( "SESSION_TYPE" , getSessionType());

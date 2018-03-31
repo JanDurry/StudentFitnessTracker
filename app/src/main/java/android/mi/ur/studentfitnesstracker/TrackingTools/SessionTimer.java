@@ -2,7 +2,7 @@ package android.mi.ur.studentfitnesstracker.TrackingTools;
 
 /**
  * Created by JanDurry on 13.03.2018.
- * Es wurde sich an der Stopwatch-Klasse orientiert
+ * Es wurde sich an der Stopwatch-Klasse aus der Eieruhr-Übung orientiert
  */
 
 public class SessionTimer {

@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/goal_title"
-        android:layout_toStartOf="@id/mileage_cycle_value"
+        android:layout_toStartOf="@id/goal_title"
         android:id="@+id/mileage_cycle_img"
         android:paddingTop="@dimen/list_item_padding_top"
         android:paddingStart="@dimen/list_item_padding_small"
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/goal_title"
-            android:layout_toEndOf="@id/total_mileage_start"
+            android:layout_toEndOf="@id/mileage_cycle_img"
             android:textSize="@dimen/periodic_text_size"
             android:paddingStart="@dimen/param_padding"
             android:paddingEnd="@dimen/space"
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/mileage_cycle_value"
-        android:layout_toStartOf="@id/mileage_cycle_value"
+        android:layout_toStartOf="@id/goal_title"
         android:id="@+id/mileage_cycle_avg_img"
         android:paddingTop="@dimen/list_item_padding_top"
         android:paddingStart="@dimen/list_item_padding_small"
@@ -136,7 +136,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/goal_value"
+        android:id="@+id/average_kCal"
         android:layout_below="@id/total_kCal_burnt"
         android:textSize="@dimen/periodic_text_size"
         android:paddingStart="@dimen/param_padding"
@@ -149,7 +149,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/goal_percentage"
-        android:layout_below="@id/goal_value"
+        android:layout_below="@id/average_kCal"
         android:textSize="@dimen/periodic_text_size"
         android:paddingStart="@dimen/param_padding"
         android:paddingEnd="@dimen/space"
@@ -157,22 +157,12 @@
         android:text="@string/goal_percentage"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/goal_percentage"
-        android:id="@+id/total_mileage_start"
-        android:textSize="@dimen/periodic_text_size"
-        android:paddingStart="@dimen/param_padding"
-        android:paddingEnd="@dimen/space"
-        android:paddingBottom="@dimen/param_padding"
-        android:text="@string/total_mileage_start"/>
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/goal_percentage"
-        android:layout_toEndOf="@+id/total_mileage_start"
         android:id="@+id/total_mileage"
         android:textSize="@dimen/periodic_text_size"
         android:paddingStart="@dimen/param_padding"

@@ -4,18 +4,31 @@
     <!-- Settings -->
 
     <string name="settings">Settings</string>
+
+    <!--Personal Data -->
+
     <string name="personal_data">Persönliche Daten</string>
 
     <string name="header_weight">Gewicht: </string>
     <string name="edit_weight"></string>
     <string name="text_kg"> kg</string>
 
-    <string name="session_aim">Sessionziel: </string>
+    <string name="session_aim">Neues Ziel: </string>
     <string name="edit_session_aim"></string>
-    <string name="text_kCal"> kCal</string>
+    <string name="text_kCal">kCal</string>
 
     <string name="button_change_personal_data">Ändern</string>
     <string name="button_save_personal_data">Speichern</string>
+
+    <!-- Goal -->
+
+    <string name="personal_goal">Ziel</string>
+    <string name="current_goal">Aktuelles Ziel</string>
+    <string name="current_goal_value_date">5000 kCal (01.01.2019)</string>
+    <string name="set_new_goal">Neues Ziel setzen</string>
+    <string name="set_new_goal_value"></string>
+    <string name="set_new_goal_date">02.01.2019 12:00</string>
+    <string name="set_new_goal_button">Neues Ziel setzen</string>
 
 
     <!-- Fragments/Activites -->
@@ -27,7 +40,7 @@
     <string name="goal_title">Deine Persönliche Statistik</string>
 
     <string name="total_mileage_start">Du hast insgesamt</string>
-    <string name="total_mileage">0 m zurückgelegt!</string>
+    <string name="total_mileage">Du hast bisher 0 m zurückgelegt!</string>
     <string name="mileage_cycle">Auf dem Rad: </string>
     <string name="mileage_run">Zu Fuß: </string>
     <string name="mileage_cycle_value"></string>
@@ -69,11 +82,11 @@
     <!-- Notifications -->
 
     <string name="app_permission_title">App GPS Permission</string>
-    <string name="app_permission_message">Zum verwenden dieser App musst du GPS für diese App aktivieren.</string>
-    <string name="app_permission_enabled">GPS App Permission wurden gegeben. Viel Erfolg beim abnehmen!</string>
-    <string name="app_permission_disabled">GPS App Permission wurden abgelehnt. So kannst du diese App nicht nutzen.</string>
+    <string name="app_permission_message">Zum Verwenden dieser App musst du GPS für diese App aktivieren.</string>
+    <string name="app_permission_enabled">GPS App Permission wurde gegeben. Viel Erfolg beim Abnehmen!</string>
+    <string name="app_permission_disabled">GPS App Permission wurde abgelehnt. So kannst du diese App nicht nutzen.</string>
 
-    <string name="gps_permission_message">Dein GPS ist nicht auf deinem Smartphone aktiviert und wird benötigt. GPS aktivieren?</string>
+    <string name="gps_permission_message">GPS ist nicht auf deinem Smartphone aktiviert und wird benötigt. GPS aktivieren?</string>
     <string name="gps_permission_settings">Einstellungen</string>
     <string name="gps_permission_deny">Abbrechen</string>
 

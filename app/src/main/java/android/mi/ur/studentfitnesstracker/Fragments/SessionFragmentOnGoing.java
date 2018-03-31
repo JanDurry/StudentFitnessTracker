@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,6 +13,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.location.Location;
 import android.mi.ur.studentfitnesstracker.Activities.MainMenu;
+import android.mi.ur.studentfitnesstracker.Activities.PeriodicStatistics;
 import android.mi.ur.studentfitnesstracker.Constants.Constants;
 import android.mi.ur.studentfitnesstracker.Database.SessionDatabaseAdapter;
 import android.mi.ur.studentfitnesstracker.Listener.OnSessionDataChangedListener;
@@ -19,11 +22,14 @@ import android.mi.ur.studentfitnesstracker.R;
 import android.mi.ur.studentfitnesstracker.TrackingTools.SessionService;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * Created by JanDurry on 24.02.2018.
@@ -53,6 +59,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
     private OnSessionFragmentOnGoingDataChanged onSessionFragmentOnGoingDataChanged;
 
     private boolean bound;
+    private boolean backEnabled = true;
 
     private TextView time;
     private TextView kCal;
@@ -174,6 +181,7 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
                 ((MainMenu)getActivity()).enableToolBar();
                 unbindSessionService();
                 stopService();
+                checkIfSessionGoalAccomplished();
                 closeFragment();
             }
         });
@@ -200,23 +208,41 @@ public class SessionFragmentOnGoing extends Fragment implements OnSessionDataCha
         kCal.setText(String.valueOf((int)kCalTotal));
         pace.setText(currentPace);
         distance.setText(currentDistanceInMetersString);
-        checkIfSessionAimAccomplished();
+
     }
 
     /** send Notfication if session aim has been accomplished */
 
-    private void checkIfSessionAimAccomplished() {
-        int sessionAim = sessionDB.getUserSessionAim();
+    private void checkIfSessionGoalAccomplished() {
+        //int sessionGoal = sessionDB.getUserGoal();
+        //int totalkCal = sessionDB.getTotalkCal();
         Bundle arguments = getArguments();
         String sessionType = arguments.getString("SESSION_TYPE");
-        if (sessionType.equals(Constants.SESSION_TYPE_CYCLE)) {
-            //.setSmallIcon(R.drawable.img_cycle)
-        } else if (sessionType.equals(Constants.SESSION_TYPE_RUN)){
-            //.setSmallIcon(R.drawable.img_cycle)
+        NotificationCompat.Builder notification = null;
+
+            notification = new  NotificationCompat.Builder(getActivity(), Constants.CHANNEL_ID);
+            notification.setAutoCancel(true);
+            if(sessionType.equals(Constants.SESSION_TYPE_CYCLE)) {
+                notification.setSmallIcon(R.drawable.img_cycle);
+            } else if(sessionType.equals(Constants.SESSION_TYPE_RUN)){
+                notification.setSmallIcon(R.drawable.img_run);
+            }
+            notification.setTicker("kCal-Ziel erreicht!");
+            notification.setContentTitle("kCal-Ziel");
+            notification.setContentText("Super! Du hast dein kCal-Ziel erreicht!");
+
+
+        if(notification != null) {
+            Intent intent = new Intent(getActivity(), PeriodicStatistics.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            notification.setContentIntent(pendingIntent);
+
+            NotificationManager nManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+            nManager.notify(Constants.UNIQUE_ID, notification.build());
+            //sessionDB.resetTotalkCal();
         }
-
-
     }
+
 
     /** SessionFragmentOnGoing Callbacks */
 

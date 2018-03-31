@@ -12,7 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class PeriodicStatistics extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -29,7 +33,8 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
     private TextView mileageAvgCycle;
 
     private TextView totalKCal;
-    private TextView goalPercentage;
+    private TextView averageKCal;
+    private TextView goalString;
 
 
     private int totalMileageValue = 0;
@@ -44,6 +49,7 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
     private String totalMileageRunString;
     private String totalMileageCycleString;
     private String totalKCalString;
+    private String averageKCalString;
     private String avgRunString;
     private String avgCycleString;
 
@@ -74,6 +80,7 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
         mileageCycle.setText(totalMileageCycleString);
         totalMileage.setText(totalMileageString);
         totalKCal.setText(totalKCalString);
+        averageKCal.setText(averageKCalString);
         mileageAvgRun.setText(avgRunString);
         mileageAvgCycle.setText(avgCycleString);
     }
@@ -81,10 +88,52 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
     private void setStrings() {
         totalMileageCycleString = String.valueOf(totalMileageCycleValue) + " m";
         totalMileageRunString = String.valueOf(totalMileageRunValue) + " m";
-        avgRunString = String.valueOf(avgRun) + " m im avg.";
-        avgCycleString = String.valueOf(avgCycle) + " m im avg.";
+        avgRunString = "Ø " + String.valueOf((int)avgRun) + " m";
+        avgCycleString = "Ø " + String.valueOf((int)avgCycle) + " m";
         totalKCalString = "Du hast ingesamt " + String.valueOf(totalKCalValue) + " kCal verbraucht!";
+        averageKCalString = "Du verbrauchst durchschnittlich " + String.valueOf(getAveragekCal()) + " kCal pro Session!";
         totalMileageString = "Du hast insgesamt " + String.valueOf(totalMileageValue) + " m zurückgelegt!";
+        goalString.setText(makeGoalString());
+    }
+
+    private double getGoalPercentage() {
+        return  ((double) /*getGoalTotal()*/ totalKCalValue / (double) sessionDB.getUserGoal() * 100);
+    }
+
+    /*private int getGoalTotal() {
+        int sum = 0;
+        for(SessionItem item : sessions) {
+            if(userGoalStringToDate(item.getDate()).after(userGoalStringToDate(sessionDB.getUserGoalDate()))) {
+                sum += item.getkCal();
+            }
+        }
+        return sum;
+    }*/
+
+    private int getAveragekCal() {
+        int sessionSum = 0;
+        for(SessionItem item: sessions) {
+            sessionSum++;
+        }
+        return (/*getGoalTotal()*/ totalKCalValue / sessionSum);
+    }
+
+    private String makeGoalString() {
+        if(/*getGoalTotal()*/ totalKCalValue < sessionDB.getUserGoal()) {
+            return "Du hast bisher " + /*getGoalTotal()*/ totalKCalValue + " kCal von " + sessionDB.getUserGoal() + " kCal verbraucht. Das sind " + new DecimalFormat("##.##").format(getGoalPercentage()) + " % deines aktuellen Ziels.";
+        }
+        return "Du hast " + sessionDB.getUserGoal() + " kCal von " + sessionDB.getUserGoal() + " kCal verbraucht. Du hast dein Ziel erreicht!";
+    }
+
+    private Date userGoalStringToDate(String dateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DEFAULT_DATE_FORMAT);
+        Date convertedDate = new Date();
+        try {
+             convertedDate = dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return convertedDate;
     }
 
     private void getAverageValues() {
@@ -127,7 +176,8 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
         mileageCycle = (TextView) findViewById(R.id.mileage_cycle_value);
         mileageRun = (TextView) findViewById(R.id.mileage_run_value);
         totalKCal = (TextView) findViewById(R.id.total_kCal_burnt);
-        goalPercentage = (TextView) findViewById(R.id.goal_percentage);
+        averageKCal = (TextView) findViewById(R.id.average_kCal);
+        goalString = (TextView) findViewById(R.id.goal_percentage);
         mileageAvgCycle = (TextView) findViewById(R.id.mileage_cycle_avg_value);
         mileageAvgRun = (TextView) findViewById(R.id.mileage_run_avg_value);
     }

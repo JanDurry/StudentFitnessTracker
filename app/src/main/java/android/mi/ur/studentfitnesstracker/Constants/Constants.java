@@ -41,7 +41,8 @@ public class Constants {
 
     //* ----------DATE---------------- *//
 
-    public static final String SIMPLE_DATE_FORMAT = "dd.MM.yy HH:mm:ss";
+    public static final String SIMPLE_DATE_FORMAT = "dd.MM.yy, HH:mm:ss";
+    public static final String DEFAULT_DATE_FORMAT = "EEE MMM dd HH:mm:ss z yyyy";
 
 
 
@@ -61,7 +62,7 @@ public class Constants {
 
     //** -------SessionService------- **/
 
-    public static final int LOCATION_UPDATE_TIME = 5000;
+    public static final int LOCATION_UPDATE_TIME = 10000;
     public static final float LOCATION_UPDATE_DISTANCE = 10;
     public static final int GPS_PROVIDER_LISTENER_INDEX = 0;
     public static final int NETWORK_PROVIDER_LISTENER_INDEX = 1;
@@ -87,7 +88,7 @@ public class Constants {
     //** ---------------------DATABASE---START-------------- **//
 
     public static final String DATABASE_NAME = "studentfitnesstracker.db";
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 4;
 
     public static final String DATABASE_TABLE = "sessionitems";
     public static final String DATABASE_TABLE_USER = "sessionUserData";
@@ -99,15 +100,20 @@ public class Constants {
     public static final String KEY_PACE = "pace";
     public static final String KEY_KCAL = "kCal";
     public static final String KEY_TIME = "time";
+    public static final String KEY_TOTAL_KCAL = "total_kCal";
 
     public static final String KEY_WEIGHT = "weight";
-    public static final String KEY_SESSION_AIM = "session_aim";
+    public static final String KEY_GOAL = "key_goal";
 
     public static final int COLUMN_WEIGHT_INDEX = 1;
-    public static final int COLUMN_SESSION_AIM_INDEX = 2;
+    public static final int COLUMN_SESSION_GOAL_INDEX = 2;
+    public static final int COLUMN_GOAL_DATE_INDEX = 4;
 
     public static final int DEFAULT_WEIGHT = 75;
-    public static final int DEFAULT_SESSION_AIM = 200; // 300 Gramm Körperfett in Kalorien
+    public static final int DEFAULT_GOAL_KCAL = 10000; // 15 kg Körperfett in Kalorien
+    public static final String DEFAULT_GOAL_DATE = "31.12.2020";
+    public static final int DEFAULT_TOTAL_KCAL = 0;
+    public static final String KEY_GOAL_DATE = "goal_date";
 
     public static final int COLUMN_ID_INDEX = 0;
     public static final int COLUMN_TYPE_INDEX = 1;
@@ -116,6 +122,7 @@ public class Constants {
     public static final int COLUMN_PACE_INDEX = 4;
     public static final int COLUMN_KCAL_INDEX = 5;
     public static final int COLUMN_TIME_INDEX = 6;
+    public static final int COLUMN_TOTAL_KCAL_INDEX = 7;
 
     //** ---------------------DATABASE---ENDE-------------- **//
 
@@ -130,7 +137,10 @@ public class Constants {
     public static final String DB_TAG = "DATABASE";
 
 
+    /** --------------NOTIFICATION-------------- **/
 
+    public static final String CHANNEL_ID = "123";
+    public static final int UNIQUE_ID = 7654;
 
 
     /** -------------BOTTOM NAVIGATION VIEW ID´S----------------- **/

@@ -42,6 +42,7 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
     private BottomNavigationView bottomNavigationItemView;
 
     private Toolbar toolbar;
+    private boolean backEnabled;
 
     private SessionItem sessionItem;
     private ArrayList<SessionItem> sessions;
@@ -180,7 +181,10 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
         sessionDB = new SessionDatabaseAdapter(this);
         sessionDB.open();
         if (!sessionDB.checkIfUserDataExists()) {
-            sessionDB.insertUserData(Constants.DEFAULT_WEIGHT, Constants.DEFAULT_SESSION_AIM);
+            Date date = Calendar.getInstance(TimeZone.getTimeZone("CET")).getTime();
+            SimpleDateFormat formatDate = new SimpleDateFormat(Constants.SIMPLE_DATE_FORMAT);
+            String formattedDate = formatDate.format(date);
+            sessionDB.insertUserData(Constants.DEFAULT_WEIGHT, Constants.DEFAULT_GOAL_KCAL, formattedDate, Constants.KEY_GOAL_DATE);
         }
         sessions = sessionDB.getAllSessionItems();
     }
@@ -198,6 +202,19 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
         bottomNavigationItemView.setOnNavigationItemSelectedListener(this);
         bottomNavigationItemView.getMenu().getItem(Constants.BOTTOM_NAVIGATION_VIEW_NEW_SESSION_ID).setChecked(true);
     }
+
+
+    /** enable/disable back-Button **/
+
+    public void enableBack() {
+        backEnabled = true;
+    }
+
+    public void disableBackButton() {
+        backEnabled = false;
+    }
+
+
 
     /* Callbacks aus dem SessionFragmentOnGoing
     *  ruft öffentliche Methoden des MapFragment auf.
@@ -249,5 +266,14 @@ public class MainMenu extends AppCompatActivity implements SessionFragmentOnGoin
             startActivity(intent);
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!backEnabled) {
+            //Back is disabled
+        } else {
+            super.onBackPressed();
+        }
     }
 }
