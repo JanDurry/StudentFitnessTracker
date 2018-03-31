@@ -33,6 +33,7 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
     private TextView mileageAvgCycle;
 
     private TextView totalKCal;
+    private TextView averageKCal;
     private TextView goalString;
 
 
@@ -48,6 +49,7 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
     private String totalMileageRunString;
     private String totalMileageCycleString;
     private String totalKCalString;
+    private String averageKCalString;
     private String avgRunString;
     private String avgCycleString;
 
@@ -78,6 +80,7 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
         mileageCycle.setText(totalMileageCycleString);
         totalMileage.setText(totalMileageString);
         totalKCal.setText(totalKCalString);
+        averageKCal.setText(averageKCalString);
         mileageAvgRun.setText(avgRunString);
         mileageAvgCycle.setText(avgCycleString);
     }
@@ -88,6 +91,7 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
         avgRunString = "Ø " + String.valueOf((int)avgRun) + " m";
         avgCycleString = "Ø " + String.valueOf((int)avgCycle) + " m";
         totalKCalString = "Du hast ingesamt " + String.valueOf(totalKCalValue) + " kCal verbraucht!";
+        averageKCalString = "Du verbrauchst durchschnittlich " + String.valueOf(getAveragekCal()) + " kCal pro Session!";
         totalMileageString = "Du hast insgesamt " + String.valueOf(totalMileageValue) + " m zurückgelegt!";
         goalString.setText(makeGoalString());
     }
@@ -104,6 +108,14 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
             }
         }
         return sum;
+    }
+
+    private int getAveragekCal() {
+        int sessionSum = 0;
+        for(SessionItem item: sessions) {
+            sessionSum++;
+        }
+        return (getGoalTotal() / sessionSum);
     }
 
     private String makeGoalString() {
@@ -164,6 +176,7 @@ public class PeriodicStatistics extends AppCompatActivity implements BottomNavig
         mileageCycle = (TextView) findViewById(R.id.mileage_cycle_value);
         mileageRun = (TextView) findViewById(R.id.mileage_run_value);
         totalKCal = (TextView) findViewById(R.id.total_kCal_burnt);
+        averageKCal = (TextView) findViewById(R.id.average_kCal);
         goalString = (TextView) findViewById(R.id.goal_percentage);
         mileageAvgCycle = (TextView) findViewById(R.id.mileage_cycle_avg_value);
         mileageAvgRun = (TextView) findViewById(R.id.mileage_run_avg_value);
